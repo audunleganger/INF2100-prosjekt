@@ -31,11 +31,11 @@ public class Main {
 	    } else if (a.equals("-logY")) {
 		logY = true;
 	    } else if (a.equals("-testexpr")) {
-		testExpr = true; 
+		testExpr = true;
 	    } else if (a.equals("-testparser")) {
-		testParser = true; 
+		testParser = true;
 	    } else if (a.equals("-testscanner")) {
-		testScanner = true; 
+		testScanner = true;
 	    } else if (a.startsWith("-")) {
 		usage();
 	    } else if (fileName != null) {
@@ -51,7 +51,8 @@ public class Main {
 	    baseFilename = baseFilename.substring(0,baseFilename.length()-4);
 	else if (baseFilename.endsWith(".py"))
 	    baseFilename = baseFilename.substring(0,baseFilename.length()-3);
-
+  else
+      System.out.println("Feil fil"); System.exit(0);
 	log = new LogFile(baseFilename+".log");
 	if (logE || testExpr) log.doLogEval = true;
 	if (logP || testParser) log.doLogParser = true;
@@ -59,7 +60,7 @@ public class Main {
 	if (logY || testExpr || testParser) log.doLogPrettyPrint = true;
 
 	Scanner s = new Scanner(fileName);
-	if (testScanner) 
+	if (testScanner)
 	    doTestScanner(s);
 	else if (testParser)
 	    doTestParser(s);
@@ -76,7 +77,7 @@ public class Main {
     private static void doTestScanner(Scanner s) {
 	do {
 	    s.readNextToken();
-	} while (s.curToken().kind != eofToken); 
+	} while (s.curToken().kind != eofToken);
     }
 
 
@@ -106,7 +107,7 @@ public class Main {
 
     private static void doRunInterpreter(Scanner s) {
 	AspProgram prog = AspProgram.parse(s);
-	if (log.doLogPrettyPrint) 
+	if (log.doLogPrettyPrint)
 	    prog.prettyPrint();
 
 	RuntimeScope lib = new RuntimeLibrary();
