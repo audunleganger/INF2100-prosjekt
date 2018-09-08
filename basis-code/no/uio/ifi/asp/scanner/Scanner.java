@@ -81,6 +81,22 @@ public class Scanner {
         }
 
         //-- Must be changed in part 1:
+        /*
+            Oppskrift:
+            - Sjekk om linje er tom
+            - Sjekk om linjen inneholder en kommentar
+            - Omform TAB-er til blanke (whitespaces)
+            - Tell antall blanke (whitespaces): n
+            - Hvis n > Indents.top
+                - Push n på indents
+                - Legg til INDENT-token på curLineTokens
+            - Hvis n < Indents.top
+                - Pop Indents.top
+                - Legg til en DEDENT-token på curLineTokens
+            - Hvis n != Indents.top, har vi indenteringsfeil
+            - På slutten av siste linje: For alle indents
+              som er > 0, legg til DEDENT-token i curLineTokens
+        */
 
         // Terminate line:
         curLineTokens.add(new Token(newLineToken,curLineNum()));
