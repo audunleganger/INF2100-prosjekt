@@ -1,0 +1,4 @@
+   1: 
+   2: # en hygelig hilsen
+   3: navn='Dag'
+   4: print('Hei, ', navn)

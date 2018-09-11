@@ -80,29 +80,69 @@ public class Scanner {
             scannerError("Unspecified I/O error!");
         }
 
-        //-- Must be changed in part 1:
-        /*
-            Oppskrift:
-            - Sjekk om linje er tom
-            - Sjekk om linjen inneholder en kommentar
-            - Omform TAB-er til blanke (whitespaces)
-            - Tell antall blanke (whitespaces): n
-            - Hvis n > Indents.top
-                - Push n på indents
-                - Legg til INDENT-token på curLineTokens
-            - Hvis n < Indents.top
-                - Pop Indents.top
-                - Legg til en DEDENT-token på curLineTokens
-            - Hvis n != Indents.top, har vi indenteringsfeil
-            - På slutten av siste linje: For alle indents
-              som er > 0, legg til DEDENT-token i curLineTokens
-        */
 
-        // Terminate line:
-        curLineTokens.add(new Token(newLineToken,curLineNum()));
 
-        for (Token t: curLineTokens)
-        Main.log.noteToken(t);
+          if(line.trim().isEmpty()){
+            System.out.println("This line is empty, linenumber: " + curLineNum());
+            return;
+          }
+
+          // fjerner tab og gjor dem til whitespaces
+          String withouttab = expandLeadingTabs(line);
+          int amount = findIndent(withouttab);
+
+          if(amount == indents[numIndents-1]){
+            System.out.println("Dont neeed to indent");
+          }
+          else if (amount > indents[numIndents-1]) {
+              System.out.println("Need to indent");
+          }
+          else{
+            System.out.println("Need to find amount of dedent we need to do");
+          }
+
+          String[] tekst = line.split(" ", 200);
+
+          for(int a = 0; a<tekst.length; a++){
+            if(tekst[a].contains("#")){
+              System.out.println("this a comment, we dont neeed to take it at: " +  curLineNum());
+              break;
+            }
+            System.out.println("finding what to do with word: " + tekst[a]);
+//working progress
+            if(tekst[a].contains(TokenKind.equalToken())){
+              System.out.println("this word has = token");
+            }
+
+          }
+
+
+
+          //-- Must be changed in part 1:
+          /*
+              Oppskrift:
+              - Sjekk om linjen er tomt OK
+              - Sjekk om linjen inneholder en kommentar
+              - Omform TAB-er til blanke (whitespaces)
+              - Tell antall blanke (whitespaces): n
+              - Hvis n > Indents.top
+                  - Push n på indents
+                  - Legg til INDENT-token på curLineTokens
+              - Hvis n < Indents.top
+                  - Pop Indents.top
+                  - Legg til en DEDENT-token på curLineTokens
+              - Hvis n != Indents.top, har vi indenteringsfeil
+              - På slutten av siste linje: For alle indents
+                som er > 0, legg til DEDENT-token i curLineTokens
+          */
+          // Terminate line:
+          //curLineTokens.add(new Token(newLineToken,curLineNum()));
+
+
+
+        for (Token t: curLineTokens){
+          Main.log.noteToken(t);
+        }
     }
 
     public int curLineNum() {

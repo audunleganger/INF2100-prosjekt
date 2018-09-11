@@ -47,12 +47,15 @@ public class Main {
         if (fileName == null) usage();
 
         baseFilename = fileName;
-        if (baseFilename.endsWith(".asp"))
-        baseFilename = baseFilename.substring(0,baseFilename.length()-4);
-        else if (baseFilename.endsWith(".py"))
-        baseFilename = baseFilename.substring(0,baseFilename.length()-3);
-        else
-        System.out.println("Feil fil"); System.exit(0);
+        if (baseFilename.endsWith(".asp")){
+          baseFilename = baseFilename.substring(0,baseFilename.length()-4);
+        }
+        else if (baseFilename.endsWith(".py")){
+          baseFilename = baseFilename.substring(0,baseFilename.length()-3);
+        }
+        else{
+          System.out.println("Feil fil"); System.exit(0);
+        }
         log = new LogFile(baseFilename+".log");
         if (logE || testExpr) log.doLogEval = true;
         if (logP || testParser) log.doLogParser = true;
