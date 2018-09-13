@@ -81,16 +81,17 @@ public class Scanner {
         }
 
 
-
+        // Begynnelse paa oppgaven
           if(line.trim().isEmpty()){
             System.out.println("This line is empty, linenumber: " + curLineNum());
             return;
           }
 
-          // fjerner tab og gjor dem til whitespaces
+          // Konverterer tabs til whitespaces, lagrer det i variabel amount
           String withouttab = expandLeadingTabs(line);
           int amount = findIndent(withouttab);
 
+          // Sjekker om antall indenteringer mathcer linjen over
           if(amount == indents[numIndents-1]){
             System.out.println("Dont neeed to indent");
           }
@@ -101,15 +102,19 @@ public class Scanner {
             System.out.println("Need to find amount of dedent we need to do");
           }
 
+          // Deler linjen opp i string-array, separert med whitespaces
+          // Vil alle tokens vaere separert med whitespaces? (3 + 5 er, 3+5 er ikke)
           String[] tekst = line.split(" ", 200);
 
+          // Leser hver enkelt ws-separert ord i filen, sjekker om det er kommentar (#)
           for(int a = 0; a<tekst.length; a++){
             if(tekst[a].contains("#")){
               System.out.println("this a comment, we dont neeed to take it at: " +  curLineNum());
               break;
             }
             System.out.println("finding what to do with word: " + tekst[a]);
-//working progress
+
+            // Work in progress
             if(tekst[a].contains(TokenKind.equalToken())){
               System.out.println("this word has = token");
             }
