@@ -115,8 +115,9 @@ public class Scanner {
             System.out.println("finding what to do with word: " + tekst[a]);
 
             // Work in progress
-            if(tekst[a].contains(TokenKind.equalToken())){
-              System.out.println("this word has = token");
+            if(tekst[a].contains("=")){
+                curLineTokens.add(new Token(equalToken,curLineNum()));
+                System.out.println("Fant = i teskt[a], la til =-token paa linje: " + curLineNum());
             }
 
           }
@@ -141,7 +142,7 @@ public class Scanner {
                 som er > 0, legg til DEDENT-token i curLineTokens
           */
           // Terminate line:
-          //curLineTokens.add(new Token(newLineToken,curLineNum()));
+          curLineTokens.add(new Token(newLineToken,curLineNum()));
 
 
 
