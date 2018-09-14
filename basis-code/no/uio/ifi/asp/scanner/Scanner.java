@@ -102,7 +102,7 @@ public class Scanner {
               Main.log.noteToken(t);
           }
 
-          // check at jeg har gjort dedent riktig er litt ussikkert på den
+          // Check at jeg har gjort dedent riktig er litt ussikkert på den
           else  {
             for(int i = 0; i < numIndents; i++)   {
               if(indents[i] == amount)  {
@@ -123,20 +123,24 @@ public class Scanner {
             }
           }
 
-          // Deler linjen opp i string-array, separert med whitespaces
-          // Vil alle tokens vaere separert med whitespaces? (3 + 5 er, 3+5 er ikke)
 
-
-          //working progress
-          mainloop;
+          //Work in progress
           int letter_counter = 0;
-          for(int a = 0; line.length(); a++){
-            if(line.charAt(a).equals('#')){
+          mainloop:
+          for (int a = 0; line.length(); a++){
+            if(line.charAt(a) == ('#')) {
               System.out.println("this is a comment"); // ser bort fra at comment kan være lengere i teksten, (vetikke om det kommer til å funke)
               break mainloop;
             }
-            if(isLetterAZ(line.charAt(a)) != true){
 
+            if (isLetterAZ(line.charAt(a)) != true)  {
+                // Ikke en bokstav
+                // Ved aa benytte oss av tokenkind, bruk checkResWords for andre occured
+
+                // Sjekk om det passer i checkResWords - hvis ikke er det name token
+            }
+            else if (isDigit(line.charAt(a)) != true) {
+                // Ikke et tall
             }
           }
 
