@@ -101,11 +101,13 @@ public class Scanner {
               curLineTokens.add(t);
               Main.log.noteToken(t);
           }
-          else{// check at jeg har gjort dedent riktig er litt ussikkert på den
-            for(int i = 0; i<numIndents; i++){
-              if(indents[i] == amount){
+
+          // check at jeg har gjort dedent riktig er litt ussikkert på den
+          else  {
+            for(int i = 0; i < numIndents; i++)   {
+              if(indents[i] == amount)  {
                 int temp = numIndents - (i + 1);
-                for(int g = 0; g<temp; g++){
+                for(int g = 0; g < temp; g++){
                   Token t = new Token(dedentToken, curLineNum());
                   curLineTokens.add(t);
                   Main.log.noteToken(t);
@@ -114,7 +116,7 @@ public class Scanner {
                 numIndents = i + 1;
                 break;
               }
-              else if(i == (numIndents - 1) && indents[i] != amount){
+              else if (i == (numIndents - 1) && indents[i] != amount)   {
                 System.out.println("Dedent Error has occured: no match was found then dedenting in line: " + curLineNum());
                 System.exit(0);
               }
