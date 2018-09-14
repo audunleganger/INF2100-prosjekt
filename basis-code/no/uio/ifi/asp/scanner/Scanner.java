@@ -102,7 +102,7 @@ public class Scanner {
               Main.log.noteToken(t);
           }
 
-          // check at jeg har gjort dedent riktig er litt ussikkert på den
+          // Check at jeg har gjort dedent riktig er litt ussikkert på den
           else  {
             for(int i = 0; i < numIndents; i++)   {
               if(indents[i] == amount)  {
@@ -123,22 +123,48 @@ public class Scanner {
             }
           }
 
-          // Deler linjen opp i string-array, separert med whitespaces
-          // Vil alle tokens vaere separert med whitespaces? (3 + 5 er, 3+5 er ikke)
 
-
-          //working progress
+          //Work in progress
           int letter_counter = 0;
           mainloop:
-          for(int a = 0; line.length(); a++){
-            if(line.charAt(a).equals("#")){
+          for (int a = 0; a<line.length(); a++){
+            if(line.charAt(a) == ('#')) {
               System.out.println("this is a comment"); // ser bort fra at comment kan være lengere i teksten, (vetikke om det kommer til å funke)
               break mainloop;
             }
-            if(isLetterAZ(line.charAt(a)) != true){
 
+            if (isLetterAZ(line.charAt(a)) != true)  {
+              if(isDigit(line.charAt(a))) {
+                for(int b = a; b<line.length(); b++) {
+                    if(!isName(line.charAt(b))) {
+                      Token temp = new Token(nameToken, curLineNum());
+                      temp.name = line.substring(letter_counter, b);
+                      curLineTokens.add(temp);
+                      Main.log.noteToken(temp);
+                      letter_counter = b + 1;
+                      a = b;
+                    }
+                  }
+                }
+
+                else {
+                  Token temp = new Token(nameToken, curLineNum());
+                  temp.name = line.substring(letter_counter,a);
+                  temp.checkResWords();
+                  curLineTokens.add(temp);
+                  Main.log.noteToken(temp);
+                  letter_counter = a + 1;
+                }
+              }
+                // Ikke en bokstav
+                // Ved aa benytte oss av tokenkind, bruk checkResWords for andre occured
+
+                // Sjekk om det passer i checkResWords - hvis ikke er det name token
+            else if (isDigit(line.charAt(a)) != true) {
+                // Ikke et tall
             }
           }
+
 
 
 
@@ -203,6 +229,9 @@ public class Scanner {
         return ('A'<=c && c<='Z') || ('a'<=c && c<='z') || (c=='_');
     }
 
+    private boolean isName(char c){
+      return ('A'<=c && c<='Z') || ('a'<=c && c<='z') || (c=='_' || ('0' <=c && c<='9'));
+    }
 
     private boolean isDigit(char c) {
         return '0'<=c && c<='9';
