@@ -128,10 +128,10 @@ public class Scanner {
 
 
           //working progress
-          mainloop;
           int letter_counter = 0;
+          mainloop:
           for(int a = 0; line.length(); a++){
-            if(line.charAt(a).equals('#')){
+            if(line.charAt(a).equals("#")){
               System.out.println("this is a comment"); // ser bort fra at comment kan være lengere i teksten, (vetikke om det kommer til å funke)
               break mainloop;
             }
