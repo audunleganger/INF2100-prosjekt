@@ -127,22 +127,80 @@ public class Scanner {
           //Work in progress
           int letter_counter = 0;
           mainloop:
-          for (int a = 0; line.length(); a++){
+          for (int a = 0; a<line.length(); a++){
             if(line.charAt(a) == ('#')) {
               System.out.println("this is a comment"); // ser bort fra at comment kan være lengere i teksten, (vetikke om det kommer til å funke)
               break mainloop;
             }
 
             if (isLetterAZ(line.charAt(a)) != true)  {
+              if(isDigit(line.charAt(a))) {
+                if(isLetterAZ(line.charAt(a-1))) {
+                  for(int b = a; b<line.length(); b++) {
+                      if(!isName(line.charAt(b))) {
+                        System.out.println("I should come here");
+                        Token temp = new Token(nameToken, curLineNum());
+                        temp.name = line.substring(letter_counter, b);
+                        curLineTokens.add(temp);
+                        Main.log.noteToken(temp);
+                        letter_counter = b + 1;
+                        a = b;
+                        break;
+                      }
+                    }
+                  }
+                  else {
+                    System.out.println("I should never come here");
+                    //this is a number either float or int
+                  }
+                }
+                else if (line.charAt(a) == '\'' ) {
+                  System.out.println("Maybe i come here?");
+                  letter_counter = a;
+                  for(int b = a + 1; b<line.length(); b++) {
+                    if(line.charAt(b) == '\'') {
+                      Token temp = new Token(stringToken, curLineNum());
+                      System.out.println(line.substring(a + 1,b));
+                      temp.stringLit = line.substring(a + 1,b);
+                      curLineTokens.add(temp);
+                      Main.log.noteToken(temp);
+                      letter_counter = b + 1;
+                      a = b;
+                      break;
+                    }
+                  }
+                }
+                else if(checkOperator(Character.toString(line.charAt(a - 1)))) {
+                  if(checkOperator(line.substring(a, a+1))) {
+                    Token temp = new Token(get_Operator(line.substring(a,a+1)), curLineNum());
+                    curLineTokens.add(temp);
+                    Main.log.noteToken(temp);
+                    letter_counter = a + 1;
+                    a = a + 1;
+                  }
+                  else {
+                    Token temp = new Token(get_Operator(Character.toString(line.charAt(a))), curLineNum());
+                    curLineTokens.add(temp);
+                    Main.log.noteToken(temp);
+                    letter_counter = a;
+                  }
+                }
+                else {
+                  System.out.println("i never come here");
+                  Token temp = new Token(nameToken, curLineNum());
+                  temp.name = line.substring(letter_counter,a);
+                  temp.checkResWords();
+                  curLineTokens.add(temp);
+                  Main.log.noteToken(temp);
+                  letter_counter = a;
+                }
+              }
                 // Ikke en bokstav
                 // Ved aa benytte oss av tokenkind, bruk checkResWords for andre occured
 
                 // Sjekk om det passer i checkResWords - hvis ikke er det name token
-            }
-            else if (isDigit(line.charAt(a)) != true) {
-                // Ikke et tall
-            }
           }
+
 
 
 
@@ -171,6 +229,24 @@ public class Scanner {
       /*  for (Token t: curLineTokens){
           Main.log.noteToken(t);
         }*/
+    }
+
+    public boolean checkOperator(String s){
+      for(TokenKind tk : EnumSet.range(asToken,rightParToken)){
+        if(s.equals(tk.image)){
+          return true;
+        }
+      }
+      return false;
+    }
+
+    public TokenKind get_Operator(String s){
+      for(TokenKind tk : EnumSet.range(asToken, rightParToken)){
+        if(s.equals(tk.image)){
+          return tk;
+        }
+      }
+      return null;
     }
 
     public int curLineNum() {
@@ -207,6 +283,9 @@ public class Scanner {
         return ('A'<=c && c<='Z') || ('a'<=c && c<='z') || (c=='_');
     }
 
+    private boolean isName(char c){
+      return ('A'<=c && c<='Z') || ('a'<=c && c<='z') || (c=='_' || ('0' <=c && c<='9'));
+    }
 
     private boolean isDigit(char c) {
         return '0'<=c && c<='9';
