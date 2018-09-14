@@ -90,36 +90,52 @@ public class Scanner {
           // Konverterer tabs til whitespaces, lagrer det i variabel amount
           String withouttab = expandLeadingTabs(line);
           int amount = findIndent(withouttab);
-
           // Sjekker om antall indenteringer mathcer linjen over
           if(amount == indents[numIndents-1]){
-            System.out.println("Dont neeed to indent");
+           //nothing
           }
           else if (amount > indents[numIndents-1]) {
-              System.out.println("Need to indent");
+              indents[numIndents] = amount;
+              numIndents = numIndents + 1;
+              Token t = new Token(indentToken,curLineNum());
+              curLineTokens.add(t);
+              Main.log.noteToken(t);
           }
-          else{
-            System.out.println("Need to find amount of dedent we need to do");
+          else{// check at jeg har gjort dedent riktig er litt ussikkert på den
+            for(int i = 0; i<numIndents; i++){
+              if(indents[i] == amount){
+                int temp = numIndents - (i + 1);
+                for(int g = 0; g<temp; g++){
+                  Token t = new Token(dedentToken, curLineNum());
+                  curLineTokens.add(t);
+                  Main.log.noteToken(t);
+                  indents[numIndents - (g + 1)] = 0; // det her må den ikke gjøre, vi kan la elemente være
+                }
+                numIndents = i + 1;
+                break;
+              }
+              else if(i == (numIndents - 1) && indents[i] != amount){
+                System.out.println("Dedent Error has occured: no match was found then dedenting in line: " + curLineNum());
+                System.exit(0);
+              }
+            }
           }
 
           // Deler linjen opp i string-array, separert med whitespaces
           // Vil alle tokens vaere separert med whitespaces? (3 + 5 er, 3+5 er ikke)
-          String[] tekst = line.split(" ", 200);
 
-          // Leser hver enkelt ws-separert ord i filen, sjekker om det er kommentar (#)
-          for(int a = 0; a<tekst.length; a++){
-            if(tekst[a].contains("#")){
-              System.out.println("this a comment, we dont neeed to take it at: " +  curLineNum());
-              break;
+
+          //working progress
+          mainloop;
+          int letter_counter = 0;
+          for(int a = 0; line.length(); a++){
+            if(line.charAt(a).equals('#')){
+              System.out.println("this is a comment"); // ser bort fra at comment kan være lengere i teksten, (vetikke om det kommer til å funke)
+              break mainloop;
             }
-            System.out.println("finding what to do with word: " + tekst[a]);
+            if(isLetterAZ(line.charAt(a)) != true){
 
-            // Work in progress
-            if(tekst[a].contains("=")){
-                curLineTokens.add(new Token(equalToken,curLineNum()));
-                System.out.println("Fant = i teskt[a], la til =-token paa linje: " + curLineNum());
             }
-
           }
 
 
@@ -145,10 +161,10 @@ public class Scanner {
           curLineTokens.add(new Token(newLineToken,curLineNum()));
 
 
-
-        for (Token t: curLineTokens){
+          //trenger ikke den akkurat naa siden jeg debuger shit
+      /*  for (Token t: curLineTokens){
           Main.log.noteToken(t);
-        }
+        }*/
     }
 
     public int curLineNum() {

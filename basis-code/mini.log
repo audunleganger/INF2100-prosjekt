@@ -1,8 +1,7 @@
    1: 
    2: # en hygelig hilsen
-Scanner: NEWLINE token on line 2
-   3: navn='Dag'
-Scanner: = token on line 3
-Scanner: NEWLINE token on line 3
-   4: print('Hei, ', navn)
-Scanner: NEWLINE token on line 4
+   3:   navn='Dag'
+Scanner: INDENT token on line 3
+   4:     print('Hei, ', navn)
+Scanner: INDENT token on line 4
+   5:  print('Hei')
