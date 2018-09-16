@@ -71,6 +71,10 @@ public class Scanner {
             if (line == null) {
                 sourceFile.close();
                 sourceFile = null;
+                Token temp = new Token(eofToken, curLineNum());
+                curLineTokens.add(temp);
+                Main.log.noteToken(temp);
+                return;
             } else {
                 Main.log.noteSourceLine(curLineNum(), line);
             }
@@ -137,25 +141,27 @@ public class Scanner {
               if(isDigit(line.charAt(a))){
                 letter_counter = a;
                 //going through it, until we find something that is not a integer
-                while(isDigit(line.charAt(letter_counter))){
+
+                while(letter_counter+1 != line.length() && isDigit(line.charAt(letter_counter+1))){
                   letter_counter++;
                 }
                 //this is a float
+
                 if(line.charAt(letter_counter) == '.'){
                   letter_counter++;
                   //finding the rest of float
-                  while(isDigit(line.charAt(letter_counter))){
+                  while(isDigit(line.charAt(letter_counter+1))){
                     letter_counter++;
                   }
                   //before sending we need to check that we the next char is not letter
-                  if(isLetterAZ(line.charAt(letter_counter))){
+                  if(isLetterAZ(line.charAt(letter_counter)) || line.charAt(letter_counter) == '.'){
                     System.out.println("Illegal statement, expecting float at line: " + curLineNum() + ", got:");
                     System.out.println(line.substring(a,letter_counter+1) + "...");
                     System.exit(0);
                   }
                   //if this is not true then we got a white space, operation, or string or something that maybe is allowed
                   // and we can send to find_float to get us the float value
-                  find_float(line.substring(a,letter_counter));
+                  find_float(line.substring(a,letter_counter+1));
                 }
                 else{
                   // this integer againg we need to check if next char is not a letter
@@ -167,25 +173,26 @@ public class Scanner {
                     System.exit(0);
                   }
                   // since everything is okey we go on to and send the word to
-                  find_integer(line.substring(a,letter_counter));
+                  find_integer(line.substring(a,letter_counter+1));
                 }
                 // and lastly we want to that the a to start from letter_counter possition
                 // but neeed to take - 1 from counter since a will increase with 1
-                a = letter_counter - 1;
+                a = letter_counter;
               }
               // it wasnt a integer so, we will check if it is a word
               else if(isLetterAZ(line.charAt(a))){
                 //since it is a letter now we can use isname, since we can a key token or a name token
                 letter_counter = a;
-                while(isName(line.charAt(letter_counter))){
+                
+                while(letter_counter + 1 != line.length() && isName(line.charAt(letter_counter + 1))){
                   letter_counter++;
                 }
                 // now we found the full word, need to check if it is name with numbers or key or name without numbers
                 // but all we need do is to send this to function down to do all the job for us
-                find_name_or_key(line.substring(a,letter_counter));
+                find_name_or_key(line.substring(a,letter_counter+1));
                 // it will either be a name or ke token
                 // also we want that a will start from letter_counter possition, again we need to take - 1 sine a will increase with 1
-                a = letter_counter - 1;
+                a = letter_counter;
                 }
                 // since this was not a letter or a integer, lets check if it is a operator, since
                 // the fuc takes string, we need to do substring
@@ -273,6 +280,7 @@ public class Scanner {
     }
 
     private void find_integer(String word){
+        System.out.println(word);
       long value = Long.parseLong(word);
       Token temp = new Token(integerToken, curLineNum());
       temp.integerLit = value;
@@ -355,7 +363,7 @@ public class Scanner {
     }
 
     private boolean isName(char c){
-      return ('A'<=c && c<='Z') || ('a'<=c && c<='z') || (c=='_' || ('0' <=c && c<='9'));
+      return ('A'<=c && c<='Z') || ('a'<=c && c<='z') || (c=='_') || ('0' <=c && c<='9');
     }
 
     private boolean isDigit(char c) {
