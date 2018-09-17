@@ -183,7 +183,7 @@ public class Scanner {
               else if(isLetterAZ(line.charAt(a))){
                 //since it is a letter now we can use isname, since we can a key token or a name token
                 letter_counter = a;
-                
+
                 while(letter_counter + 1 != line.length() && isName(line.charAt(letter_counter + 1))){
                   letter_counter++;
                 }
@@ -233,6 +233,10 @@ public class Scanner {
 
                   // we need to find the end of the string,
                   while(line.charAt(letter_counter) != '\'' && line.charAt(letter_counter) != '\"'){
+                    if(letter_counter + 1 == line.length() && (line.charAt(letter_counter) != '\'' || line.charAt(letter_counter) != '\"')){
+                        System.out.println("String error, was expecting \' or \", but didnt find it, at line: " + curLineNum());
+                        System.exit(0);
+                    }
                     letter_counter++;
                   }
                   // now that we found the word we need to add it to the token
