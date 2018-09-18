@@ -69,6 +69,13 @@ public class Scanner {
         try {
             line = sourceFile.readLine();
             if (line == null) {
+                if(numIndents > 1){
+                    for(int i = numIndents; i != 1; i--)   {
+                          Token t = new Token(dedentToken, curLineNum());
+                          curLineTokens.add(t);
+                          Main.log.noteToken(t);
+                    }
+                }
                 sourceFile.close();
                 sourceFile = null;
                 Token temp = new Token(eofToken, curLineNum());
@@ -85,10 +92,6 @@ public class Scanner {
 
 
         // Begynnelse paa oppgaven
-          if(line.trim().isEmpty()){
-            System.out.println("This line is empty, linenumber: " + curLineNum());
-            return;
-          }
 
           // Konverterer tabs til whitespaces, lagrer det i variabel amount
           String withouttab = expandLeadingTabs(line);
@@ -102,7 +105,6 @@ public class Scanner {
               numIndents = numIndents + 1;
               Token t = new Token(indentToken,curLineNum());
               curLineTokens.add(t);
-              Main.log.noteToken(t);
           }
 
           // Check at jeg har gjort dedent riktig er litt ussikkert på den
@@ -113,7 +115,6 @@ public class Scanner {
                 for(int g = 0; g < temp; g++){
                   Token t = new Token(dedentToken, curLineNum());
                   curLineTokens.add(t);
-                  Main.log.noteToken(t);
                   indents[numIndents - (g + 1)] = 0; // det her må den ikke gjøre, vi kan la elemente være
                 }
                 numIndents = i + 1;
@@ -126,6 +127,14 @@ public class Scanner {
             }
           }
 
+          if(line.trim().isEmpty()){
+              for (Token t: curLineTokens){
+                  Main.log.noteToken(t);
+              }
+            System.out.println("This line is empty, linenumber: " + curLineNum());
+            return;
+          }
+
 
           int letter_counter = 0;
           String word;
@@ -134,7 +143,7 @@ public class Scanner {
           for (int a = 0; a<line.length(); a++){
             if(line.charAt(a) == ('#')) {
               System.out.println("this is a comment"); // ser bort fra at comment kan være lengere i teksten, (vetikke om det kommer til å funke)
-              break mainloop;
+              return;
             }
 // we found that we had letters and something else now, now we need find out what is that new letter and what was before it
             // check if this is a integer or float
@@ -146,11 +155,10 @@ public class Scanner {
                   letter_counter++;
                 }
                 //this is a float
-
-                if(line.charAt(letter_counter) == '.'){
+                if(letter_counter + 1 !=  line.length() && line.charAt(letter_counter + 1) == '.'){
                   letter_counter++;
                   //finding the rest of float
-                  while(isDigit(line.charAt(letter_counter+1))){
+                  while(letter_counter+1 != line.length() && isDigit(line.charAt(letter_counter+1))){
                     letter_counter++;
                   }
                   //before sending we need to check that we the next char is not letter
@@ -207,7 +215,6 @@ public class Scanner {
                     Token temp = new Token(get_Operator(line.substring(letter_counter, letter_counter+2)), curLineNum());
                     // now just to add it to the list
                     curLineTokens.add(temp);
-                    Main.log.noteToken(temp);
                     // we add 1 to letter_counter since we moved with 1
                     letter_counter++;
                   }
@@ -217,7 +224,6 @@ public class Scanner {
                     Token temp = new Token(get_Operator(line.substring(letter_counter, letter_counter+1)), curLineNum());
                     // now just to add it to the list
                     curLineTokens.add(temp);
-                    Main.log.noteToken(temp);
                     // and that is it
                   }
                   //we put a to be at the right possition, we could have avoided the use of letter_counter
@@ -244,7 +250,6 @@ public class Scanner {
                   // we need to do pluss 1 since we dont want to take ' with us
                   temp.stringLit = line.substring(a + 1, letter_counter);
                   curLineTokens.add(temp);
-                  Main.log.noteToken(temp);
                   // now we need to set a to the place we want it to be to
                   a = letter_counter;
                 }
@@ -278,18 +283,16 @@ public class Scanner {
 
 
           //trenger ikke den akkurat naa siden jeg debuger shit
-      /*  for (Token t: curLineTokens){
-          Main.log.noteToken(t);
-        }*/
+          for (Token t: curLineTokens){
+              Main.log.noteToken(t);
+          }
     }
 
     private void find_integer(String word){
-        System.out.println(word);
       long value = Long.parseLong(word);
       Token temp = new Token(integerToken, curLineNum());
       temp.integerLit = value;
       curLineTokens.add(temp);
-      Main.log.noteToken(temp);
     }
 
     private void find_name_or_key(String word){
@@ -297,7 +300,6 @@ public class Scanner {
       temp.name = word;
       temp.checkResWords();
       curLineTokens.add(temp);
-      Main.log.noteToken(temp);
     }
 
     private void find_float(String word){
@@ -305,8 +307,7 @@ public class Scanner {
         double number = Float.parseFloat(word);
         Token temp = new Token(floatToken, curLineNum());
         temp.floatLit = number;
-        curLineTokens.add(temp);
-        Main.log.noteToken(temp);
+        curLineTokens.add(temp);;
       }
       else{
         System.out.println("Float constraction error, not a float, in line: " + curLineNum());
