@@ -61,7 +61,6 @@ public class Scanner {
         return false;
     }
 
-
     private void readNextLine() {
         curLineTokens.clear();
 
@@ -70,8 +69,19 @@ public class Scanner {
         try {
             line = sourceFile.readLine();
             if (line == null) {
+                if(numIndents > 1){
+                    for(int i = numIndents; i != 1; i--)   {
+                          Token t = new Token(dedentToken, curLineNum());
+                          curLineTokens.add(t);
+                          Main.log.noteToken(t);
+                    }
+                }
                 sourceFile.close();
                 sourceFile = null;
+                Token temp = new Token(eofToken, curLineNum());
+                curLineTokens.add(temp);
+                Main.log.noteToken(temp);
+                return;
             } else {
                 Main.log.noteSourceLine(curLineNum(), line);
             }
@@ -82,10 +92,6 @@ public class Scanner {
 
 
         // Begynnelse paa oppgaven
-          if(line.trim().isEmpty()){
-            System.out.println("This line is empty, linenumber: " + curLineNum());
-            return;
-          }
 
           // Konverterer tabs til whitespaces, lagrer det i variabel amount
           String withouttab = expandLeadingTabs(line);
@@ -99,7 +105,6 @@ public class Scanner {
               numIndents = numIndents + 1;
               Token t = new Token(indentToken,curLineNum());
               curLineTokens.add(t);
-              Main.log.noteToken(t);
           }
 
           // Check at jeg har gjort dedent riktig er litt ussikkert på den
@@ -110,7 +115,6 @@ public class Scanner {
                 for(int g = 0; g < temp; g++){
                   Token t = new Token(dedentToken, curLineNum());
                   curLineTokens.add(t);
-                  Main.log.noteToken(t);
                   indents[numIndents - (g + 1)] = 0; // det her må den ikke gjøre, vi kan la elemente være
                 }
                 numIndents = i + 1;
@@ -123,83 +127,136 @@ public class Scanner {
             }
           }
 
+          if(line.trim().isEmpty()){
+              for (Token t: curLineTokens){
+                  Main.log.noteToken(t);
+              }
+            System.out.println("This line is empty, linenumber: " + curLineNum());
+            return;
+          }
 
-          //Work in progress
+
           int letter_counter = 0;
+          String word;
           mainloop:
+          // seems like a finish product, test as much as u want if something doesnt work plz contact me
           for (int a = 0; a<line.length(); a++){
             if(line.charAt(a) == ('#')) {
               System.out.println("this is a comment"); // ser bort fra at comment kan være lengere i teksten, (vetikke om det kommer til å funke)
-              break mainloop;
+              return;
             }
+// we found that we had letters and something else now, now we need find out what is that new letter and what was before it
+            // check if this is a integer or float
+              if(isDigit(line.charAt(a))){
+                letter_counter = a;
+                //going through it, until we find something that is not a integer
 
-            if (isLetterAZ(line.charAt(a)) != true)  {
-              if(isDigit(line.charAt(a))) {
-                if(isLetterAZ(line.charAt(a-1))) {
-                  for(int b = a; b<line.length(); b++) {
-                      if(!isName(line.charAt(b))) {
-                        System.out.println("I should come here");
-                        Token temp = new Token(nameToken, curLineNum());
-                        temp.name = line.substring(letter_counter, b);
-                        curLineTokens.add(temp);
-                        Main.log.noteToken(temp);
-                        letter_counter = b + 1;
-                        a = b;
-                        break;
-                      }
-                    }
-                  }
-                  else {
-                    System.out.println("I should never come here");
-                    //this is a number either float or int
-                  }
+                while(letter_counter+1 != line.length() && isDigit(line.charAt(letter_counter+1))){
+                  letter_counter++;
                 }
-                else if (line.charAt(a) == '\'' ) {
-                  System.out.println("Maybe i come here?");
-                  letter_counter = a;
-                  for(int b = a + 1; b<line.length(); b++) {
-                    if(line.charAt(b) == '\'') {
-                      Token temp = new Token(stringToken, curLineNum());
-                      System.out.println(line.substring(a + 1,b));
-                      temp.stringLit = line.substring(a + 1,b);
-                      curLineTokens.add(temp);
-                      Main.log.noteToken(temp);
-                      letter_counter = b + 1;
-                      a = b;
-                      break;
-                    }
+                //this is a float
+                if(letter_counter + 1 !=  line.length() && line.charAt(letter_counter + 1) == '.'){
+                  letter_counter++;
+                  //finding the rest of float
+                  while(letter_counter+1 != line.length() && isDigit(line.charAt(letter_counter+1))){
+                    letter_counter++;
                   }
-                }
-                else if(checkOperator(Character.toString(line.charAt(a - 1)))) {
-                  if(checkOperator(line.substring(a, a+1))) {
-                    Token temp = new Token(get_Operator(line.substring(a,a+1)), curLineNum());
-                    curLineTokens.add(temp);
-                    Main.log.noteToken(temp);
-                    letter_counter = a + 1;
-                    a = a + 1;
+                  //before sending we need to check that we the next char is not letter
+                  if(isLetterAZ(line.charAt(letter_counter)) || line.charAt(letter_counter) == '.'){
+                    System.out.println("Illegal statement, expecting float at line: " + curLineNum() + ", got:");
+                    System.out.println(line.substring(a,letter_counter+1) + "...");
+                    System.exit(0);
                   }
-                  else {
-                    Token temp = new Token(get_Operator(Character.toString(line.charAt(a))), curLineNum());
-                    curLineTokens.add(temp);
-                    Main.log.noteToken(temp);
-                    letter_counter = a;
+                  //if this is not true then we got a white space, operation, or string or something that maybe is allowed
+                  // and we can send to find_float to get us the float value
+                  find_float(line.substring(a,letter_counter+1));
+                }
+                else{
+                  // this integer againg we need to check if next char is not a letter
+                  // throw a error msg and get on end the program
+
+                  if(isLetterAZ(line.charAt(letter_counter))){
+                    System.out.println("Illegal statement, expecting Integer at line: " + curLineNum() + ", got:");
+                    System.out.println(line.substring(a,letter_counter+1) + "...");
+                    System.exit(0);
                   }
+                  // since everything is okey we go on to and send the word to
+                  find_integer(line.substring(a,letter_counter+1));
                 }
-                else {
-                  System.out.println("i never come here");
-                  Token temp = new Token(nameToken, curLineNum());
-                  temp.name = line.substring(letter_counter,a);
-                  temp.checkResWords();
-                  curLineTokens.add(temp);
-                  Main.log.noteToken(temp);
-                  letter_counter = a;
-                }
+                // and lastly we want to that the a to start from letter_counter possition
+                // but neeed to take - 1 from counter since a will increase with 1
+                a = letter_counter;
               }
-                // Ikke en bokstav
-                // Ved aa benytte oss av tokenkind, bruk checkResWords for andre occured
+              // it wasnt a integer so, we will check if it is a word
+              else if(isLetterAZ(line.charAt(a))){
+                //since it is a letter now we can use isname, since we can a key token or a name token
+                letter_counter = a;
 
-                // Sjekk om det passer i checkResWords - hvis ikke er det name token
-          }
+                while(letter_counter + 1 != line.length() && isName(line.charAt(letter_counter + 1))){
+                  letter_counter++;
+                }
+                // now we found the full word, need to check if it is name with numbers or key or name without numbers
+                // but all we need do is to send this to function down to do all the job for us
+                find_name_or_key(line.substring(a,letter_counter+1));
+                // it will either be a name or ke token
+                // also we want that a will start from letter_counter possition, again we need to take - 1 sine a will increase with 1
+                a = letter_counter;
+                }
+                // since this was not a letter or a integer, lets check if it is a operator, since
+                // the fuc takes string, we need to do substring
+                else if(checkOperator(line.substring(a,a+1))){
+                  //it was operator, now we got to check if the operator is something like this: ==
+                  // we allways sett letter_counter to be a, se we know how many extra letters we move from a
+                  // need to check if this is the end of the line, if it is then there is only one operator
+                  letter_counter = a;
+                  if( a+1 != line.length() && checkOperator(line.substring(letter_counter, letter_counter+2))){
+                    //if this true then we got a something like this ==
+                    // we can use the function to find what kind of token it is:
+                    Token temp = new Token(get_Operator(line.substring(letter_counter, letter_counter+2)), curLineNum());
+                    // now just to add it to the list
+                    curLineTokens.add(temp);
+                    // we add 1 to letter_counter since we moved with 1
+                    letter_counter++;
+                  }
+                  else{
+                    // this is simple operator, so we will just add it and move on
+                    // again using the same fuc we find the right operator token
+                    Token temp = new Token(get_Operator(line.substring(letter_counter, letter_counter+1)), curLineNum());
+                    // now just to add it to the list
+                    curLineTokens.add(temp);
+                    // and that is it
+                  }
+                  //we put a to be at the right possition, we could have avoided the use of letter_counter
+                  // but since it is important in other if/else we using it here to
+                  a = letter_counter;
+                }
+                //lastly we need to check if this a string
+                // the string can start with "" or with ''
+                else if(line.charAt(a) == '\'' || line.charAt(a) == '\"'){
+                  letter_counter = a;
+                  //we increas letter_counter since we dont want to start at the same spot, unlike other places
+                  letter_counter++;
+
+                  // we need to find the end of the string,
+                  while(line.charAt(letter_counter) != '\'' && line.charAt(letter_counter) != '\"'){
+                    if(letter_counter + 1 == line.length() && (line.charAt(letter_counter) != '\'' || line.charAt(letter_counter) != '\"')){
+                        System.out.println("String error, was expecting \' or \", but didnt find it, at line: " + curLineNum());
+                        System.exit(0);
+                    }
+                    letter_counter++;
+                  }
+                  // now that we found the word we need to add it to the token
+                  Token temp = new Token (stringToken, curLineNum());
+                  // we need to do pluss 1 since we dont want to take ' with us
+                  temp.stringLit = line.substring(a + 1, letter_counter);
+                  curLineTokens.add(temp);
+                  // now we need to set a to the place we want it to be to
+                  a = letter_counter;
+                }
+                // if we came here it means a is white spaace
+      }
+
+
 
 
 
@@ -226,9 +283,36 @@ public class Scanner {
 
 
           //trenger ikke den akkurat naa siden jeg debuger shit
-      /*  for (Token t: curLineTokens){
-          Main.log.noteToken(t);
-        }*/
+          for (Token t: curLineTokens){
+              Main.log.noteToken(t);
+          }
+    }
+
+    private void find_integer(String word){
+      long value = Long.parseLong(word);
+      Token temp = new Token(integerToken, curLineNum());
+      temp.integerLit = value;
+      curLineTokens.add(temp);
+    }
+
+    private void find_name_or_key(String word){
+      Token temp = new Token(nameToken, curLineNum());
+      temp.name = word;
+      temp.checkResWords();
+      curLineTokens.add(temp);
+    }
+
+    private void find_float(String word){
+      if(!word.contains("[a-zA-Z]+")){
+        double number = Float.parseFloat(word);
+        Token temp = new Token(floatToken, curLineNum());
+        temp.floatLit = number;
+        curLineTokens.add(temp);;
+      }
+      else{
+        System.out.println("Float constraction error, not a float, in line: " + curLineNum());
+        System.exit(0);
+      }
     }
 
     public boolean checkOperator(String s){
@@ -284,7 +368,7 @@ public class Scanner {
     }
 
     private boolean isName(char c){
-      return ('A'<=c && c<='Z') || ('a'<=c && c<='z') || (c=='_' || ('0' <=c && c<='9'));
+      return ('A'<=c && c<='Z') || ('a'<=c && c<='z') || (c=='_') || ('0' <=c && c<='9');
     }
 
     private boolean isDigit(char c) {
