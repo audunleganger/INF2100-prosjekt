@@ -91,14 +91,12 @@ public class Scanner {
         }
 
 
-        // Begynnelse paa oppgaven
-
           // Konverterer tabs til whitespaces, lagrer det i variabel amount
           String withouttab = expandLeadingTabs(line);
           int amount = findIndent(withouttab);
           // Sjekker om antall indenteringer mathcer linjen over
           if(amount == indents[numIndents-1]){
-           //nothing
+           // Riktig antall indents, gjoer ingenting
           }
           else if (amount > indents[numIndents-1]) {
               indents[numIndents] = amount;
@@ -107,7 +105,7 @@ public class Scanner {
               curLineTokens.add(t);
           }
 
-          // Check at jeg har gjort dedent riktig er litt ussikkert på den
+
           else  {
             for(int i = 0; i < numIndents; i++)   {
               if(indents[i] == amount)  {
@@ -115,7 +113,7 @@ public class Scanner {
                 for(int g = 0; g < temp; g++){
                   Token t = new Token(dedentToken, curLineNum());
                   curLineTokens.add(t);
-                  indents[numIndents - (g + 1)] = 0; // det her må den ikke gjøre, vi kan la elemente være
+                  indents[numIndents - (g + 1)] = 0; // Unoedvendig siden det blir overskrevet ved neste indent
                 }
                 numIndents = i + 1;
                 break;
@@ -139,105 +137,94 @@ public class Scanner {
           int letter_counter = 0;
           String word;
           mainloop:
-          // seems like a finish product, test as much as u want if something doesnt work plz contact me
+          // I hovedloopen vil vi gaa gjennom linjen og lagre indeksen i variabel a. Hver gang vi finner noe
+          // stopper a, og vi itererer med en annen varabel (letter_counter), og til slutt lagrer vi det vi leste
+          // som en ny token (hvis det som staar er gyldig)
+          // Vi gaar gjennom linjen, og sjekker i foerste omgang om det er en kommentar (#)
           for (int a = 0; a<line.length(); a++){
             if(line.charAt(a) == ('#')) {
               System.out.println("this is a comment"); // ser bort fra at comment kan være lengere i teksten, (vetikke om det kommer til å funke)
               return;
             }
-// we found that we had letters and something else now, now we need find out what is that new letter and what was before it
-            // check if this is a integer or float
+            // Vi sjekker om det vi har er et tall
               if(isDigit(line.charAt(a))){
                 letter_counter = a;
-                //going through it, until we find something that is not a integer
+                // Vi fortsetter aa iterer gjennom helt til vi finner noe som IKKE er et tall
 
                 while(letter_counter+1 != line.length() && isDigit(line.charAt(letter_counter+1))){
                   letter_counter++;
                 }
-                //this is a float
+                // Hvis vi finner et punktum ".", vet vi at vi jobber med en float
                 if(letter_counter + 1 !=  line.length() && line.charAt(letter_counter + 1) == '.'){
                   letter_counter++;
-                  //finding the rest of float
+                  // Finner alle desimalene i floaten
                   while(letter_counter+1 != line.length() && isDigit(line.charAt(letter_counter+1))){
                     letter_counter++;
                   }
-                  //before sending we need to check that we the next char is not letter
+                  // Vi sjekker at neste tegn ikke er en bokstav eller punktum (ugyldig statement)
                   if(isLetterAZ(line.charAt(letter_counter)) || line.charAt(letter_counter) == '.'){
                     System.out.println("Illegal statement, expecting float at line: " + curLineNum() + ", got:");
                     System.out.println(line.substring(a,letter_counter+1) + "...");
                     System.exit(0);
                   }
-                  //if this is not true then we got a white space, operation, or string or something that maybe is allowed
-                  // and we can send to find_float to get us the float value
+                  // Hvis dette ikke er sant, vet vi at vi har en operator eller et whitespace, noe som kan vaere gyldig,
+                  // og vi kan bruke find_float til aa finne float-verdien
                   find_float(line.substring(a,letter_counter+1));
                 }
                 else{
-                  // this integer againg we need to check if next char is not a letter
-                  // throw a error msg and get on end the program
+                  // Dette er et heltall, og vi sjekker igjen om det neste tegnet er en bokstav
+                  // Hvis det er det, er uttrykket ugyldig
 
                   if(isLetterAZ(line.charAt(letter_counter))){
                     System.out.println("Illegal statement, expecting Integer at line: " + curLineNum() + ", got:");
                     System.out.println(line.substring(a,letter_counter+1) + "...");
                     System.exit(0);
                   }
-                  // since everything is okey we go on to and send the word to
+                  // Uttrykket er gyldig, og vi har et heltall(int)
                   find_integer(line.substring(a,letter_counter+1));
                 }
-                // and lastly we want to that the a to start from letter_counter possition
-                // but neeed to take - 1 from counter since a will increase with 1
+                // Vi shifter a over til letter_counter, slik at vi fortsetter etter at tokenen er ferdig
                 a = letter_counter;
               }
-              // it wasnt a integer so, we will check if it is a word
+              // Ikke float eller heltall, sjekker om det er et ord
               else if(isLetterAZ(line.charAt(a))){
-                //since it is a letter now we can use isname, since we can a key token or a name token
                 letter_counter = a;
 
+                // Det er et ord, saa vi begynner aa lese til vi finner noe annet enn bokstaver
                 while(letter_counter + 1 != line.length() && isName(line.charAt(letter_counter + 1))){
                   letter_counter++;
                 }
-                // now we found the full word, need to check if it is name with numbers or key or name without numbers
-                // but all we need do is to send this to function down to do all the job for us
+
+                // Naa har vi et fullt ord, saa vi sjekker om det er et ord med tall eller om det er en key
                 find_name_or_key(line.substring(a,letter_counter+1));
-                // it will either be a name or ke token
-                // also we want that a will start from letter_counter possition, again we need to take - 1 sine a will increase with 1
+                // Vi shifter a over til letter_counter, slik at vi faar med hele ordet eller key-valuen
                 a = letter_counter;
                 }
-                // since this was not a letter or a integer, lets check if it is a operator, since
-                // the fuc takes string, we need to do substring
+                // Vi sjekker om det er en operator via checkOperator-funksjonen
                 else if(checkOperator(line.substring(a,a+1))){
-                  //it was operator, now we got to check if the operator is something like this: ==
-                  // we allways sett letter_counter to be a, se we know how many extra letters we move from a
-                  // need to check if this is the end of the line, if it is then there is only one operator
+                  // Vi vet at det er en operator, maa sjekke om det er en to-tegns-operator (f.eks "==" eller ">=")
                   letter_counter = a;
                   if( a+1 != line.length() && checkOperator(line.substring(letter_counter, letter_counter+2))){
-                    //if this true then we got a something like this ==
-                    // we can use the function to find what kind of token it is:
+                    // Vi vet det er en to-tegns-operator, saa vi oppretter en token og pusher den paa curLineTokens
                     Token temp = new Token(get_Operator(line.substring(letter_counter, letter_counter+2)), curLineNum());
-                    // now just to add it to the list
                     curLineTokens.add(temp);
-                    // we add 1 to letter_counter since we moved with 1
                     letter_counter++;
                   }
                   else{
-                    // this is simple operator, so we will just add it and move on
-                    // again using the same fuc we find the right operator token
+                      // Vi vet det er en ett-tegns-operator, saa vi oppretter en token og pusher den paa curLineTokens
                     Token temp = new Token(get_Operator(line.substring(letter_counter, letter_counter+1)), curLineNum());
-                    // now just to add it to the list
+                    // Vi pusher paa stacken
                     curLineTokens.add(temp);
-                    // and that is it
                   }
-                  //we put a to be at the right possition, we could have avoided the use of letter_counter
-                  // but since it is important in other if/else we using it here to
                   a = letter_counter;
                 }
-                //lastly we need to check if this a string
-                // the string can start with "" or with ''
+                // Vi sjekker om det en string (begynner med " eller ')
                 else if(line.charAt(a) == '\'' || line.charAt(a) == '\"'){
                   letter_counter = a;
-                  //we increas letter_counter since we dont want to start at the same spot, unlike other places
+                  // Vi oeker letter_counter, saann at vi ikke faar med " eller ' i selve stringen
                   letter_counter++;
 
-                  // we need to find the end of the string,
+                  // Vi itererer til vi finner slutten av stringen
                   while(line.charAt(letter_counter) != '\'' && line.charAt(letter_counter) != '\"'){
                     if(letter_counter + 1 == line.length() && (line.charAt(letter_counter) != '\'' || line.charAt(letter_counter) != '\"')){
                         System.out.println("String error, was expecting \' or \", but didnt find it, at line: " + curLineNum());
@@ -245,40 +232,15 @@ public class Scanner {
                     }
                     letter_counter++;
                   }
-                  // now that we found the word we need to add it to the token
+                  // Vi fant et ord, lager string-token og pusher paa stacken
                   Token temp = new Token (stringToken, curLineNum());
-                  // we need to do pluss 1 since we dont want to take ' with us
                   temp.stringLit = line.substring(a + 1, letter_counter);
                   curLineTokens.add(temp);
-                  // now we need to set a to the place we want it to be to
+                  // Shifter a over til letter_counter
                   a = letter_counter;
                 }
-                // if we came here it means a is white spaace
-      }
-
-
-
-
-
-
-          //-- Must be changed in part 1:
-          /*
-              Oppskrift:
-              - Sjekk om linjen er tomt OK
-              - Sjekk om linjen inneholder en kommentar
-              - Omform TAB-er til blanke (whitespaces)
-              - Tell antall blanke (whitespaces): n
-              - Hvis n > Indents.top
-                  - Push n på indents
-                  - Legg til INDENT-token på curLineTokens
-              - Hvis n < Indents.top
-                  - Pop Indents.top
-                  - Legg til en DEDENT-token på curLineTokens
-              - Hvis n != Indents.top, har vi indenteringsfeil
-              - På slutten av siste linje: For alle indents
-                som er > 0, legg til DEDENT-token i curLineTokens
-          */
-          // Terminate line:
+                // Hvis vi kom hit, er det et whitespace. Vi gjoer ingenting
+            }
           curLineTokens.add(new Token(newLineToken,curLineNum()));
 
 
