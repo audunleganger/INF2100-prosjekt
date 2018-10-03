@@ -341,28 +341,49 @@ public class Scanner {
 
     public boolean isCompOpr() {
         TokenKind k = curToken().kind;
-        //-- Must be changed in part 2:
+        c = k.toString();
+        if(c.equals("<") || c.equals(">")){
+            return true;
+        }
+        else if(c.equals("==") || c.equals("!=")){
+            return true;
+        }
+        else if(c.equals("<=") || c.equals(">=")){
+            return true;
+        }
         return false;
     }
 
 
     public boolean isFactorPrefix() {
         TokenKind k = curToken().kind;
-        //-- Must be changed in part 2:
+        c = k.toString();
+        if(c.equals("+") || c.equals("-")){
+            return true;
+        }
         return false;
     }
 
 
     public boolean isFactorOpr() {
         TokenKind k = curToken().kind;
-        //-- Must be changed in part 2:
+        c = k.toString();
+        if(c.equals("*") || c.equals("/")){
+            return true;
+        }
+        else if(c.equals("%") || c.equals("//")){
+            return true;
+        }
         return false;
     }
 
 
     public boolean isTermOpr() {
         TokenKind k = curToken().kind;
-        //-- Must be changed in part 2:
+        c = k.toString();
+        if(c.equals("+") || c.equals("-")){
+            return true;
+        }
         return false;
     }
 }
