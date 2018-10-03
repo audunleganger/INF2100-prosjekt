@@ -1,0 +1,3 @@
+class AspSubscription extends AspPrimarySuffix{
+    
+}

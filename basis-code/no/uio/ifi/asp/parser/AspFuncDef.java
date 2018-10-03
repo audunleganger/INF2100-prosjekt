@@ -1,0 +1,3 @@
+class AspFuncDef extends AspStmt{
+    
+}

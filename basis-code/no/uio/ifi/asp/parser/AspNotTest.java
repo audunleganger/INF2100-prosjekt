@@ -1,0 +1,3 @@
+class AspNotTest extends AspSyntax{
+    
+}

@@ -1,0 +1,3 @@
+class AspFactorOpr extends AspSyntax{
+    
+}

@@ -1,0 +1,3 @@
+class AspFloatLiteral extends AspAtom{
+    
+}

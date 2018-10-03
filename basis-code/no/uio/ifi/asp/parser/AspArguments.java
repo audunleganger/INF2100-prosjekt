@@ -1,0 +1,3 @@
+class AspArguments extends AspPrimarySuffix{
+
+}

@@ -1,0 +1,3 @@
+class AspTerm extends AspSyntax{
+    
+}

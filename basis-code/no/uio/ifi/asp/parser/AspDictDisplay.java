@@ -1,0 +1,3 @@
+class AspDictDisplay extends AspAtom{
+
+}

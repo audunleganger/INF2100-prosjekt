@@ -1,0 +1,3 @@
+class AspForStmt extends AspStmt{
+    
+}

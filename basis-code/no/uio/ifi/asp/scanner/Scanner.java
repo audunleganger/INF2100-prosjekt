@@ -68,6 +68,7 @@ public class Scanner {
         String line = null;
         try {
             line = sourceFile.readLine();
+            // sjekker om vi har noen dedent å gjøre før vi avslutter programmet
             if (line == null) {
                 if(numIndents > 1){
                     for(int i = numIndents; i != 1; i--)   {

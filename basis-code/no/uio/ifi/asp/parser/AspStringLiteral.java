@@ -1,0 +1,3 @@
+class AspStringLiteral extends AspAtom{
+    
+}

@@ -1,0 +1,3 @@
+class AspAssignment extends AspStmt{
+    
+}

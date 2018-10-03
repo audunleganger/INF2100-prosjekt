@@ -1,0 +1,3 @@
+class AspWhileStmt extends AspStmt{
+    
+}

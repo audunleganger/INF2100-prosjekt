@@ -1,0 +1,3 @@
+class AspAndTest extends AspSyntax{
+
+}

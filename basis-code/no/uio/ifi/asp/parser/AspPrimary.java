@@ -1,0 +1,3 @@
+class AspPrimary extends AspSyntax{
+    
+}

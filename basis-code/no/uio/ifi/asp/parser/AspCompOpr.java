@@ -1,0 +1,3 @@
+class AspCompOpr extends AspSyntax{
+    
+}

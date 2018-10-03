@@ -1,0 +1,3 @@
+class AspBooleanLiteral extends AspAtom{
+    
+}

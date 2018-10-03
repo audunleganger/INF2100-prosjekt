@@ -1,0 +1,3 @@
+class AspIntegerLiteral extends AspAtom{
+    
+}

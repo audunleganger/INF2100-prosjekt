@@ -1,0 +1,3 @@
+class AspName extends AspAtom{
+    
+}

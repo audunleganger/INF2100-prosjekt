@@ -1,0 +1,3 @@
+class AspInnerExpr extends AspAtom{
+    
+}

@@ -1,0 +1,3 @@
+class AspNoneLiteral extends AspAtom{
+    
+}

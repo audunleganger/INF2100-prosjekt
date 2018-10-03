@@ -1,0 +1,3 @@
+class AspPassStmt extends AspStmt{
+    
+}
