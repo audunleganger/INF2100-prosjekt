@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
+
 import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 public class AspProgram extends AspSyntax {
-    //-- Must be changed in part 2:
-    // ArrayList<AspStmt> stmts = new ArrayList<>();
+
+    ArrayList<AspStmt> stmts = new ArrayList<>();
 
     AspProgram(int n) {
         super(n);
@@ -21,8 +22,18 @@ public class AspProgram extends AspSyntax {
 
         AspProgram ap = new AspProgram(s.curLineNum());
         while (s.curToken().kind != eofToken) {
-            //-- Must be changed in part 2:
-            // ap.stmts.add(AspStmt.parse(s));
+            if(s.curToken().kind == nameToken){
+                if(s.curLineTokens.contains(equalToken)){
+                    ap.stmts.add(AspAssignment.parse(s));
+                }
+                else{
+                    ap.stmts.add(AspExprStmt.parse(s))
+                }
+            }
+            else{
+                // all others, for now random shit:
+                ap.stmts.add(AspStmt.parse(s));
+            }
         }
 
         leaveParser("program");
@@ -32,7 +43,9 @@ public class AspProgram extends AspSyntax {
 
     @Override
     public void prettyPrint() {
-        //-- Must be changed in part 2:
+        for ( AspStmt aStmt : stmts){
+            aStmt.prettyPrint();
+        }
     }
 
 
