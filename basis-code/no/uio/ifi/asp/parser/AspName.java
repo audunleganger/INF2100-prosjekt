@@ -3,6 +3,8 @@ package no.uio.ifi.asp.parser;
 import no.uio.ifi.asp.scanner.*;
 import no.uio.ifi.asp.main.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
+import no.uio.ifi.asp.runtime.*;
+
 
 
 class AspName extends AspAtom{
@@ -26,7 +28,7 @@ class AspName extends AspAtom{
 
     @Override
     void prettyPrint() {
-        String word = " " + word + " ";
+        word = " " + word + " ";
         Main.log.prettyWrite(word);
     }
 

@@ -4,6 +4,8 @@ import no.uio.ifi.asp.scanner.*;
 import java.util.ArrayList;
 import no.uio.ifi.asp.main.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
+import no.uio.ifi.asp.runtime.*;
+
 
 
 abstract class AspAtom extends AspSyntax{
@@ -19,9 +21,9 @@ abstract class AspAtom extends AspSyntax{
         /*
         Maa lage:
             AspFloatLiteral *done*
-            AspIntegerLiteral
-            AspDictDisplay
-            AspListDisplay
+            AspIntegerLiteral *done*
+            AspDictDisplay *done*
+            AspListDisplay *done*
             AspInnerExpr
             AspName  *done*
             AspNoneLiteral

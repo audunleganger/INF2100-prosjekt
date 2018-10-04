@@ -4,6 +4,8 @@ import no.uio.ifi.asp.scanner.*;
 import java.util.ArrayList;
 import no.uio.ifi.asp.main.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
+import no.uio.ifi.asp.runtime.*;
+
 
 
 class AspIntegerLiteral extends AspAtom{
@@ -28,7 +30,7 @@ class AspIntegerLiteral extends AspAtom{
 
     @Override
     void prettyPrint(){
-        String word = " " + word + " ";
+        word = " " + word + " ";
         Main.log.prettyWrite(word);
     }
 

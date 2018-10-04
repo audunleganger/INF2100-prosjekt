@@ -6,6 +6,8 @@ import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.runtime.*;
 import no.uio.ifi.asp.scanner.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
+import no.uio.ifi.asp.runtime.*;
+
 
 public class AspExpr extends AspSyntax {
     ArrayList<AspAndTest> andTests = new ArrayList<>();

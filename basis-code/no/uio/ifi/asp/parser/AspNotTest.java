@@ -3,6 +3,8 @@ package no.uio.ifi.asp.parser;
 import no.uio.ifi.asp.scanner.*;
 import no.uio.ifi.asp.main.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
+import no.uio.ifi.asp.runtime.*;
+
 
 class AspNotTest extends AspSyntax{
     AspComparison comp;
@@ -34,7 +36,7 @@ class AspNotTest extends AspSyntax{
         }
         comp.prettyPrint();
     }
-    
+
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         //-- Must be changed in part 3:

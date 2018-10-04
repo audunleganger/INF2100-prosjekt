@@ -4,6 +4,8 @@ import no.uio.ifi.asp.scanner.*;
 import java.util.ArrayList;
 import no.uio.ifi.asp.main.*;
 import static no.uio.ifi.asp.scanner.TokenKind.*;
+import no.uio.ifi.asp.runtime.*;
+
 
 
 abstract class AspPrimarySuffix extends AspSyntax{
@@ -24,7 +26,7 @@ abstract class AspPrimarySuffix extends AspSyntax{
             aps = AspSubscription.parse(s);
         }
         else{
-            parserError("Expected an Primary Suffix expression but found a " + s.curToken().kind + "!" + s.curLineNum());
+            parserError(("Expected an Primary Suffix expression but found a " + s.curToken().kind + "!" ), s.curLineNum());
         }
 
         leaveParser("Primary Suffix");
@@ -40,5 +42,10 @@ abstract class AspPrimarySuffix extends AspSyntax{
         else{
             sub.prettyPrint();
         }
+    }
+    @Override
+    public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+        //-- Must be changed in part 4:
+        return null;
     }
 }
