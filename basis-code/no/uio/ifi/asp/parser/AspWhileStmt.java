@@ -7,8 +7,8 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspWhileStmt extends AspStmt{
-    AspExpr test;
-    AspSuite body;
+    AspExpr expr;
+    AspSuite suite;
 
     AspWhileStmt(int n) {
         super(n);
@@ -16,18 +16,25 @@ class AspWhileStmt extends AspStmt{
 
     static AspWhileStmt parse(Scanner s) {
         enterParser("while stmt");
+
         AspWhileStmt aws = new AspWhileStmt(s.curLineNum());
+
         skip(s, whileToken);
-        aws.test = AspExpr.parse(s);
+        aws.expr = AspExpr.parse(s);
         skip(s, colonToken);
-        //aws.body = AspSuite.parse(s);
+        aws.suite = AspSuite.parse(s);
+
         leaveParser("while stmt");
+
         return aws;
     }
 
     @Override
     void prettyPrint() {
-
+        Main.log.prettyWrite("While ");
+        expr.prettyPrint();
+        Main.log.prettyWrite(": ");
+        suite.prettyPrint();
     }
 
     @Override
