@@ -18,7 +18,7 @@ public class AspExpr extends AspSyntax {
 
 
     public static AspExpr parse(Scanner s) {
-        enterParser("expr");
+        enterParser("Expr");
         AspExpr ae = new AspExpr(s.curLineNum());
 
         while (true){
@@ -29,7 +29,7 @@ public class AspExpr extends AspSyntax {
             skip(s, orToken);
         }
 
-        leaveParser("expr");
+        leaveParser("Expr");
         return ae;
     }
 

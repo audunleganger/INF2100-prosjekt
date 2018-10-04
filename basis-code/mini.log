@@ -2,89 +2,93 @@
    1: 
    2: # en hygelig hilsen
    3: navn='Dag'
-  <Assignment>
-    <Name>
-    </Name>
-    <expr>
-      <And test>
-        <Not test>
-          <Comparison>
-            <Term>
-              <Factor>
-                <Primary>
-                  <atom>
-                    <String Literal>
-                    </String Literal>
-                  </atom>
-                </Primary>
-              </Factor>
-            </Term>
-          </Comparison>
-        </Not test>
-      </and test>
-    </expr>
-  </Assignment>
+  <Stmt>
+    <Assignment>
+      <Name>
+      </Name>
+      <Expr>
+        <And test>
+          <Not test>
+            <Comparison>
+              <Term>
+                <Factor>
+                  <Primary>
+                    <atom>
+                      <String Literal>
+                      </String Literal>
+                    </atom>
+                  </Primary>
+                </Factor>
+              </Term>
+            </Comparison>
+          </Not test>
+        </and test>
+      </Expr>
+    </Assignment>
+  </Stmt>
    4: print('Hei, ', navn)
-  <Exp Stmt>
-    <expr>
-      <And test>
-        <Not test>
-          <Comparison>
-            <Term>
-              <Factor>
-                <Primary>
-                  <atom>
-                    <Name>
-                    </Name>
-                  </atom>
-                  <Primary Suffix>
-                    <Arguments>
-                      <expr>
-                        <And test>
-                          <Not test>
-                            <Comparison>
-                              <Term>
-                                <Factor>
-                                  <Primary>
-                                    <atom>
-                                      <String Literal>
-                                      </String Literal>
-                                    </atom>
-                                  </Primary>
-                                </Factor>
-                              </Term>
-                            </Comparison>
-                          </Not test>
-                        </and test>
-                      </expr>
-                      <expr>
-                        <And test>
-                          <Not test>
-                            <Comparison>
-                              <Term>
-                                <Factor>
-                                  <Primary>
-                                    <atom>
-                                      <Name>
-                                      </Name>
-                                    </atom>
-                                  </Primary>
-                                </Factor>
-                              </Term>
-                            </Comparison>
-                          </Not test>
-                        </and test>
-                      </expr>
-                    </Arguments>
-                  </Primary Suffix>
-                </Primary>
-              </Factor>
-            </Term>
-          </Comparison>
-        </Not test>
-      </and test>
-    </expr>
-  </Exp Stmt>
+  <Stmt>
+    <Exp Stmt>
+      <Expr>
+        <And test>
+          <Not test>
+            <Comparison>
+              <Term>
+                <Factor>
+                  <Primary>
+                    <atom>
+                      <Name>
+                      </Name>
+                    </atom>
+                    <Primary Suffix>
+                      <Arguments>
+                        <Expr>
+                          <And test>
+                            <Not test>
+                              <Comparison>
+                                <Term>
+                                  <Factor>
+                                    <Primary>
+                                      <atom>
+                                        <String Literal>
+                                        </String Literal>
+                                      </atom>
+                                    </Primary>
+                                  </Factor>
+                                </Term>
+                              </Comparison>
+                            </Not test>
+                          </and test>
+                        </Expr>
+                        <Expr>
+                          <And test>
+                            <Not test>
+                              <Comparison>
+                                <Term>
+                                  <Factor>
+                                    <Primary>
+                                      <atom>
+                                        <Name>
+                                        </Name>
+                                      </atom>
+                                    </Primary>
+                                  </Factor>
+                                </Term>
+                              </Comparison>
+                            </Not test>
+                          </and test>
+                        </Expr>
+                      </Arguments>
+                    </Primary Suffix>
+                  </Primary>
+                </Factor>
+              </Term>
+            </Comparison>
+          </Not test>
+        </and test>
+      </Expr>
+    </Exp Stmt>
+  </Stmt>
 </program>
 PP>  navn = "Dag"
 

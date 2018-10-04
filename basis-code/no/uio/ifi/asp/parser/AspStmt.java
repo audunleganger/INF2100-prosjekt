@@ -13,6 +13,29 @@ abstract class AspStmt extends AspSyntax{
         super(n);
     }
 
+    static AspStmt parse(Scanner s){
+        enterParser("Stmt");
+
+        AspStmt as = null;
+
+        if(s.curToken().kind == nameToken){
+            if(s.anyEqualToken()){
+                as = AspAssignment.parse(s);
+            }
+            else{
+                as = AspExprStmt.parse(s);
+            }
+        }
+        else{
+            // all others, for now random shit:
+            as = AspExprStmt.parse(s);
+        }
+
+        leaveParser("Stmt");
+
+        return as;
+    }
+
     @Override
     void prettyPrint() {
 
