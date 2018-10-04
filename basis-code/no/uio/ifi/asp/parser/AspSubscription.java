@@ -9,19 +9,31 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspSubscription extends AspPrimarySuffix{
+    AspExpr expr;
 
     AspSubscription(int n){
         super(n);
     }
 
     static AspSubscription parse(Scanner s){
-        // Does nothing right now
-        return null;
+        enterParser("Subscription");
+
+        AspSubscription as = new AspSubscription(s.curLineNum());
+
+        skip(s,leftBraceToken);
+        as.expr = AspExpr.parse(s);
+        skip(s, rightBraceToken);
+
+        leaveParser("Subscription");
+
+        return as;
     }
 
     @Override
     void prettyPrint(){
-        // Does nothing right now
+        Main.log.prettyWrite("[");
+        expr.prettyPrint();
+        Main.log.prettyWrite("]");
     }
 
     @Override
