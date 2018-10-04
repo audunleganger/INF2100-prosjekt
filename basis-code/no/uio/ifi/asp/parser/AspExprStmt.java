@@ -32,4 +32,10 @@ class AspExprStmt extends AspStmt{
         expr.prettyPrint();
         Main.log.prettyWriteLn(" \n");
     }
+
+    @Override
+    public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+        //-- Must be changed in part 3:
+        return null;
+    }
 }
