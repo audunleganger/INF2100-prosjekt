@@ -26,7 +26,7 @@ class AspBooleanLiteral extends AspAtom{
             skip(s, falseToken);
             tokenType = false;
         }
-        return null;
+        return abl;
     }
 
     @Override
