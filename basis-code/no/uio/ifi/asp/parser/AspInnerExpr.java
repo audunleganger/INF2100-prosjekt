@@ -9,19 +9,30 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspInnerExpr extends AspAtom{
+    String word;
+
 
     AspInnerExpr(int n){
         super(n);
     }
 
     static AspInnerExpr parse(Scanner s){
-        //does nothing now
-        return null;
+        enterParser("InnerExpr");
+
+        skip(s, leftParToken);
+
+        AspInnerExpr aie = new AspIntegerLiteral(s.curLineNum());
+        aie.word = s.curToken().stringLit;
+
+        skip(s, rightParToken);
+
+        return aie;
     }
 
     @Override
     void prettyPrint(){
-        //does nothing now
+        word = " (" + word + ") ";
+        Main.log.prettyWrite(word);
     }
 
     @Override
