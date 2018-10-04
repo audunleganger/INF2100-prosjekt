@@ -18,18 +18,6 @@ abstract class AspAtom extends AspSyntax{
 
         AspAtom aa = null;
 
-        /*
-        Maa lage:
-            AspFloatLiteral *done*
-            AspIntegerLiteral *done*
-            AspDictDisplay *done*
-            AspListDisplay *done*
-            AspInnerExpr
-            AspName  *done*
-            AspNoneLiteral
-            AspStringLiteral *done*
-
-        */
 
         switch (s.curToken().kind) {
             case falseToken:

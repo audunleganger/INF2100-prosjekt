@@ -23,7 +23,7 @@ class AspIntegerLiteral extends AspAtom{
 
         skip(s, integerToken);
 
-        leaveParser("Integer Token");
+        leaveParser("Integer Literal");
 
         return ail;
     }

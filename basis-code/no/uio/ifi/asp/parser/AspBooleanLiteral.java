@@ -9,19 +9,34 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspBooleanLiteral extends AspAtom{
-
+    static boolean tokenType;
     AspBooleanLiteral(int n){
         super(n);
     }
 
     static AspBooleanLiteral parse(Scanner s){
-        // does nothing now
+        enterParser("Boolean Literal");
+
+        AspBooleanLiteral abl = new AspBooleanLiteral(s.curLineNum());
+        if (s.curToken().kind == trueToken) {
+            skip(s, trueToken);
+            tokenType = true;
+        }
+        else if (s.curTOken().kind == falseToken)   {
+            skip(s, falseToken);
+            tokenType = false;
+        }
         return null;
     }
 
     @Override
     void prettyPrint(){
-        //does nothing now
+        if (tokenType)  {
+            Main.log.prettyWrite(" True ");
+        }
+        else    {
+            Main.log.prettyWrite(" False" );
+        }
     }
 
     @Override
