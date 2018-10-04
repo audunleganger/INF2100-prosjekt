@@ -16,6 +16,7 @@ class AspCompOpr extends AspSyntax{
     }
 
     static AspCompOpr parse(Scanner s){
+        enterParser("Comparison Operator");
         AspCompOpr aco = new AspCompOpr(s.curLineNum());
         if (s.curToken().kind == lessToken)   {
             skip(s, lessToken);
@@ -41,6 +42,7 @@ class AspCompOpr extends AspSyntax{
             skip(s, notEqualToken);
             sign = "!=";
         }
+        leaveParser("Comparison Operator");
         return aco;
     }
 
