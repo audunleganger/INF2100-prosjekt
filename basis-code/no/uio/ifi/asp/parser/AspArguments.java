@@ -23,6 +23,9 @@ class AspArguments extends AspPrimarySuffix{
         skip(s, leftParToken);
 
         while(true) {
+            if(s.curToken().kind == rightParToken){
+                break;
+            }
             aa.expr.add(AspExpr.parse(s));
             if(s.curToken().kind != commaToken){
                 break;

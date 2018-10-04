@@ -9,13 +9,33 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspReturnStmt extends AspStmt{
+    AspExpr expr;
 
     AspReturnStmt(int n)    {
         super(n);
     }
+
+    static AspReturnStmt parse(Scanner s) {
+        enterParser("Return Stmt");
+
+        AspReturnStmt ars = new AspReturnStmt(s.curLineNum());
+
+        skip(s, returnToken);
+        ars.expr = AspExpr.parse(s);
+        skip(s, newLineToken);
+
+        leaveParser("Return Stmt");
+
+        return ars;
+
+    }
+
+
     @Override
     void prettyPrint(){
-
+        Main.log.prettyWrite("return ");
+        expr.prettyPrint();
+        Main.log.prettyWriteln("\n");
     }
 
     @Override
