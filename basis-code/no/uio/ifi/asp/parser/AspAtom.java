@@ -28,7 +28,7 @@ abstract class AspAtom extends AspSyntax{
             case nameToken: aa = AspName.parse(s); break;
             case noneToken: aa = AspNoneLiteral.parse(s); break;
             case stringToken: aa = AspStringLiteral.parse(s); break;
-            default: parserError("Expected an expression atom but found a " + s.curToken().kind + "!", s.curLineNum()); 
+            default: parserError("Expected an expression atom but found a " + s.curToken().kind + "!", s.curLineNum());
         }
             leaveParser("atom");
             return aa;
