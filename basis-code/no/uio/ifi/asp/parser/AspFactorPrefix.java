@@ -9,19 +9,30 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspFactorPrefix extends AspSyntax{
+    static String sign;
 
     AspFactorPrefix(int n) {
         super(n);
     }
 
     static AspFactorPrefix parse(Scanner s){
-        //does nothing now
-        return null;
+        AspFactorPrefix afp = new AspFactorPrefix();
+        enterParser("Factor Prefix");
+        if (s.curToken().kind == plusToken) {
+            sign = "+";
+            skip(s, plusToken);
+        }
+        else if (s.curToken().kind == minusToken)   {
+            sign = "-";
+            skip(s, minusToken);
+        }
+        leaveParser("Factor Prefix");
+        return afp;
     }
 
     @Override
     void prettyPrint() {
-        //does nothing now
+        Main.log.prettyWrite(sign);
     }
 
     @Override
