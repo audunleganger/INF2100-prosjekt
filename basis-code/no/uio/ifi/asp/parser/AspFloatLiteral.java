@@ -8,4 +8,17 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 class AspFloatLiteral extends AspAtom{
 
+    AspFloatLiteral(int n){
+        super(n)
+    }
+
+    static AspFloatLiteral parse(Scanner s){
+        //do nothing now
+        return null
+    }
+
+    @Override
+    void prettyPrint(){
+        //does nothing now
+    }
 }

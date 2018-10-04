@@ -8,4 +8,17 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 class AspDictDisplay extends AspAtom{
 
+    AspDictDisplay(int n){
+        super(n);
+    }
+
+    static AspDictDisplay parse(Scanner s){
+        //does nothing now
+        return null;
+    }
+
+    @Override
+    void prettyPrint(){
+        //Does nothing now
+    }
 }
