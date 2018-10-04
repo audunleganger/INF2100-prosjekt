@@ -19,7 +19,8 @@ class AspDictDisplay extends AspAtom{
 
         AspDictDisplay ads = new AspDictDisplay(s.curLIneNum());
 
-        skip(s.leftBraceToken());
+        skip(s, leftBraceToken);
+
         while (true)    {
             aa.strlit.add(AspStringLiteral.parse(s));
             skip(s, colonToken);
@@ -27,13 +28,43 @@ class AspDictDisplay extends AspAtom{
             if (s.curToken().kind != commaToken)    {
                 break;
             }
+            skip(s, commaToken);
         }
-        return null;
+
+        skip(s, rightBraceToken);
+
+        leaveParser("DictDisplay");
+
+        return ads;
     }
 
     @Override
     void prettyPrint(){
-        //Does nothing now
+        int amount_p = strlit.size() - 1;
+        if (amount_p > (expr.size() - 1))   {
+            amount_p = (expr.size() - 1);
+        }
+
+        Main.log.prettyWrite(" {");
+        if (strlit.size() == 1) {
+            strlit.get(0).prettyPrint();
+            Main.log.prettyWrite(" : ");
+            expr.get(0).prettyPrint();
+        }
+
+        else    {
+            for (int i = 0; i < strlit.size(); i++) {
+                strlit.get(i).prettyPrint();
+                Main.log.prettyWrite(" : ");
+                expr.get(i).prettyPrint();
+                if (amount_p != 0)  {
+                    // Mulig dette endres til "\n"
+                    Main.log.prettyWrite(", ");
+                    amount_p--;
+                }
+            }
+        }
+        Main.log.prettyWrite("} ");
     }
 
     @Override
