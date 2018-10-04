@@ -34,7 +34,7 @@ class AspFactor extends AspSyntax{
         }
         leaveParser("Factor");
 
-        return ac;
+        return af;
     }
 
     @Override
@@ -53,5 +53,11 @@ class AspFactor extends AspSyntax{
                 factoro.remove(0);
             }
         }
+    }
+
+    @Override
+    public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+        //-- Must be changed in part 3:
+        return null;
     }
 }

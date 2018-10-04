@@ -12,7 +12,7 @@ class AspSuite extends AspSyntax{
         super(n);
     }
 
-    static Aspsuite parse(Scanner s){
+    static AspSuite parse(Scanner s){
         //does nothing
         return null;
     }

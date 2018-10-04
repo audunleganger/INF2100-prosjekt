@@ -341,7 +341,7 @@ public class Scanner {
 
     public boolean isCompOpr() {
         TokenKind k = curToken().kind;
-        c = k.toString();
+        String c = k.toString();
         if(c.equals("<") || c.equals(">")){
             return true;
         }
@@ -357,7 +357,7 @@ public class Scanner {
 
     public boolean isFactorPrefix() {
         TokenKind k = curToken().kind;
-        c = k.toString();
+        String c = k.toString();
         if(c.equals("+") || c.equals("-")){
             return true;
         }
@@ -367,7 +367,7 @@ public class Scanner {
 
     public boolean isFactorOpr() {
         TokenKind k = curToken().kind;
-        c = k.toString();
+        String c = k.toString();
         if(c.equals("*") || c.equals("/")){
             return true;
         }

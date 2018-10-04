@@ -7,8 +7,6 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 
 abstract class AspPrimarySuffix extends AspSyntax{
-    AspArgumments arg;
-    AspSubscription sub;
 
     AspPrimarySuffix(int n){
         super(n);
@@ -17,15 +15,13 @@ abstract class AspPrimarySuffix extends AspSyntax{
     static AspPrimarySuffix parse(Scanner s){
         enterParser("Primary Suffix");
 
-        AspPrimarySuffix aps = new AspPrimarySuffix(s.curLineNum());
+        AspPrimarySuffix aps = null;
 
         if(s.curToken().kind == leftParToken){
-            aps.arg = AspArgumments.parse(s);
-            aps.sub = null;
+            aps = AspArguments.parse(s);
         }
         else if(s.curToken().kind == leftBracketToken){
-            aps.sub = AspSubscription.parse(s);
-            aps.arg = null;
+            aps = AspSubscription.parse(s);
         }
         else{
             parserError("Expected an Primary Suffix expression but found a " + s.curToken().kind + "!" + s.curLineNum());
