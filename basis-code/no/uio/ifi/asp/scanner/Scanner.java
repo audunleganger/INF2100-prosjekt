@@ -380,7 +380,7 @@ public class Scanner {
 
     public boolean isTermOpr() {
         TokenKind k = curToken().kind;
-        c = k.toString();
+        String c = k.toString();
         if(c.equals("+") || c.equals("-")){
             return true;
         }
