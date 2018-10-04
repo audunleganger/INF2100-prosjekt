@@ -6,6 +6,7 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 
 class AspName extends AspAtom{
+    String word;
 
     AspName(int n){
         super(n);
@@ -15,6 +16,7 @@ class AspName extends AspAtom{
         enterParser("Name");
 
         AspName an = new AspName(s.curLineNum());
+        an.word = s.curToken().kind.toString();
         skip(s,nameToken);
 
         leaveParser("Name");
@@ -24,7 +26,13 @@ class AspName extends AspAtom{
 
     @Override
     void prettyPrint() {
-        String word = " " + s.curToken().kind.toString() + " ";
+        String word = " " + word + " ";
         Main.log.prettyWrite(word);
+    }
+
+    @Override
+    public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+        //-- Must be changed in part 3:
+        return null;
     }
 }

@@ -31,7 +31,7 @@ class AspAssignment extends AspStmt{
         aa.exp = AspExpr.parse(s);
         skip(s, newLineToken);
         leaveParser("Assignment");
-        
+
         return aa;
     }
 
@@ -45,5 +45,11 @@ class AspAssignment extends AspStmt{
         Main.log.prettyWrite(" = ");
         exp.prettyPrint();
         Main.log.prettyWriteLn("\n");
+    }
+
+    @Override
+    public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+        //-- Must be changed in part 3:
+        return null;
     }
 }
