@@ -14,7 +14,7 @@ class AspListDisplay extends AspAtom{
 
     static AspListDisplay parse(Scanner s){
         //does nothing now
-        return null
+        return null;
     }
 
     @Override

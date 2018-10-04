@@ -27,7 +27,7 @@ public class AspProgram extends AspSyntax {
                     ap.stmts.add(AspAssignment.parse(s));
                 }
                 else{
-                    ap.stmts.add(AspExprStmt.parse(s))
+                    ap.stmts.add(AspExprStmt.parse(s));
                 }
             }
             else{

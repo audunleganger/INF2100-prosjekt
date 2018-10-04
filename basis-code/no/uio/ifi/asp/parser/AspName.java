@@ -8,7 +8,7 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
 class AspName extends AspAtom{
 
     AspName(int n){
-        super(n)
+        super(n);
     }
 
     static AspName parse(Scanner s) {
@@ -16,7 +16,7 @@ class AspName extends AspAtom{
 
         AspName an = new AspName(s.curLineNum());
         skip(s,nameToken);
-        
+
         leaveParser("Name");
 
         return an;

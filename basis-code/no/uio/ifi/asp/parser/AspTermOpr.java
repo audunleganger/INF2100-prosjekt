@@ -14,7 +14,7 @@ class AspTermOpr extends AspSyntax{
 
     static AspTermOpr parse(Scanner n){
         //does nothing yet
-        return null
+        return null;
     }
 
     @Override

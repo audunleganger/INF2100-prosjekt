@@ -23,7 +23,7 @@ class AspTerm extends AspSyntax{
             at.factor.add(AspFactor.parse(s));
 
             if(s.isTermOpr()){
-                at.tempo.add(AspTermOpr.parse(s))
+                at.tempo.add(AspTermOpr.parse(s));
             }
             else{
                 break;

@@ -25,15 +25,15 @@ abstract class AspPrimarySuffix extends AspSyntax{
         }
         else if(s.curToken().kind == leftBracketToken){
             aps.sub = AspSubscription.parse(s);
-            aps.arg = null
+            aps.arg = null;
         }
-        else(
-            parserError("Expected an Primary Suffix expression but found a " + s.curToken().kind + "!", s.curLineNum());
-        )
+        else{
+            parserError("Expected an Primary Suffix expression but found a " + s.curToken().kind + "!" + s.curLineNum());
+        }
 
         leaveParser("Primary Suffix");
 
-        return aps
+        return aps;
     }
 
     @Override

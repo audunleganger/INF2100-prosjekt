@@ -30,6 +30,6 @@ class AspExprStmt extends AspStmt{
     @Override
     void prettyPrint(){
         expr.prettyPrint();
-        Main.log.prettyWriteLn(" \n")
+        Main.log.prettyWriteLn(" \n");
     }
 }
