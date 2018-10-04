@@ -19,7 +19,7 @@ class AspFloatLiteral extends AspAtom{
         enterParser("Float Literal");
 
         AspFloatLiteral afl = new AspFloatLiteral(s.curLineNum());
-        af1.word = s.curToken().kind.toString();
+        afl.word = Double.toString(s.curToken().floatLit);
         skip(s, floatToken);
 
         leaveParser("Float Literal");

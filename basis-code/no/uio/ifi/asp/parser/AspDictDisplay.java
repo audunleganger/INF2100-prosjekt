@@ -24,9 +24,9 @@ class AspDictDisplay extends AspAtom{
         skip(s, leftBraceToken);
 
         while (true)    {
-            aa.strlit.add(AspStringLiteral.parse(s));
+            ads.strlit.add(AspStringLiteral.parse(s));
             skip(s, colonToken);
-            aa.expr.add(AspExpr.parse(s));
+            ads.expr.add(AspExpr.parse(s));
             if (s.curToken().kind != commaToken)    {
                 break;
             }

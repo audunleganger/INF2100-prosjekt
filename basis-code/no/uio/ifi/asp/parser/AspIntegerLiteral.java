@@ -19,7 +19,7 @@ class AspIntegerLiteral extends AspAtom{
         enterParser("Integer Literal");
 
         AspIntegerLiteral ail = new AspIntegerLiteral(s.curLineNum());
-        ail.word = s.curToken().kind.toString();
+        ail.word = Long.toString(s.curToken().integerLit);
 
         skip(s, integerToken);
 

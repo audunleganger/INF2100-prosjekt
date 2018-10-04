@@ -18,7 +18,7 @@ class AspName extends AspAtom{
         enterParser("Name");
 
         AspName an = new AspName(s.curLineNum());
-        an.word = s.curToken().kind.toString();
+        an.word = s.curToken().name;
         skip(s,nameToken);
 
         leaveParser("Name");
@@ -28,7 +28,7 @@ class AspName extends AspAtom{
 
     @Override
     void prettyPrint() {
-        word = " " + word + " ";
+        word = " " + word;
         Main.log.prettyWrite(word);
     }
 

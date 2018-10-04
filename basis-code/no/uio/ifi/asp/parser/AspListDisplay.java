@@ -18,12 +18,12 @@ class AspListDisplay extends AspAtom{
     static AspListDisplay parse(Scanner s){
         enterParser("ListDisplay");
 
-        AspListDisplay ald = new AspListDisplay(s.curlineNum());
+        AspListDisplay ald = new AspListDisplay(s.curLineNum());
 
         skip(s, leftBracketToken);
 
         while(true) {
-            aa.expr.add(AspExpr.parse(s));
+            ald.expr.add(AspExpr.parse(s));
             if (s.curToken().kind != commaToken)    {
                 break;
             }

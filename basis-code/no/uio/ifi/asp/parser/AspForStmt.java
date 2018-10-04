@@ -9,6 +9,11 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspForStmt extends AspStmt{
+    
+    AspForStmt(int n){
+        super(n);
+    }
+
 
     @Override
     void prettyPrint(){

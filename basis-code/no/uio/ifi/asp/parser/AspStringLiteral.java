@@ -19,7 +19,7 @@ class AspStringLiteral extends AspAtom{
         enterParser("String Literal");
 
         AspStringLiteral asl = new AspStringLiteral(s.curLineNum());
-        as1.word = s.curToken().kind.toString();
+        asl.word = s.curToken().stringLit;
         skip(s, stringToken);
 
         leaveParser("String Literal");
@@ -29,7 +29,7 @@ class AspStringLiteral extends AspAtom{
 
     @Override
     void prettyPrint() {
-        word = "\" " + word + " \"";
+        word = "\"" + word + "\"";
         Main.log.prettyWrite(word);
     }
 
