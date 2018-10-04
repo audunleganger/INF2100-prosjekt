@@ -25,7 +25,7 @@ class AspPrimary extends AspSyntax{
             if(s.curToken().kind != leftParToken && s.curToken().kind != leftBraceToken){
                 break;
             }
-            primaryS.add(AspPrimarySuffix.parse(s));
+            ap.primaryS.add(AspPrimarySuffix.parse(s));
         }
 
         leaveParser("Primary");

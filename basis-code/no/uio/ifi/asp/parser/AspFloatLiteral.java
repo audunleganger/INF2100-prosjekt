@@ -9,16 +9,24 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
 class AspFloatLiteral extends AspAtom{
 
     AspFloatLiteral(int n){
-        super(n)
+        super(n);
     }
 
     static AspFloatLiteral parse(Scanner s){
-        //do nothing now
-        return null
+        enterParser("Float Literal");
+
+        AspFloatLiteral afl = new AspFLoatLiteral(s.curLineNum());
+
+        skip(s, stringToken);
+
+        leaveParser("Float Literal");
+
+        return afl;
     }
 
     @Override
     void prettyPrint(){
-        //does nothing now
+        String word = " " + s.curToken().kind.toString() + " ";
+        Main.log.prettyWrite(word);
     }
 }
