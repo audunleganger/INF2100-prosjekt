@@ -30,7 +30,7 @@ class AspPassStmt extends AspStmt{
     @Override
     void prettyPrint(){
         Main.log.prettyWrite("pass ");
-        Main.log.prettyWriteln("\n");
+        Main.log.prettyWriteLn("\n");
     }
 
     @Override

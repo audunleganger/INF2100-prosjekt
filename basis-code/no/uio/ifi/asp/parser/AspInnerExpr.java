@@ -21,7 +21,7 @@ class AspInnerExpr extends AspAtom{
 
         skip(s, leftParToken);
 
-        AspInnerExpr aie = new AspIntegerLiteral(s.curLineNum());
+        AspInnerExpr aie = new AspInnerExpr(s.curLineNum());
         aie.word = s.curToken().stringLit;
 
         skip(s, rightParToken);

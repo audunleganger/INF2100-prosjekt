@@ -16,7 +16,10 @@ class AspFactorOpr extends AspSyntax{
     }
 
     static AspFactorOpr parse(Scanner s){
-        AspFactorOperator afo = new AspFactorOperator(s.curLineNum());
+        enterParser("Factor Opr");
+
+        AspFactorOpr afo = new AspFactorOpr(s.curLineNum());
+
         if (s.curToken().kind == lessToken)   {
             skip(s, lessToken);
             sign = "<";
@@ -41,6 +44,9 @@ class AspFactorOpr extends AspSyntax{
             skip(s, notEqualToken);
             sign = "!=";
         }
+
+        leaveParser("Factor Opr");
+
         return afo;
     }
 

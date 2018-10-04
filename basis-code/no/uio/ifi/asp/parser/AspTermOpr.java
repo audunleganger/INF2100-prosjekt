@@ -16,7 +16,7 @@ class AspTermOpr extends AspSyntax{
         super(n);
     }
 
-    static AspTermOpr parse(Scanner n){
+    static AspTermOpr parse(Scanner s){
         enterParser("Term Opr");
 
         AspTermOpr ato = new AspTermOpr(s.curLineNum());

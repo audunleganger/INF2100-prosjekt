@@ -22,7 +22,7 @@ class AspBooleanLiteral extends AspAtom{
             skip(s, trueToken);
             tokenType = true;
         }
-        else if (s.curTOken().kind == falseToken)   {
+        else if (s.curToken().kind == falseToken)   {
             skip(s, falseToken);
             tokenType = false;
         }

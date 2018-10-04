@@ -40,7 +40,7 @@ class AspSuite extends AspSyntax{
 
     @Override
     void prettyPrint(){
-        Main.log.prettyWriteln("\n");
+        Main.log.prettyWriteLn("\n");
         Main.log.prettyIndent();
         for(AspStmt as : stmt){
             as.prettyPrint();

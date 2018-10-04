@@ -35,7 +35,7 @@ class AspReturnStmt extends AspStmt{
     void prettyPrint(){
         Main.log.prettyWrite("return ");
         expr.prettyPrint();
-        Main.log.prettyWriteln("\n");
+        Main.log.prettyWriteLn("\n");
     }
 
     @Override

@@ -19,7 +19,7 @@ class AspIfStmt extends AspStmt{
     static AspIfStmt parse(Scanner s)   {
         enterParser("IfStmt");
 
-        AspIfStmt ais = new AspIfStmt(s.curToken());
+        AspIfStmt ais = new AspIfStmt(s.curLineNum());
 
         skip(s, ifToken);
 
@@ -37,11 +37,12 @@ class AspIfStmt extends AspStmt{
             skip(s, colonToken);
 
             ais.suite.add(AspSuite.parse(s));
-
-            leaveParser("IfStmt");
-
-            return ais;
         }
+        
+        leaveParser("IfStmt");
+
+        return ais;
+
     }
 
     @Override

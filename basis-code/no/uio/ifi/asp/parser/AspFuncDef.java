@@ -52,7 +52,7 @@ class AspFuncDef extends AspStmt{
         Main.log.prettyWrite("def ");
         name.prettyPrint();
         Main.log.prettyWrite("(");
-        if(list_name.isEmty()){
+        if(list_name.isEmpty()){
             Main.log.prettyWrite(")");
             Main.log.prettyWrite(":");
             suite.prettyPrint();
