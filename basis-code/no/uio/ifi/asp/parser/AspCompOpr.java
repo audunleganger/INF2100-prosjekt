@@ -9,19 +9,44 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspCompOpr extends AspSyntax{
+    static String sign;
 
     AspCompOpr(int n){
         super(n);
     }
 
     static AspCompOpr parse(Scanner s){
-        // does nothing right now
-        return null;
+        AspCompOpr aco = new AspCompOpr(s.curLineNum());
+        if (s.curToken().kind == lessToken)   {
+            skip(s, lessToken);
+            sign = "<";
+        }
+        else if (s.curToken().kind == greaterToken) {
+            skip(s, greaterToken);
+            sign = ">";
+        }
+        else if (s.curToken().kind == equalToken)   {
+            skip(s, equalToken);
+            sign = "==";
+        }
+        else if (s.curToken().kind == greaterEqualToken)    {
+            skip(s, greaterEqualToken);
+            sign = ">=";
+        }
+        else if (s.curToken().kind == lessEqualToken)   {
+            skip(s, lessEqualToken);
+            sign = "<=";
+        }
+        else if (s.curToken().kind == notEqualToken)    {
+            skip(s, notEqualToken);
+            sign = "!=";
+        }
+        return aco;
     }
 
     @Override
     void prettyPrint() {
-        // does nothing right now
+        Main.log.prettyWrite(sign);
     }
 
     @Override
