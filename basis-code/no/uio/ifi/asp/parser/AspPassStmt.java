@@ -14,9 +14,23 @@ class AspPassStmt extends AspStmt{
         super(n);
     }
 
+    static AspPassStmt parse(Scanner s){
+        enterParser("Pass Stmt");
+
+        AspPassStmt aps = new AspPassStmt(s.curLineNum());
+
+        skip(s, passToken);
+        skip(s, newLineToken);
+
+        leaveParser("Pass Stmt");
+
+        return aps;
+    }
+
     @Override
     void prettyPrint(){
-
+        Main.log.prettyWrite("pass ");
+        Main.log.prettyWriteln("\n");
     }
 
     @Override
