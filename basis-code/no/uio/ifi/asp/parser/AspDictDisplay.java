@@ -17,7 +17,7 @@ class AspDictDisplay extends AspAtom{
     static AspDictDisplay parse(Scanner s){
         enterParser("DictDisplay");
 
-        AspDictDisplay ads = new AspDictDisplay(s.curLIneNum());
+        AspDictDisplay ads = new AspDictDisplay(s.curLineNum());
 
         skip(s, leftBraceToken);
 
