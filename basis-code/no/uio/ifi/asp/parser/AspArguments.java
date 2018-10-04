@@ -28,9 +28,29 @@ class AspArguments extends AspPrimarySuffix{
             skip(s, commaToken);
         }
 
-        if(s.curToken().kind != rightParToken){
-            
-        }
+        skip(s, rightParToken);
+
+        leaveParser("Arguments");
+
+        return aa;
     }
 
+    @Override
+    void prettyPrint(){
+        int amount_p = expr.size() - 1;
+        Main.log.prettyWrite(" (");
+        if(expr.size() == 1){
+            expr.get(0).prettyPrint();
+        }
+        else{
+            for(EspExpr ee : expr){
+                ee.prettyPrint();
+                if(amount_p != 0){
+                    Main.log.prettyWrite(", ");
+                    amount_p--;
+                }
+            }
+        }
+        Main.log.prettyWrite(") ");
+    }
 }

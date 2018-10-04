@@ -8,4 +8,17 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 class AspSuite extends AspSyntax{
 
+    AspSuite(int n){
+        super(n);
+    }
+
+    static Aspsuite parse(Scanner s){
+        //does nothing
+        return null;
+    }
+
+    @Override
+    void prettyPrint(){
+        //does nothing
+    }
 }
