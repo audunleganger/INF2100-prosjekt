@@ -12,12 +12,20 @@ class AspIntegerLiteral extends AspAtom{
     }
 
     static AspIntegerLiteral parse(Scanner s){
-        //does nothing now
-        return null;
+        enterParser("Integer Literal");
+
+        AspIntegerLiteral ail = new AspIntegerLiteral(s.curLineNum());
+
+        skip(s, integerToken);
+
+        leaveParser("Integer Token");
+
+        return ail;
     }
 
     @Override
     void prettyPrint(){
-        //does nothing now
+        String word = " " + s.curToken().kind.toString() + " ";
+        Main.log.prettyWrite(word);
     }
 }
