@@ -26,9 +26,26 @@ abstract class AspStmt extends AspSyntax{
                 as = AspExprStmt.parse(s);
             }
         }
+        else if(s.curToken().kind == forToken){
+            as = AspForStmt.parse(s);
+        }
+        else if(s.curToken().kind == ifToken){
+            as = AspIfStmt.parse(s);
+        }
+        else if(s.curToken().kind == whileToken){
+            as = AspWhileStmt.parse(s);
+        }
+        else if(s.curToken().kind == returnToken){
+            as = AspReturnStmt.parse(s);
+        }
+        else if(s.curToken().kind == passToken){
+            as = AspPassStmt.parse(s);
+        }
+        else if(s.curToken().kind == defToken){
+            as = AspForStmt.parse(s);
+        }
         else{
-            // all others, for now random shit:
-            as = AspExprStmt.parse(s);
+            parserError("Expected an stmt but found a " + s.curToken().kind + "!", s.curLineNum());
         }
 
         leaveParser("Stmt");
