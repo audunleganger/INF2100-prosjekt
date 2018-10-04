@@ -43,7 +43,7 @@ class AspArguments extends AspPrimarySuffix{
             expr.get(0).prettyPrint();
         }
         else{
-            for(EspExpr ee : expr){
+            for(AspExpr ee : expr){
                 ee.prettyPrint();
                 if(amount_p != 0){
                     Main.log.prettyWrite(", ");
