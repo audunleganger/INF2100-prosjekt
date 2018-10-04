@@ -9,19 +9,38 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspTermOpr extends AspSyntax{
+    String pluss;
+    String minus;
 
     AspTermOpr(int n){
         super(n);
     }
 
     static AspTermOpr parse(Scanner n){
-        //does nothing yet
-        return null;
+        enterParser("Term Opr");
+
+        AspTermOpr ato = new AspTermOpr(s.curLineNum());
+
+        switch (s.curToken().kind) {
+            case plusToken: ato.pluss = "+"; ato.minus = "";
+            skip(s, plusToken); break;
+            case minusToken: ato.minus = "-"; ato.pluss = "";
+            skip(s, minusToken); break;
+        }
+
+        leaveParser("Term Opr");
+
+        return ato;
     }
 
     @Override
     void prettyPrint(){
-        //does nothing yet
+        if(pluss == "+"){
+            Main.log.prettyWrite("+ ");
+        }
+        else{
+            Main.log.prettyWrite("- ");
+        }
     }
 
     @Override
