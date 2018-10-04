@@ -3,9 +3,11 @@ package no.uio.ifi.asp.parser;
 import no.uio.ifi.asp.scanner.*;
 import java.util.ArrayList;
 import no.uio.ifi.asp.main.*;
+import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 
 class AspIntegerLiteral extends AspAtom{
+    String word;
 
     AspIntegerLiteral(int n){
         super(n);
@@ -15,6 +17,7 @@ class AspIntegerLiteral extends AspAtom{
         enterParser("Integer Literal");
 
         AspIntegerLiteral ail = new AspIntegerLiteral(s.curLineNum());
+        ail.word = s.curToken().kind.toString();
 
         skip(s, integerToken);
 
@@ -25,7 +28,13 @@ class AspIntegerLiteral extends AspAtom{
 
     @Override
     void prettyPrint(){
-        String word = " " + s.curToken().kind.toString() + " ";
+        String word = " " + word + " ";
         Main.log.prettyWrite(word);
+    }
+
+    @Override
+    public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+        //-- Must be changed in part 3:
+        return null;
     }
 }

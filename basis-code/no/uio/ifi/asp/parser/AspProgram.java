@@ -23,7 +23,7 @@ public class AspProgram extends AspSyntax {
         AspProgram ap = new AspProgram(s.curLineNum());
         while (s.curToken().kind != eofToken) {
             if(s.curToken().kind == nameToken){
-                if(s.curLineTokens.contains(equalToken)){
+                if(s.anyEqualToken()){
                     ap.stmts.add(AspAssignment.parse(s));
                 }
                 else{
@@ -32,7 +32,7 @@ public class AspProgram extends AspSyntax {
             }
             else{
                 // all others, for now random shit:
-                ap.stmts.add(AspStmt.parse(s));
+                ap.stmts.add(AspExprStmt.parse(s));
             }
         }
 

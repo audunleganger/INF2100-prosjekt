@@ -7,6 +7,7 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
 
 
 class AspStringLiteral extends AspAtom{
+    String word;
 
     AspStringLiteral(int n){
         super(n);
@@ -16,7 +17,7 @@ class AspStringLiteral extends AspAtom{
         enterParser("String Literal");
 
         AspStringLiteral asl = new AspStringLiteral(s.curLineNum());
-
+        as1.word = s.curToken().kind.toString();
         skip(s, stringToken);
 
         leaveParser("String Literal");
@@ -26,7 +27,13 @@ class AspStringLiteral extends AspAtom{
 
     @Override
     void prettyPrint() {
-        String word = "\" " + s.curToken().kind.toString() + " \"";
+        String word = "\" " + word + " \"";
         Main.log.prettyWrite(word);
+    }
+
+    @Override
+    public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+        //-- Must be changed in part 3:
+        return null;
     }
 }

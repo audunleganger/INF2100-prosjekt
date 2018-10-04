@@ -19,17 +19,20 @@ class AspWhileStmt extends AspStmt{
         skip(s, whileToken);
         aws.test = AspExpr.parse(s);
         skip(s, colonToken);
-        aws.body = AspSuite.parse(s);
+        //aws.body = AspSuite.parse(s);
         leaveParser("while stmt");
         return aws;
     }
 
     @Override
     void prettyPrint() {
-        Main.log.prettyWrite(" while ");
-        test.prettyPrint();
-        Main.log.prettyWrite(" : ");
-        body.log.prettyPrint();
+
+    }
+
+    @Override
+    public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+        //-- Must be changed in part 3:
+        return null;
     }
 
 }
