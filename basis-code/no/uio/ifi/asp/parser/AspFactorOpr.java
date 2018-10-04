@@ -20,31 +20,7 @@ class AspFactorOpr extends AspSyntax{
 
         AspFactorOpr afo = new AspFactorOpr(s.curLineNum());
 
-        if (s.curToken().kind == lessToken)   {
-            skip(s, lessToken);
-            sign = "<";
-        }
-        else if (s.curToken().kind == greaterToken) {
-            skip(s, greaterToken);
-            sign = ">";
-        }
-        else if (s.curToken().kind == equalToken)   {
-            skip(s, equalToken);
-            sign = "==";
-        }
-        else if (s.curToken().kind == greaterEqualToken)    {
-            skip(s, greaterEqualToken);
-            sign = ">=";
-        }
-        else if (s.curToken().kind == lessEqualToken)   {
-            skip(s, lessEqualToken);
-            sign = "<=";
-        }
-        else if (s.curToken().kind == notEqualToken)    {
-            skip(s, notEqualToken);
-            sign = "!=";
-        }
-
+    
         leaveParser("Factor Opr");
 
         return afo;
