@@ -42,7 +42,7 @@ abstract class AspStmt extends AspSyntax{
             as = AspPassStmt.parse(s);
         }
         else if(s.curToken().kind == defToken){
-            as = AspForStmt.parse(s);
+            as = AspFuncDefStmt.parse(s);
         }
         else{
             parserError("Expected an stmt but found a " + s.curToken().kind + "!", s.curLineNum());

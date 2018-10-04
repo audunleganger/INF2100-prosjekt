@@ -9,8 +9,7 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspInnerExpr extends AspAtom{
-    String word;
-
+    AspExpr exp;
 
     AspInnerExpr(int n){
         super(n);
@@ -18,21 +17,23 @@ class AspInnerExpr extends AspAtom{
 
     static AspInnerExpr parse(Scanner s){
         enterParser("InnerExpr");
+        AspInnerExpr aie = new AspInnerExpr(s.curLineNum());
 
         skip(s, leftParToken);
 
-        AspInnerExpr aie = new AspInnerExpr(s.curLineNum());
-        aie.word = s.curToken().stringLit;
+        aie.exp = AspExpr.parse(s);
 
         skip(s, rightParToken);
 
+        leaveParser("InnerExpr");
         return aie;
     }
 
     @Override
     void prettyPrint(){
-        word = " (" + word + ") ";
-        Main.log.prettyWrite(word);
+        Main.log.prettyWrite("( ");
+        exp.prettyPrint();
+        Main.log.prettyWrite(") ");
     }
 
     @Override
