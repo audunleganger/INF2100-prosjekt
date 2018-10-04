@@ -9,15 +9,39 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspForStmt extends AspStmt{
-    
+    AspName name;
+    AspExpr expr;
+    AspSuite suite;
+
     AspForStmt(int n){
         super(n);
     }
 
+    static AspForStmt parse(Scanner s){
+        enterParser("For");
+
+        AspForStmt afs = new AspForStmt(s.curLineNum());
+
+        skip(s, forToken);
+        afs.name = AspName.parse(s);
+        skip(s, inToken);
+        afs.expr = AspExpr.parse(s);
+        skip(s, colonToken);
+        afs.suite = AspSuite.parse(s);
+
+        leaveParser("For");
+
+        return afs;
+    }
 
     @Override
     void prettyPrint(){
-
+        Main.log.prettyWrite("for ");
+        name.prettyPrint();
+        Main.log.prettyWrite("in ");
+        expr.prettyPrint();
+        Main.log.prettyWrite(": ");
+        suite.prettyPrint();
     }
 
     @Override
