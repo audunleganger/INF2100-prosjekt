@@ -19,8 +19,13 @@ class AspFactorOpr extends AspSyntax{
         enterParser("Factor Opr");
 
         AspFactorOpr afo = new AspFactorOpr(s.curLineNum());
+        switch (s.curToken().kind) {
+            case asToken: afo.sign = "* "; skip(s, asToken); break;
+            case slashToken: afo.sign = "/ "; skip(s, slashToken); break;
+            case percentToken: afo.sign = "% "; skip(s, percentToken); break;
+            case doubleSlashToken: afo.sign = "// "; skip(s, doubleSlashToken); break;
+        }
 
-    
         leaveParser("Factor Opr");
 
         return afo;
