@@ -51,8 +51,10 @@ class AspFactor extends AspSyntax{
                     factorp.remove(0);
                 }
                 ap.prettyPrint();
-                factoro.get(0).prettyPrint();
-                factoro.remove(0);
+                if(!factoro.isEmpty()){
+                    factoro.get(0).prettyPrint();
+                    factoro.remove(0);
+                }
             }
         }
     }

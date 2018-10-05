@@ -44,8 +44,10 @@ class AspComparison extends AspSyntax{
         else{
             for(AspTerm at : term){
                 at.prettyPrint();
-                compo.get(0).prettyPrint();
-                compo.remove(0);
+                if(!compo.isEmpty()){
+                    compo.get(0).prettyPrint();
+                    compo.remove(0);
+                }
             }
         }
     }

@@ -20,9 +20,9 @@ class AspSubscription extends AspPrimarySuffix{
 
         AspSubscription as = new AspSubscription(s.curLineNum());
 
-        skip(s,leftBraceToken);
+        skip(s,leftBracketToken);
         as.expr = AspExpr.parse(s);
-        skip(s, rightBraceToken);
+        skip(s, rightBracketToken);
 
         leaveParser("Subscription");
 

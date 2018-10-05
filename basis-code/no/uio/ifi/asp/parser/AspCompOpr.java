@@ -26,8 +26,8 @@ class AspCompOpr extends AspSyntax{
             skip(s, greaterToken);
             sign = ">";
         }
-        else if (s.curToken().kind == equalToken)   {
-            skip(s, equalToken);
+        else if (s.curToken().kind == doubleEqualToken)   {
+            skip(s, doubleEqualToken);
             sign = "==";
         }
         else if (s.curToken().kind == greaterEqualToken)    {

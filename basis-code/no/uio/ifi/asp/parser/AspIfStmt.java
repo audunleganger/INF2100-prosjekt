@@ -11,6 +11,8 @@ import no.uio.ifi.asp.runtime.*;
 class AspIfStmt extends AspStmt{
     ArrayList<AspExpr> expr = new ArrayList<>();
     ArrayList<AspSuite> suite = new ArrayList<>();
+    AspSuite suite2;
+
 
     AspIfStmt(int n)    {
         super(n);
@@ -23,22 +25,22 @@ class AspIfStmt extends AspStmt{
 
         skip(s, ifToken);
 
-        while (true)    {
+        while(true){
             ais.expr.add(AspExpr.parse(s));
             skip(s, colonToken);
             ais.suite.add(AspSuite.parse(s));
-            if (s.curToken().kind != elifToken) {
+            if(s.curToken().kind != elifToken){
                 break;
             }
             skip(s, elifToken);
         }
-        if (s.curToken().kind == elseToken) {
+        if(s.curToken().kind == elseToken){
             skip(s, elseToken);
             skip(s, colonToken);
-
-            ais.suite.add(AspSuite.parse(s));
+            ais.suite2 = AspSuite.parse(s);
         }
-        
+        ais.suite2 = null;
+
         leaveParser("IfStmt");
 
         return ais;
@@ -47,42 +49,44 @@ class AspIfStmt extends AspStmt{
 
     @Override
     void prettyPrint(){
-        boolean elsePresent = false;
+        int amount_p = expr.size() - 1;
+        Main.log.prettyWrite("if ");
 
-        if (expr.size() == (suite.size()-1))    {
-            elsePresent = true;
-        }
-
-
-
-        Main.log.prettyWrite(" if ");
-        if (expr.size() == 1)   {
+        if(suite.size() == 1){
             expr.get(0).prettyPrint();
-            Main.log.prettyWrite(":\n");
+            Main.log.prettyWrite(": ");
             suite.get(0).prettyPrint();
-        }
 
-        else {
-            if (elsePresent)    {
-                for (int i = 0; i < (suite.size()-1); i++)  {
-                    Main.log.prettyWrite(" elif ");
-                    expr.get(i).prettyPrint();
-                    Main.log.prettyWrite(":\n");
-                    suite.get(i).prettyPrint();
-                }
-                Main.log.prettyWrite(" else ");
-                suite.get(suite.size()-1).prettyPrint();
-
+            if(suite2 == null){
+                return;
             }
-            else    {
-                for (int i = 0; i < suite.size(); i++)  {
-                    Main.log.prettyWrite(" elif ");
-                    expr.get(i).prettyPrint();
-                    Main.log.prettyWrite(":\n");
-                    suite.get(i).prettyPrint();
-                }
+            else{
+                Main.log.prettyWrite("else ");
+                Main.log.prettyWrite(": ");
+                suite2.prettyPrint();
             }
         }
+        else{
+            for(AspExpr ae : expr){
+                ae.prettyPrint();
+                Main.log.prettyWrite(": ");
+                suite.get(0).prettyPrint();
+                suite.remove(0);
+                if(amount_p != 0){
+                    Main.log.prettyWrite("elif ");
+                    amount_p--;
+                }
+            }
+            if(suite2 == null){
+                return;
+            }
+            else{
+                Main.log.prettyWrite("else ");
+                Main.log.prettyWrite(": ");
+                suite2.prettyPrint();
+            }
+        }
+
     }
 
 
