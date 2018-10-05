@@ -130,7 +130,6 @@ public class Scanner {
               for (Token t: curLineTokens){
                   Main.log.noteToken(t);
               }
-            System.out.println("This line is empty, linenumber: " + curLineNum());
             return;
           }
 
@@ -144,7 +143,7 @@ public class Scanner {
           // Vi gaar gjennom linjen, og sjekker i foerste omgang om det er en kommentar (#)
           for (int a = 0; a<line.length(); a++){
             if(line.charAt(a) == ('#')) {
-              System.out.println("this is a comment"); // ser bort fra at comment kan være lengere i teksten, (vetikke om det kommer til å funke)
+               // ser bort fra at comment kan være lengere i teksten, (vetikke om det kommer til å funke)
               return;
             }
             // Vi sjekker om det vi har er et tall
