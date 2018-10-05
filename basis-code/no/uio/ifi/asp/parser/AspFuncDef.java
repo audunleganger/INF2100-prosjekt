@@ -51,10 +51,10 @@ class AspFuncDef extends AspStmt{
         int amount_p = list_name.size() - 1;
         Main.log.prettyWrite("def ");
         name.prettyPrint();
-        Main.log.prettyWrite("(");
+        Main.log.prettyWrite("( ");
         if(list_name.isEmpty()){
-            Main.log.prettyWrite(")");
-            Main.log.prettyWrite(":");
+            Main.log.prettyWrite(") ");
+            Main.log.prettyWrite(": ");
             suite.prettyPrint();
         }
         else{
@@ -65,8 +65,8 @@ class AspFuncDef extends AspStmt{
                     amount_p--;
                 }
             }
-            Main.log.prettyWrite(")");
-            Main.log.prettyWrite(":");
+            Main.log.prettyWrite(") ");
+            Main.log.prettyWrite(": ");
             suite.prettyPrint();
         }
 

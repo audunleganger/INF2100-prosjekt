@@ -9,7 +9,7 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspCompOpr extends AspSyntax{
-    static String sign;
+     String sign;
 
     AspCompOpr(int n){
         super(n);
@@ -20,27 +20,27 @@ class AspCompOpr extends AspSyntax{
         AspCompOpr aco = new AspCompOpr(s.curLineNum());
         if (s.curToken().kind == lessToken)   {
             skip(s, lessToken);
-            sign = "<";
+            aco.sign = "< ";
         }
         else if (s.curToken().kind == greaterToken) {
             skip(s, greaterToken);
-            sign = ">";
+            aco.sign = "> ";
         }
         else if (s.curToken().kind == doubleEqualToken)   {
             skip(s, doubleEqualToken);
-            sign = "==";
+            aco.sign = "== ";
         }
         else if (s.curToken().kind == greaterEqualToken)    {
             skip(s, greaterEqualToken);
-            sign = ">=";
+            aco.sign = ">= ";
         }
         else if (s.curToken().kind == lessEqualToken)   {
             skip(s, lessEqualToken);
-            sign = "<=";
+            aco.sign = "<= ";
         }
         else if (s.curToken().kind == notEqualToken)    {
             skip(s, notEqualToken);
-            sign = "!=";
+            aco.sign = "!= ";
         }
         leaveParser("Comparison Operator");
         return aco;

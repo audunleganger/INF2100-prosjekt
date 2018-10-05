@@ -47,17 +47,17 @@ class AspDictDisplay extends AspAtom{
             amount_p = (expr.size() - 1);
         }
 
-        Main.log.prettyWrite(" {");
+        Main.log.prettyWrite("{ ");
         if (strlit.size() == 1) {
             strlit.get(0).prettyPrint();
-            Main.log.prettyWrite(" : ");
+            Main.log.prettyWrite(": ");
             expr.get(0).prettyPrint();
         }
 
         else    {
             for (int i = 0; i < strlit.size(); i++) {
                 strlit.get(i).prettyPrint();
-                Main.log.prettyWrite(" : ");
+                Main.log.prettyWrite(": ");
                 expr.get(i).prettyPrint();
                 if (amount_p != 0)  {
                     // Mulig dette endres til "\n"

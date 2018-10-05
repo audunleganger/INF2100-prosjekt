@@ -32,7 +32,7 @@ class AspNotTest extends AspSyntax{
     @Override
     void prettyPrint() {
         if(hasNot == true){
-            Main.log.prettyWrite(" not ");
+            Main.log.prettyWrite("not ");
         }
         comp.prettyPrint();
     }

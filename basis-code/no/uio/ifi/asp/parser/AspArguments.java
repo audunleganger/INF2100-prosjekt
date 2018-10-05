@@ -43,7 +43,7 @@ class AspArguments extends AspPrimarySuffix{
     @Override
     void prettyPrint(){
         int amount_p = expr.size() - 1;
-        Main.log.prettyWrite(" (");
+        Main.log.prettyWrite("( ");
         if(expr.size() == 1){
             expr.get(0).prettyPrint();
         }

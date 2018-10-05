@@ -28,7 +28,7 @@ class AspName extends AspAtom{
 
     @Override
     void prettyPrint() {
-        word = " " + word;
+        word = word + " ";
         Main.log.prettyWrite(word);
     }
 

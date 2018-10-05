@@ -44,7 +44,7 @@ class AspAssignment extends AspStmt{
         for(AspSubscription asub : lasub){
             asub.prettyPrint();
         }
-        Main.log.prettyWrite(" = ");
+        Main.log.prettyWrite("= ");
         exp.prettyPrint();
         Main.log.prettyWriteLn("\n");
     }
