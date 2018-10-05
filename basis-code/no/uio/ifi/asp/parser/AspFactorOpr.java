@@ -9,7 +9,7 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspFactorOpr extends AspSyntax{
-    static String sign;
+    String sign;
 
     AspFactorOpr(int n) {
         super(n);
