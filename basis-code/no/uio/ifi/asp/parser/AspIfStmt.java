@@ -39,7 +39,9 @@ class AspIfStmt extends AspStmt{
             skip(s, colonToken);
             ais.suite2 = AspSuite.parse(s);
         }
-        ais.suite2 = null;
+        else{
+            ais.suite2 = null;
+        }
 
         leaveParser("IfStmt");
 

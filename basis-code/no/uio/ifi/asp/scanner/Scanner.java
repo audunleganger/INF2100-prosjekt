@@ -96,6 +96,13 @@ public class Scanner {
           String withouttab = expandLeadingTabs(line);
           int amount = findIndent(withouttab);
           // Sjekker om antall indenteringer mathcer linjen over
+          if(line.trim().isEmpty()){
+              for (Token t: curLineTokens){
+                  Main.log.noteToken(t);
+              }
+            return;
+          }
+
           if(amount == indents[numIndents-1]){
            // Riktig antall indents, gjoer ingenting
           }
@@ -126,12 +133,6 @@ public class Scanner {
             }
           }
 
-          if(line.trim().isEmpty()){
-              for (Token t: curLineTokens){
-                  Main.log.noteToken(t);
-              }
-            return;
-          }
 
 
           int letter_counter = 0;
@@ -266,7 +267,7 @@ public class Scanner {
 
     private void find_float(String word){
       if(!word.contains("[a-zA-Z]+")){
-        double number = Float.parseFloat(word);
+        double number = Double.parseDouble(word);
         Token temp = new Token(floatToken, curLineNum());
         temp.floatLit = number;
         curLineTokens.add(temp);;
