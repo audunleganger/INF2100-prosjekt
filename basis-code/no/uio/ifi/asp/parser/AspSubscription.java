@@ -15,6 +15,8 @@ class AspSubscription extends AspPrimarySuffix{
         super(n);
     }
 
+    // Skipper den omsluttende [], og parser innholdet i det indre uttrykket via
+    // AspExpr sin parse-metode
     static AspSubscription parse(Scanner s){
         enterParser("Subscription");
 
@@ -29,6 +31,7 @@ class AspSubscription extends AspPrimarySuffix{
         return as;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         Main.log.prettyWrite("[ ");

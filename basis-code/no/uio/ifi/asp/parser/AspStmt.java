@@ -13,6 +13,11 @@ abstract class AspStmt extends AspSyntax{
         super(n);
     }
 
+    // Sjekker foerst om vi har en nameToken. Har vi dette, vil vi sjekke om det eksisterer
+    // et likhetstegn eller ikke. Har vi det vil innholdet bli parset via AspAssignment
+    //  sin parse-metode. Har vi ikke det vil det bli parset via AspExprStmt sin parse-metode.
+    // Har vi ikke en nameToken, sjekker vi om det passer med de reserverte navnenene (if, for, while osv.)
+    // Vi parser det deretter med den sin respektive parse-metode.
     static AspStmt parse(Scanner s){
         enterParser("Stmt");
 
@@ -53,6 +58,7 @@ abstract class AspStmt extends AspSyntax{
         return as;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint() {
 

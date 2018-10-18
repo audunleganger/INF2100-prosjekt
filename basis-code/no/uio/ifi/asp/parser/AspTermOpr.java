@@ -21,6 +21,8 @@ class AspTermOpr extends AspSyntax{
 
         AspTermOpr ato = new AspTermOpr(s.curLineNum());
 
+        // Sjekker hvilket tegn vi har, og setter pluss eller minus til dette
+        // avhengig av hvilket det er
         switch (s.curToken().kind) {
             case plusToken: ato.pluss = "+"; ato.minus = "";
             skip(s, plusToken); break;
@@ -33,6 +35,7 @@ class AspTermOpr extends AspSyntax{
         return ato;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         if(pluss == "+"){

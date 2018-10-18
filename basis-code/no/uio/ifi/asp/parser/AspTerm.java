@@ -16,6 +16,9 @@ class AspTerm extends AspSyntax{
         super(n);
     }
 
+    // Parser en faktor via AspFactor sin parse-metode, og sjekker deretter om s
+    // er en term-operator. Er det det, vil dette parses via AspTermOpr sin parse-metode.
+    // Dette vil den fortsette med helt til den mottar noe som ikker en term-operator
     static AspTerm parse(Scanner s){
         enterParser("Term");
 
@@ -36,6 +39,7 @@ class AspTerm extends AspSyntax{
         return at;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         if(factor.size() == 1) {

@@ -15,6 +15,8 @@ class AspExprStmt extends AspStmt{
         super(s);
     }
 
+    // Parser innholdet fra scanner via AspExpr sin parse-metode, og
+    // lagrer resultatet i variabelen expr
     static AspExprStmt parse(Scanner s){
         enterParser("Exp Stmt");
 
@@ -29,6 +31,7 @@ class AspExprStmt extends AspStmt{
         return aes;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         expr.prettyPrint();

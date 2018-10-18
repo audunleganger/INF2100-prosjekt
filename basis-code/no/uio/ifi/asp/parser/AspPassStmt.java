@@ -14,6 +14,7 @@ class AspPassStmt extends AspStmt{
         super(n);
     }
 
+    // Skipper passToken og newLineToken
     static AspPassStmt parse(Scanner s){
         enterParser("Pass Stmt");
 
@@ -27,6 +28,7 @@ class AspPassStmt extends AspStmt{
         return aps;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         Main.log.prettyWrite("pass ");

@@ -17,6 +17,8 @@ class AspFactor extends AspSyntax{
         super(n);
     }
 
+    // Sjekker om vi jobber med en prefix eller en operator mellom faktorer,
+    // og parser det via sin respektive parse-metode
     static AspFactor parse(Scanner s){
         enterParser("Factor");
 
@@ -39,6 +41,7 @@ class AspFactor extends AspSyntax{
         return af;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint() {
         if(factorp.isEmpty() && prim.size() == 1){

@@ -15,6 +15,8 @@ class AspFloatLiteral extends AspAtom{
         super(n);
     }
 
+    // Lagrer verdien som har blitt lest i variabelen word,
+    // og skipper floatToken
     static AspFloatLiteral parse(Scanner s){
         enterParser("Float Literal");
 
@@ -27,6 +29,7 @@ class AspFloatLiteral extends AspAtom{
         return afl;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         word = word + " ";

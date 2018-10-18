@@ -17,6 +17,8 @@ class AspAssignment extends AspStmt{
         super(n);
     }
 
+    // Legger til et AspNavn, og AspSubscriptions (hvis de eksisterer)
+    // og parser disse med sine respektive parse-metoder
     static AspAssignment parse(Scanner s) {
         enterParser("Assignment");
 
@@ -37,6 +39,7 @@ class AspAssignment extends AspStmt{
         return aa;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint() {
         name.prettyPrint();

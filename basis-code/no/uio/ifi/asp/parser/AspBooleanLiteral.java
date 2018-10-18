@@ -15,6 +15,8 @@ class AspBooleanLiteral extends AspAtom{
         super(n);
     }
 
+    // Sjekker hvilken token vi har, og setter tokenType til dette.
+    // Returnerer token-objektet med den korrekte tokenTypen.
     static AspBooleanLiteral parse(Scanner s){
         enterParser("Boolean Literal");
 
@@ -30,6 +32,7 @@ class AspBooleanLiteral extends AspAtom{
         return abl;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         if (tokenType)  {

@@ -15,6 +15,7 @@ class AspIntegerLiteral extends AspAtom{
         super(n);
     }
 
+    // Lagrer innholdet i tokenen til variabelen word
     static AspIntegerLiteral parse(Scanner s){
         enterParser("Integer Literal");
 
@@ -28,6 +29,7 @@ class AspIntegerLiteral extends AspAtom{
         return ail;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         word = word + " ";

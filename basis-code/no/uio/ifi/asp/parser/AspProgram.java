@@ -18,7 +18,8 @@ public class AspProgram extends AspSyntax {
         super(n);
     }
 
-
+    // Leser og parser hvert statement via AspStmt sin
+    // parse-metode helt til den finner eofToken
     public static AspProgram parse(Scanner s) {
         enterParser("program");
 
@@ -31,7 +32,7 @@ public class AspProgram extends AspSyntax {
         return ap;
     }
 
-
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     public void prettyPrint() {
         for ( AspStmt aStmt : stmts){

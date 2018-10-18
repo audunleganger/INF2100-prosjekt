@@ -15,6 +15,8 @@ class AspListDisplay extends AspAtom{
         super(n);
     }
 
+    // Parser hvert uttrykk via AspExpr sin parse-metode, og fortsetter
+    // helt til den ikke finner en komma-token.
     static AspListDisplay parse(Scanner s){
         enterParser("ListDisplay");
 
@@ -37,6 +39,7 @@ class AspListDisplay extends AspAtom{
         return ald;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         int amount_p = expr.size() - 1;

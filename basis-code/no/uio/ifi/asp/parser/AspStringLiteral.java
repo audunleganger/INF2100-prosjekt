@@ -15,6 +15,7 @@ class AspStringLiteral extends AspAtom{
         super(n);
     }
 
+    // Leser innholdet i stringToken, og lagrer det i variabelen word.
     static AspStringLiteral parse(Scanner s){
         enterParser("String Literal");
 
@@ -27,6 +28,7 @@ class AspStringLiteral extends AspAtom{
         return asl;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint() {
         word = "\"" + word + "\" ";

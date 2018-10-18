@@ -15,6 +15,8 @@ class AspFactorPrefix extends AspSyntax{
         super(n);
     }
 
+    // Sjekker om vi jobber med en + eller - operator, og setter variabelen
+    // sign til denne, og skipper den respektive tokenen
     static AspFactorPrefix parse(Scanner s){
         AspFactorPrefix afp = new AspFactorPrefix(s.curLineNum());
         enterParser("Factor Prefix");
@@ -30,6 +32,7 @@ class AspFactorPrefix extends AspSyntax{
         return afp;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint() {
         Main.log.prettyWrite(sign);

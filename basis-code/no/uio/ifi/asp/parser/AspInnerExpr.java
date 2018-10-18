@@ -15,6 +15,8 @@ class AspInnerExpr extends AspAtom{
         super(n);
     }
 
+    // Skipper de omsluttende parentesen, og parser uttrykket mellom dem
+    // via AspExpr sin parse-metode
     static AspInnerExpr parse(Scanner s){
         enterParser("InnerExpr");
         AspInnerExpr aie = new AspInnerExpr(s.curLineNum());
@@ -29,6 +31,7 @@ class AspInnerExpr extends AspAtom{
         return aie;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         Main.log.prettyWrite("( ");

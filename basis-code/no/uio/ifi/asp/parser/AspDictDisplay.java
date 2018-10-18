@@ -16,6 +16,9 @@ class AspDictDisplay extends AspAtom{
         super(n);
     }
 
+    // Legger til en AspStringLiteral og en AspExpr parvis, slik
+    // at det blir parvis (med strlit som peker til expr). Disse parses
+    // med sine respektive parse-metoder.
     static AspDictDisplay parse(Scanner s){
         enterParser("DictDisplay");
 
@@ -40,6 +43,7 @@ class AspDictDisplay extends AspAtom{
         return ads;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         int amount_p = strlit.size() - 1;

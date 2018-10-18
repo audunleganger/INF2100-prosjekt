@@ -14,6 +14,8 @@ class AspNotTest extends AspSyntax{
         super(n);
     }
 
+    // Skipper notToken hvis den finner en. Parser foelgende
+    // sammenlikning via AspComparison sin parse-metode
     static AspNotTest parse(Scanner s) {
         enterParser("Not test");
         AspNotTest ant = new AspNotTest(s.curLineNum());
@@ -29,6 +31,7 @@ class AspNotTest extends AspSyntax{
         return ant;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint() {
         if(hasNot == true){

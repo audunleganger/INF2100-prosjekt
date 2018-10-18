@@ -16,6 +16,8 @@ class AspPrimary extends AspSyntax{
         super(n);
     }
 
+    // Parser et atom via AspAtom sin parse-metode. Vil deretter parse foelgende
+    // primaries via AspPrimarySuffix sin parse-metode. Stopper naar den finner en ( eller [
     static AspPrimary parse(Scanner s) {
         enterParser("Primary");
 
@@ -35,6 +37,7 @@ class AspPrimary extends AspSyntax{
         return ap;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         if(primaryS.isEmpty()){

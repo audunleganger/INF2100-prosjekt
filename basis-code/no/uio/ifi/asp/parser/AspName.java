@@ -14,6 +14,7 @@ class AspName extends AspAtom{
         super(n);
     }
 
+    // Lagrer innholdet fra den gjendelnde nameToken-en til variabelen word
     static AspName parse(Scanner s) {
         enterParser("Name");
 
@@ -26,6 +27,7 @@ class AspName extends AspAtom{
         return an;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint() {
         word = word + " ";

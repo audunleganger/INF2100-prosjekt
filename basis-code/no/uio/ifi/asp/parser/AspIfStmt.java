@@ -18,6 +18,10 @@ class AspIfStmt extends AspStmt{
         super(n);
     }
 
+    // Parser et expression via AspExpr sin parse-metode, og en korresponderende kodeblokk via
+    // AspSuite sin parse-metode. Vil deretter gjenta for alle (potensielle) elif-er.
+    // Til slutt vil metoden sjekke om et else-statement eksisterer. Hvis det gjoer dette,
+    // vil den foelgende kodeblokken parses via AspSuite sin parse-metode
     static AspIfStmt parse(Scanner s)   {
         enterParser("IfStmt");
 
@@ -49,6 +53,7 @@ class AspIfStmt extends AspStmt{
 
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         int amount_p = expr.size() - 1;

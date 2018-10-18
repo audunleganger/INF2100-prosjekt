@@ -11,7 +11,9 @@ public abstract class AspSyntax {
         lineNum = n;
     }
 
-
+    // Funksjon som printer resultatet av parsingen paa en tydelig og oversiktlig
+    // maate. Hver subklasse av AspSyntax har sin egen variant av prettyPrint formatert
+    // spesifikt for den typen tokens som blir parset.
     abstract void prettyPrint();
     abstract RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue;
 
@@ -37,7 +39,8 @@ public abstract class AspSyntax {
         s.curToken().kind + "!", s.curLineNum());
     }
 
-
+    // Sjekker mottatt token fra s mot tk via test-metoden, og hopper over
+    // til neste token
     public static void skip(Scanner s, TokenKind tk) {
         test(s, tk);
         s.readNextToken();

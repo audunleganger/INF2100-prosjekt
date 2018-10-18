@@ -15,6 +15,9 @@ class AspSuite extends AspSyntax{
         super(n);
     }
 
+    // Skipper newLine og indent, og vil deretter parse foelgende statements
+    // via AspStmt sin parse-metode. Dette vil den fortsette aa gjoere helt
+    // til den mottar en dedentToken
     static AspSuite parse(Scanner s){
         enterParser("Suite");
 
@@ -38,6 +41,7 @@ class AspSuite extends AspSyntax{
 
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         Main.log.prettyWriteLn("\n");

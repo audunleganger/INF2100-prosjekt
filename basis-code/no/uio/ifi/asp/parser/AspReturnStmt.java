@@ -15,6 +15,8 @@ class AspReturnStmt extends AspStmt{
         super(n);
     }
 
+    // Leser uttrykket som skal returneres via AspExpr sin parse-metode.
+    // Vil deretter skippe den foelgende newLineTokenen
     static AspReturnStmt parse(Scanner s) {
         enterParser("Return Stmt");
 
@@ -30,7 +32,7 @@ class AspReturnStmt extends AspStmt{
 
     }
 
-
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         Main.log.prettyWrite("return ");

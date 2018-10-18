@@ -16,7 +16,8 @@ public class AspExpr extends AspSyntax {
         super(n);
     }
 
-
+    // Legger til en AspAndTest helt til den ikke finner en orToken, og
+    // parser disse via AspAndTest sin parse-metode
     public static AspExpr parse(Scanner s) {
         enterParser("Expr");
         AspExpr ae = new AspExpr(s.curLineNum());
@@ -33,7 +34,7 @@ public class AspExpr extends AspSyntax {
         return ae;
     }
 
-
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     public void prettyPrint() {
         int nPrinted = 0;

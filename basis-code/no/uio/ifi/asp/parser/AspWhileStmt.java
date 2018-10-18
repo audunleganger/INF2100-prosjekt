@@ -14,6 +14,9 @@ class AspWhileStmt extends AspStmt{
         super(n);
     }
 
+    // Leser uttrykket for at while-loopen skal kjoere, og parser det via AspExpr
+    // sin parse-metode. Vil deretter parse foelgende kodeblokk via AspSuite sin
+    // parse-metode
     static AspWhileStmt parse(Scanner s) {
         enterParser("while stmt");
 
@@ -29,6 +32,7 @@ class AspWhileStmt extends AspStmt{
         return aws;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint() {
         Main.log.prettyWrite("While ");

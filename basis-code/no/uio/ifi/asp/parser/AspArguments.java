@@ -15,6 +15,9 @@ class AspArguments extends AspPrimarySuffix{
         super(n);
     }
 
+    // Legger til en AspExpr for hvert argument, og avslutter naar vi ikke har flere
+    // argumenter (finner noe annet enn en komma-token etter et argument). Vi parser disse
+    // ved hjelp av AspExpr sin parse-metode
     static AspArguments parse(Scanner s){
         enterParser("Arguments");
 
@@ -40,6 +43,7 @@ class AspArguments extends AspPrimarySuffix{
         return aa;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         int amount_p = expr.size() - 1;

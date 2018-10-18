@@ -16,6 +16,8 @@ class AspAndTest extends AspSyntax{
          super(n);
      }
 
+     // Legger til en AspNotTest for hver andToken, og parser disse 
+     // via AspNotTest sin parse-metode
     static AspAndTest parse(Scanner s) {
          enterParser("And test");
          AspAndTest aat = new AspAndTest(s.curLineNum());
@@ -33,6 +35,7 @@ class AspAndTest extends AspSyntax{
          return aat;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint() {
         int nPrinted = 0;

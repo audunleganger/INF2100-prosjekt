@@ -16,6 +16,8 @@ class AspComparison extends AspSyntax{
         super(n);
     }
 
+    // Legger til AspTerm og AspCompOp annenhver gang helt til det ikke er flere operatorer,
+    // og parser disse via sine respektive parse-metoder.
     static AspComparison parse(Scanner s) {
         enterParser("Comparison");
 
@@ -36,6 +38,7 @@ class AspComparison extends AspSyntax{
         return ac;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint() {
         if(term.size() == 1){

@@ -14,6 +14,7 @@ class AspNoneLiteral extends AspAtom{
         super(n);
     }
 
+    // Skipper til neste token
     static AspNoneLiteral parse(Scanner s){
         enterParser("None Literal");
         AspNoneLiteral anl = new AspNoneLiteral(s.curLineNum());
@@ -22,6 +23,7 @@ class AspNoneLiteral extends AspAtom{
         return anl;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         // Does nothing

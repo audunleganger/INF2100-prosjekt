@@ -15,6 +15,8 @@ class AspCompOpr extends AspSyntax{
         super(n);
     }
 
+    // Sjekker hvilken type comparison-operator vi jobber med, og setter
+    // variabelen sign til dette.
     static AspCompOpr parse(Scanner s){
         enterParser("Comparison Operator");
         AspCompOpr aco = new AspCompOpr(s.curLineNum());
@@ -46,6 +48,7 @@ class AspCompOpr extends AspSyntax{
         return aco;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint() {
         Main.log.prettyWrite(sign);

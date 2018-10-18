@@ -13,6 +13,8 @@ abstract class AspAtom extends AspSyntax{
         super(n);
     }
 
+    // Finner ut hva slags type atomaer verdi vi jobber med, og parser dette
+    // med sin respektive parse-metode
     static AspAtom parse(Scanner s) {
         enterParser("atom");
 

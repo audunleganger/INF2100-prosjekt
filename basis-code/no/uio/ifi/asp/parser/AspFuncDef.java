@@ -17,6 +17,10 @@ class AspFuncDef extends AspStmt{
         super(n);
     }
 
+    // Leser inn navnet, og alle potensielle argumenter via AspName
+    // sin parse-metode, og lagrer dette i variablene name (funksjonsnavn)
+    // og list_name (argumenter). Parser deretter den foelgende kodeblokken
+    // med AspSuite sin parse-metode
     static AspFuncDef parse(Scanner s){
         enterParser("Func Def");
 
@@ -46,6 +50,7 @@ class AspFuncDef extends AspStmt{
 
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         int amount_p = list_name.size() - 1;

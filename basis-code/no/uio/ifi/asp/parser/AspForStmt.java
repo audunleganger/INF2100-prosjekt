@@ -17,6 +17,9 @@ class AspForStmt extends AspStmt{
         super(n);
     }
 
+    // Parser navn via AspName, uttrykket via AspExpr, og kodeblokken
+    // via AspSuite sine respektive parsemetoder, og lagrer det i variablene
+    // name, expr, og suite respektivt
     static AspForStmt parse(Scanner s){
         enterParser("For");
 
@@ -34,6 +37,7 @@ class AspForStmt extends AspStmt{
         return afs;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
         Main.log.prettyWrite("for ");

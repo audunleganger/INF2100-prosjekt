@@ -15,6 +15,8 @@ class AspFactorOpr extends AspSyntax{
         super(n);
     }
 
+    // Sjekker hva slags faktor-operator vi jobber med, og setter variabelen sign
+    // til denne operatoren. Skipper deretter denne tokenen
     static AspFactorOpr parse(Scanner s){
         enterParser("Factor Opr");
 
@@ -31,6 +33,7 @@ class AspFactorOpr extends AspSyntax{
         return afo;
     }
 
+    //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint() {
         Main.log.prettyWrite(sign);
