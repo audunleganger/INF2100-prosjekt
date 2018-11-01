@@ -4,9 +4,9 @@ import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.parser.AspSyntax;
 
 public class RuntimeBoolValue extends RuntimeValue {
-    boolean boolValue;
+    private boolean boolValue;
 
-    public RuntimeBoolValue(boolean v) {
+    protected RuntimeBoolValue(boolean v) {
         boolValue = v;
     }
 
