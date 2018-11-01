@@ -16,7 +16,7 @@ class AspAndTest extends AspSyntax{
          super(n);
      }
 
-     // Legger til en AspNotTest for hver andToken, og parser disse 
+     // Legger til en AspNotTest for hver andToken, og parser disse
      // via AspNotTest sin parse-metode
     static AspAndTest parse(Scanner s) {
          enterParser("And test");
@@ -50,8 +50,9 @@ class AspAndTest extends AspSyntax{
 
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+        // Evaluerer foerste notTest
         RuntimeValue v = notTests.get(0).eval(curScope);
-        for (int i = 1 < notTests.size(); i++) {
+        for (int i = 1; i < notTests.size(); i++) {
             if (!v.getBoolValue("and oeprand", this)) {
                 return v;
             }
