@@ -9,8 +9,8 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspComparison extends AspSyntax{
-    ArrayList<AspCompOpr> compo = new ArrayList<>();
     ArrayList<AspTerm> term = new ArrayList<>();
+    ArrayList<AspCompOpr> compo = new ArrayList<>();
 
     AspComparison(int n){
         super(n);
@@ -57,7 +57,26 @@ class AspComparison extends AspSyntax{
 
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-        //-- Must be changed in part 3:
-        return null;
+        RuntimeValue v = term.get(0).eval(curScope);
+        for (int i = 1; i < term.size(); i++)   {
+            TokenKind k = compo.get(i-1).kind;
+            switch (k) {
+                case lessToken:
+                    v = v.evalLess(factors.get(i).eval(curScope), this); break;
+                case greaterToken:
+                    v = v.evalGreater(factors.get(i).eval(curScope), this); break;
+                case doubleEqualToken:
+                    v = v.evalEqual(factors.get(i).eval(curScope), this); break;
+                case greaterEqualToken:
+                    v = v.evalGreaterEqual(factors.get(i).eval(curScope), this); break;
+                case lessEqualToken:
+                    v = v.evalLessEqual(factors.get(i).eval(curScope), this); break;
+                case notEqualToken:
+                    v = v.evalNotEqual(factors.get(i).eval(curScope), this); break;
+                default:
+                    Main.panic("Illegal term operator: " + k + "!");
+            }
+        }
+        return v;
     }
 }

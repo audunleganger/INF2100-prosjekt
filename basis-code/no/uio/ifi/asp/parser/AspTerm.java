@@ -9,8 +9,8 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspTerm extends AspSyntax{
-    ArrayList<AspTermOpr> tempo = new ArrayList<>();
     ArrayList<AspFactor> factor = new ArrayList<>();
+    ArrayList<AspTermOpr> tempo = new ArrayList<>();
 
     AspTerm(int n){
         super(n);
@@ -70,7 +70,7 @@ class AspTerm extends AspSyntax{
                     Main.panic("Illegal term operator: " + k + "!");
             }
         }
-        return null;
+        return v;
     }
 
 }
