@@ -7,7 +7,7 @@ public class RuntimeIntValue extends RuntimeValue {
 
     private long intValue;
 
-    private RuntimeIntValue(long v) {
+    public RuntimeIntValue(long v) {
         intValue = v;
     }
 
@@ -160,6 +160,42 @@ public class RuntimeIntValue extends RuntimeValue {
     }
 
     @Override
-    public RuntimeValue evalNotEqual
+    public RuntimeValue evalNotEqual(RuntimeValue v, AspSyntax where){
+        if (v instanceof RuntimeIntValue) {
+            return new RuntimeBoolValue(intValue != v.getIntValue("!= operand", where));
+        }
+        else if (v instanceof  RuntimeFloatValue) {
+            return new RuntimeBoolValue(intValue != v.getFloatValue("!= operand", where));
+        }
+        runtimeError("Type error for !=.", where);
+        return null;
+    }
+
+    @Override
+    public RuntimeValue evalNegate(AspSyntax where) {
+        if (intValue < 0) {
+            return new RuntimeIntValue(intValue);
+        }
+        runtimeError("Type error for is negative", where);
+        return null;
+    }
+
+    @Override
+    public RuntimeValue evalNot(AspSyntax where) {
+        if (intValue == 0) {
+            return new RuntimeIntValue(intValue);
+        }
+        runtimeError("Type error for not", where);
+        return null;
+    }
+
+    @Override
+    public RuntimeValue evalPositive(AspSyntax where) {
+        if(intValue > 0) {
+            return new RuntimeIntValue(intValue);
+        }
+        runtimeError("Type error for positive", where);
+        return null;
+    }
 
 }
