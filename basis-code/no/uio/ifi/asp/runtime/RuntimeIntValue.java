@@ -11,7 +11,6 @@ public class RuntimeIntValue extends RuntimeValue {
         intValue = v;
     }
 
-    @Override
     protected String typeName() {
         return "Integer";
     }
@@ -30,10 +29,9 @@ public class RuntimeIntValue extends RuntimeValue {
     @Override
     public RuntimeValue evalIntDivide(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeIntValue) {
-            return new RuntimeIntValue(intValue / v.getIntValue("// operand", where));
-        }
-        else if (v instanceof  RuntimeFloatValue) {
-            return new RuntimeFloatValue((long)(intValue / v.getFloatValue("// operand", where)));
+            return new RuntimeIntValue(Math.floorDiv(intValue , v.getIntValue("// operand", where)));
+        } else if (v instanceof RuntimeFloatValue) {
+            return new RuntimeFloatValue(Math.floor(intValue / v.getFloatValue("// operand", where)));
         }
         runtimeError("Type error for //.", where);
         return null;
@@ -43,8 +41,7 @@ public class RuntimeIntValue extends RuntimeValue {
     public RuntimeValue evalDivide(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeIntValue) {
             return new RuntimeIntValue(intValue / v.getIntValue("/ operand", where));
-        }
-        else if (v instanceof  RuntimeFloatValue) {
+        } else if (v instanceof RuntimeFloatValue) {
             return new RuntimeFloatValue(intValue / v.getFloatValue("/ operand", where));
         }
         runtimeError("Type error for /.", where);
@@ -54,10 +51,10 @@ public class RuntimeIntValue extends RuntimeValue {
     @Override
     public RuntimeValue evalModulo(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeIntValue) {
-            return new RuntimeIntValue(intValue % v.getIntValue("% operand", where));
-        }
-        else if (v instanceof  RuntimeFloatValue) {
-            return new RuntimeFloatValue(intValue % v.getFloatValue("% operand", where));
+            return new RuntimeIntValue(Math.floorMod(intValue, v.getIntValue("% operand", where)));
+        } else if (v instanceof RuntimeFloatValue) {
+            return new RuntimeFloatValue(intValue - v.getFloatValue("% operand", where) * Math.floor(intValue/
+                    v.getFloatValue("% operand", where)));
         }
         runtimeError("Type error for %.", where);
         return null;
@@ -65,10 +62,9 @@ public class RuntimeIntValue extends RuntimeValue {
 
     @Override
     public RuntimeValue evalMultiply(RuntimeValue v, AspSyntax where) {
-        if (v instanceof  RuntimeIntValue) {
+        if (v instanceof RuntimeIntValue) {
             return new RuntimeIntValue(intValue * v.getIntValue("* operand", where));
-        }
-        else if (v instanceof RuntimeFloatValue) {
+        } else if (v instanceof RuntimeFloatValue) {
             return new RuntimeFloatValue(intValue * v.getFloatValue("* operand", where));
         }
         runtimeError("Type error for *.", where);
@@ -79,8 +75,7 @@ public class RuntimeIntValue extends RuntimeValue {
     public RuntimeValue evalSubtract(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeIntValue) {
             return new RuntimeIntValue(intValue - v.getIntValue("- operand", where));
-        }
-        else if (v instanceof RuntimeFloatValue) {
+        } else if (v instanceof RuntimeFloatValue) {
             return new RuntimeFloatValue(intValue - v.getFloatValue("- operand", where));
         }
         runtimeError("Type error for -.", where);
@@ -88,11 +83,10 @@ public class RuntimeIntValue extends RuntimeValue {
     }
 
     @Override
-    public RuntimeValue evalAdd(RuntimeValue v, AspSyntax where){
+    public RuntimeValue evalAdd(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeIntValue) {
             return new RuntimeIntValue(intValue + v.getIntValue("+ operand", where));
-        }
-        else if (v instanceof RuntimeFloatValue) {
+        } else if (v instanceof RuntimeFloatValue) {
             return new RuntimeFloatValue(intValue + v.getFloatValue("+ operand", where));
         }
         runtimeError("Type error for +.", where);
@@ -103,8 +97,7 @@ public class RuntimeIntValue extends RuntimeValue {
     public RuntimeValue evalEqual(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeIntValue) {
             return new RuntimeBoolValue(intValue == v.getIntValue("== operand", where));
-        }
-        else if (v instanceof RuntimeFloatValue){
+        } else if (v instanceof RuntimeFloatValue) {
             return new RuntimeBoolValue(intValue == v.getFloatValue("== operand", where));
         }
         runtimeError("Type error for ==.", where);
@@ -114,9 +107,8 @@ public class RuntimeIntValue extends RuntimeValue {
     @Override
     public RuntimeValue evalGreater(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeIntValue) {
-           return new RuntimeBoolValue(intValue > v.getIntValue("> operand", where));
-        }
-        else if (v instanceof RuntimeFloatValue) {
+            return new RuntimeBoolValue(intValue > v.getIntValue("> operand", where));
+        } else if (v instanceof RuntimeFloatValue) {
             return new RuntimeBoolValue(intValue > v.getIntValue("> operand", where));
         }
         runtimeError("Type error for >.", where);
@@ -127,8 +119,7 @@ public class RuntimeIntValue extends RuntimeValue {
     public RuntimeValue evalGreaterEqual(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeIntValue) {
             return new RuntimeBoolValue(intValue >= v.getIntValue(">= operand", where));
-        }
-        else if (v instanceof RuntimeFloatValue) {
+        } else if (v instanceof RuntimeFloatValue) {
             return new RuntimeBoolValue(intValue >= v.getFloatValue(">= operand", where));
         }
         runtimeError("Type error for >=.", where);
@@ -139,8 +130,7 @@ public class RuntimeIntValue extends RuntimeValue {
     public RuntimeValue evalLess(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeIntValue) {
             return new RuntimeBoolValue(intValue < v.getIntValue("< operand", where));
-        }
-        else if (v instanceof RuntimeFloatValue) {
+        } else if (v instanceof RuntimeFloatValue) {
             return new RuntimeBoolValue(intValue < v.getFloatValue("< operand", where));
         }
         runtimeError("Type error for <.", where);
@@ -148,11 +138,10 @@ public class RuntimeIntValue extends RuntimeValue {
     }
 
     @Override
-    public RuntimeValue evalLessEqual(RuntimeValue v, AspSyntax where){
-        if (v instanceof RuntimeIntValue){
+    public RuntimeValue evalLessEqual(RuntimeValue v, AspSyntax where) {
+        if (v instanceof RuntimeIntValue) {
             return new RuntimeBoolValue(intValue <= v.getIntValue("<= operand", where));
-        }
-        else if (v instanceof  RuntimeFloatValue){
+        } else if (v instanceof RuntimeFloatValue) {
             return new RuntimeBoolValue(intValue <= v.getFloatValue("<= operand", where));
         }
         runtimeError("Type error for =<.", where);
@@ -160,11 +149,10 @@ public class RuntimeIntValue extends RuntimeValue {
     }
 
     @Override
-    public RuntimeValue evalNotEqual(RuntimeValue v, AspSyntax where){
+    public RuntimeValue evalNotEqual(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeIntValue) {
             return new RuntimeBoolValue(intValue != v.getIntValue("!= operand", where));
-        }
-        else if (v instanceof  RuntimeFloatValue) {
+        } else if (v instanceof RuntimeFloatValue) {
             return new RuntimeBoolValue(intValue != v.getFloatValue("!= operand", where));
         }
         runtimeError("Type error for !=.", where);
@@ -173,29 +161,11 @@ public class RuntimeIntValue extends RuntimeValue {
 
     @Override
     public RuntimeValue evalNegate(AspSyntax where) {
-        if (intValue < 0) {
-            return new RuntimeIntValue(intValue);
-        }
-        runtimeError("Type error for is negative", where);
-        return null;
+        return new RuntimeIntValue(-intValue);
     }
 
     @Override
     public RuntimeValue evalNot(AspSyntax where) {
-        if (intValue == 0) {
-            return new RuntimeIntValue(intValue);
-        }
-        runtimeError("Type error for not", where);
-        return null;
+        return new RuntimeBoolValue(intValue == 0);
     }
-
-    @Override
-    public RuntimeValue evalPositive(AspSyntax where) {
-        if(intValue > 0) {
-            return new RuntimeIntValue(intValue);
-        }
-        runtimeError("Type error for positive", where);
-        return null;
-    }
-
 }

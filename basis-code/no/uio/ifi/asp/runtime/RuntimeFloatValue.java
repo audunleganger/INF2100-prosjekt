@@ -28,10 +28,10 @@ public class RuntimeFloatValue extends RuntimeValue {
     @Override
     public RuntimeValue evalIntDivide(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeIntValue) {
-            return new RuntimeIntValue((long)(floatValue / v.getIntValue("// operand", where)));
+            return new RuntimeFloatValue(Math.floor(floatValue / v.getIntValue("// operand", where)));
         }
         else if (v instanceof  RuntimeFloatValue) {
-            return new RuntimeFloatValue((long)(floatValue / v.getFloatValue("// operand", where)));
+            return new RuntimeFloatValue(Math.floor(floatValue / v.getFloatValue("// operand", where)));
         }
         runtimeError("Type error for //.", where);
         return null;
@@ -52,10 +52,12 @@ public class RuntimeFloatValue extends RuntimeValue {
     @Override
     public RuntimeValue evalModulo(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeIntValue) {
-            return new RuntimeIntValue((long)(floatValue % v.getIntValue("% operand", where)));
+            return new RuntimeFloatValue(floatValue - v.getIntValue("% operand", where) * Math.floor(floatValue
+            / v.getIntValue("% operand", where)));
         }
         else if (v instanceof  RuntimeFloatValue) {
-            return new RuntimeFloatValue(floatValue % v.getFloatValue("% operand", where));
+            return new RuntimeFloatValue(floatValue - v.getFloatValue("% operand", where) * Math.floor(
+                    floatValue / v.getFloatValue("% operand", where)));
         }
         runtimeError("Type error for %.", where);
         return null;
@@ -171,29 +173,12 @@ public class RuntimeFloatValue extends RuntimeValue {
 
     @Override
     public RuntimeValue evalNegate(AspSyntax where) {
-        if (floatValue < 0) {
-            return new RuntimeFloatValue(floatValue);
-        }
-        runtimeError("Type error for is negative", where);
-        return null;
+        return new RuntimeFloatValue(-floatValue);
     }
 
     @Override
     public RuntimeValue evalNot(AspSyntax where) {
-        if (floatValue == 0) {
-            return new RuntimeFloatValue(floatValue);
-        }
-        runtimeError("Type error for not", where);
-        return null;
-    }
-
-    @Override
-    public RuntimeValue evalPositive(AspSyntax where) {
-        if(floatValue > 0) {
-            return new RuntimeFloatValue(floatValue);
-        }
-        runtimeError("Type error for positive", where);
-        return null;
+        return new RuntimeBoolValue(floatValue==0);
     }
 
 }
