@@ -62,17 +62,17 @@ class AspComparison extends AspSyntax{
             TokenKind k = compo.get(i-1).kind;
             switch (k) {
                 case lessToken:
-                    v = v.evalLess(factors.get(i).eval(curScope), this); break;
+                    v = v.evalLess(term.get(i).eval(curScope), this); break;
                 case greaterToken:
-                    v = v.evalGreater(factors.get(i).eval(curScope), this); break;
+                    v = v.evalGreater(term.get(i).eval(curScope), this); break;
                 case doubleEqualToken:
-                    v = v.evalEqual(factors.get(i).eval(curScope), this); break;
+                    v = v.evalEqual(term.get(i).eval(curScope), this); break;
                 case greaterEqualToken:
-                    v = v.evalGreaterEqual(factors.get(i).eval(curScope), this); break;
+                    v = v.evalGreaterEqual(term.get(i).eval(curScope), this); break;
                 case lessEqualToken:
-                    v = v.evalLessEqual(factors.get(i).eval(curScope), this); break;
+                    v = v.evalLessEqual(term.get(i).eval(curScope), this); break;
                 case notEqualToken:
-                    v = v.evalNotEqual(factors.get(i).eval(curScope), this); break;
+                    v = v.evalNotEqual(term.get(i).eval(curScope), this); break;
                 default:
                     Main.panic("Illegal term operator: " + k + "!");
             }

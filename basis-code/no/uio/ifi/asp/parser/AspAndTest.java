@@ -56,7 +56,7 @@ class AspAndTest extends AspSyntax{
             if (!v.getBoolValue("and operand", this)) {
                 return v;
             }
-            c = notTests.get(i).eval(curScope);
+            v = notTests.get(i).eval(curScope);
         }
         return v;
     }
