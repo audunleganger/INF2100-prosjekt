@@ -10,12 +10,12 @@ AspExpr XX
 AspExprStmt XX
 AspFactor X
 AspFactorOpr X
-AspFactorPrefix
+AspFactorPrefix X
 AspFloatLiteral XX
-AspForStmt
-AspFuncDef
-AspIfStmt
-AspInnerExpr
+AspForStmt XX
+AspFuncDef X
+AspIfStmt X
+AspInnerExpr XX
 AspIntegerLiteral XX
 AspListDisplay XX
 AspName 
@@ -23,13 +23,13 @@ AspNoneLiteral
 AspNotTest XX
 AspPassStmt
 AspPrimary XX
-AspReturnStmt
+AspReturnStmt X
 AspStringLiteral XX
 AspSubscription XX
-AspSuite
-AspTerm
-AspTermOpr
-AspWhileStmt
+AspSuite XX
+AspTerm XX
+AspTermOpr X
+AspWhileStmt XX
 
 
 

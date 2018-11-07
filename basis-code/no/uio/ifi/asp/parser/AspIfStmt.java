@@ -105,7 +105,9 @@ class AspIfStmt extends AspStmt{
             v = expr.get(i).eval(curScope);
             v = suite.get(i).eval(curScope);
         }
-        v = suite2.eval(curScope);
+        if (suite2 != null) {
+            v = suite2.eval(curScope);
+        }
         return v;
     }
 }
