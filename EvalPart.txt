@@ -9,7 +9,7 @@ AspDictDisplay XX
 AspExpr XX
 AspExprStmt XX
 AspFactor X
-AspFactorOpr
+AspFactorOpr X
 AspFactorPrefix
 AspFloatLiteral XX
 AspForStmt

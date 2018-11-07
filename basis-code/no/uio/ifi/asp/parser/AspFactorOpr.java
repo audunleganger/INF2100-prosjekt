@@ -39,9 +39,27 @@ class AspFactorOpr extends AspSyntax{
         Main.log.prettyWrite(sign);
     }
 
+    // IKKE FERDIG!
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         //-- Must be changed in part 3:
-        return null;
+        RuntimeValue v = null;
+        if (sign.equals("* "))    {
+            v = v.evalMultiply(this);
+        }
+        else if (sign.equals("/ "))    {
+            v = v.evalDivide(this);
+        }
+        else if (sign.equals("% "))    {
+            v = v.evalModulo(this);
+        }
+        else if (sign.equals("// "))    {
+            v = v.evalIntDivide(this);
+        }
+        else    {
+            Main.panic("Illegal factor operator: " + sign + "!");
+        }
+        return new RuntimeFa(word)
+        return v;
     }
 }
