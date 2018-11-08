@@ -5,7 +5,7 @@ import no.uio.ifi.asp.parser.AspSyntax;
 public class RuntimeStringValue extends RuntimeValue{
     private String stringValue;
 
-    protected RuntimeStringValue(String v){
+    public RuntimeStringValue(String v){
         this.stringValue = v;
     }
 
