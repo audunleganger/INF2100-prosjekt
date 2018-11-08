@@ -72,9 +72,10 @@ class AspFactor extends AspSyntax{
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         int teller = 0;
+        int pos = prim.size();
         RuntimeValue v = prim.get(0).eval(curScope);
         for (int i = 1; i < prim.size(); i++) {
-            if(prefixNegav(v, teller, i - 1)){
+            if(prefixNegav(teller, i - 1)){
                 v = v.evalNegate(this);
                 teller++;
             }
@@ -96,20 +97,18 @@ class AspFactor extends AspSyntax{
                     Main.panic("Illegal factor operator: " + k + "!");
             }
         }
-        if (!factorp.isEmpty()){
-            if(factorp.get(0).getSign().equals("-")){
-                v = v.evalNegate(this);
-            }
+        if ((teller == 0 || teller < factorp.size()) && prefixNegav(teller,pos - 1)){
+            v = v.evalNegate(this);
         }
         return v;
     }
 
-    private boolean prefixNegav(RuntimeValue v, int teller, int pos) {
+    private boolean prefixNegav(int teller, int pos) {
         if(prifixpos.isEmpty()){
             return false;
         }
         else if(pos == prifixpos.get(teller)){
-           return (factorp.get(teller).getSign().equals("-"));
+            return (factorp.get(teller).getSign().equals("-"));
         }
         return false;
     }

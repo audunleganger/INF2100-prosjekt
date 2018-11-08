@@ -48,8 +48,13 @@ class AspTerm extends AspSyntax{
         }
         else{
             for(AspFactor af : factor){
+                if (teller == tempo.size()) {
+                    af.prettyPrint();
+                    break;
+                }
                 af.prettyPrint();
                 tempo.get(teller).prettyPrint();
+                teller++;
             }
         }
     }

@@ -69,7 +69,6 @@ class AspArguments extends AspPrimarySuffix{
         for (int i = 1; i < expr.size(); i++)   {
             v = expr.get(i).eval(curScope);
         }
-        System.out.println("print here");
         return v;
     }
 }
