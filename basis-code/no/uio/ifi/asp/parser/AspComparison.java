@@ -59,6 +59,9 @@ class AspComparison extends AspSyntax{
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         RuntimeValue v = term.get(0).eval(curScope);
         for (int i = 1; i < term.size(); i++)   {
+            if(compo.isEmpty()) {
+                break;
+            }
             String k = compo.get(i-1).sign;
             switch (k) {
                 case "< ":

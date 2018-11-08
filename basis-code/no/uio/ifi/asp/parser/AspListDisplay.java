@@ -25,6 +25,9 @@ class AspListDisplay extends AspAtom{
         skip(s, leftBracketToken);
 
         while(true) {
+            if(s.curToken().kind == rightBracketToken) {
+                break;
+            }
             ald.expr.add(AspExpr.parse(s));
             if (s.curToken().kind != commaToken)    {
                 break;
@@ -61,10 +64,14 @@ class AspListDisplay extends AspAtom{
 
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-        RuntimeValue v = expr.get(0).eval(curScope);
-        for (int i = 1; i < expr.size(); i++)   {
-            v = expr.get(i).eval(curScope);
+        ArrayList<RuntimeValue> list = new ArrayList<>();
+        if (expr.isEmpty()) {
+            return new RuntimeListValue(list);
         }
-        return v;
+        list.add(expr.get(0).eval(curScope));
+        for (int i = 1; i < expr.size(); i++)   {
+            list.add(expr.get(i).eval(curScope));
+        }
+        return new RuntimeListValue(list);
     }
 }

@@ -38,6 +38,11 @@ public class RuntimeDictionaryValue extends RuntimeValue{
     }
 
     @Override
+    public boolean getBoolValue(String what, AspSyntax where) {
+        return !dictionaryValues.isEmpty();
+    }
+
+    @Override
     public RuntimeValue evalNot(AspSyntax where) {
         return new RuntimeBoolValue(dictionaryValues.isEmpty());
     }

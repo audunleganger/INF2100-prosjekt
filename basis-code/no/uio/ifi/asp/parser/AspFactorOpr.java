@@ -9,7 +9,11 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspFactorOpr extends AspSyntax{
-    String sign;
+    private String sign;
+
+    public String getSign() {
+        return sign;
+    }
 
     AspFactorOpr(int n) {
         super(n);
@@ -42,7 +46,7 @@ class AspFactorOpr extends AspSyntax{
     // IKKE FERDIG!
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-        //-- Must be changed in part 3:
+            //-- Must be changed in part 3:
         /*
         RuntimeValue v = null;
         if (sign.equals("* "))    {

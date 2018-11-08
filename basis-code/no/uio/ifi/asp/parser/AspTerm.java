@@ -42,16 +42,14 @@ class AspTerm extends AspSyntax{
     //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
+        int teller = 0;
         if(factor.size() == 1) {
             factor.get(0).prettyPrint();
         }
         else{
             for(AspFactor af : factor){
                 af.prettyPrint();
-                if(tempo.size() != 0){
-                    tempo.get(0).prettyPrint();
-                    tempo.remove(0);
-                }
+                tempo.get(teller).prettyPrint();
             }
         }
     }
@@ -60,12 +58,12 @@ class AspTerm extends AspSyntax{
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         RuntimeValue v = factor.get(0).eval(curScope);
         for (int i = 1; i < factor.size(); i++){
-            TokenKind k = tempo.get(i-1).kind;
+            String k = tempo.get(i-1).getOp();
             switch (k){
-                case minusToken:
+                case "-":
                     v = v.evalSubtract(factor.get(i).eval(curScope), this); break;
-                case plusToken:
-                    v = v.evalSubtract(factor.get(i).eval(curScope), this); break;
+                case "+":
+                    v = v.evalAdd(factor.get(i).eval(curScope), this); break;
                 default:
                     Main.panic("Illegal term operator: " + k + "!");
             }

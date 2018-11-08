@@ -12,6 +12,7 @@ class AspFactor extends AspSyntax{
     ArrayList<AspFactorOpr> factoro = new ArrayList<>();
     ArrayList<AspPrimary> prim = new ArrayList<>();
     ArrayList<AspFactorPrefix> factorp = new ArrayList<>();
+    ArrayList<Integer> prifixpos = new ArrayList<>();
 
     AspFactor(int n){
         super(n);
@@ -23,14 +24,16 @@ class AspFactor extends AspSyntax{
         enterParser("Factor");
 
         AspFactor af = new AspFactor(s.curLineNum());
-
+        int teller = 0;
         while(true) {
             if(s.isFactorPrefix()){
                 af.factorp.add(AspFactorPrefix.parse(s));
+                af.prifixpos.add(teller);
             }
             af.prim.add(AspPrimary.parse(s));
             if(s.isFactorOpr()){
                 af.factoro.add(AspFactorOpr.parse(s));
+                teller++;
             }
             else{
                 break;
@@ -44,43 +47,70 @@ class AspFactor extends AspSyntax{
     //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint() {
+        int teller = 0;
+
         if(factorp.isEmpty() && prim.size() == 1){
             prim.get(0).prettyPrint();
         }
         else{
-            for(AspPrimary ap : prim){
-                if(!factorp.isEmpty()){
-                    factorp.get(0).prettyPrint();
-                    factorp.remove(0);
+            for(int a = 0; a<prim.size(); a++) {
+                if(a < prifixpos.size() && a == prifixpos.get(teller)) {
+                    factorp.get(teller).prettyPrint();
+                    teller++;
                 }
-                ap.prettyPrint();
-                if(!factoro.isEmpty()){
-                    factoro.get(0).prettyPrint();
-                    factoro.remove(0);
+                prim.get(a).prettyPrint();
+
+                if(a != factoro.size()) {
+                    factoro.get(a).prettyPrint();
                 }
             }
         }
+
     }
 
     // IKKE FERDIG
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
+        int teller = 0;
         RuntimeValue v = prim.get(0).eval(curScope);
-        for (int i = 1; i < prim.size(); i++)   {
-            TokenKind k = factoro.get(i-1).kind;
+        for (int i = 1; i < prim.size(); i++) {
+            if(prefixNegav(v, teller, i - 1)){
+                v = v.evalNegate(this);
+                teller++;
+            }
+            String k = factoro.get(i-1).getSign();
             switch(k) {
-                case astToken:
-                    v = v.evalMultiply(prim.get(i).eval(curScope), this); break;
-                case slashToken:
-                    v = v.evalDivide(prim.get(i).eval(curScope), this); break;
-                case percentToken:
-                    v = v.evalModulo(prim.get(i).eval(curScope), this); break;
-                case doubleSlashToken:
-                    v = v.evalIntDivide(prim.get(i).eval(curScope), this); break;
+                case "* ":
+                    v = v.evalMultiply(prim.get(i).eval(curScope), this);
+                    break;
+                case "/ ":
+                    v = v.evalDivide(prim.get(i).eval(curScope), this);
+                    break;
+                case "% ":
+                    v = v.evalModulo(prim.get(i).eval(curScope), this);
+                    break;
+                case "// ":
+                    v = v.evalIntDivide(prim.get(i).eval(curScope), this);
+                    break;
                 default:
                     Main.panic("Illegal factor operator: " + k + "!");
             }
         }
+        if (!factorp.isEmpty()){
+            if(factorp.get(0).getSign().equals("-")){
+                v = v.evalNegate(this);
+            }
+        }
         return v;
+    }
+
+    private boolean prefixNegav(RuntimeValue v, int teller, int pos) {
+        if(prifixpos.isEmpty()){
+            return false;
+        }
+        else if(pos == prifixpos.get(teller)){
+           return (factorp.get(teller).getSign().equals("-"));
+        }
+        return false;
     }
 }

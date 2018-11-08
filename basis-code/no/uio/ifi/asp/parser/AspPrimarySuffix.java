@@ -35,15 +35,4 @@ abstract class AspPrimarySuffix extends AspSyntax{
 
         return aps;
     }
-
-    //Se forklaring for prettyPrint() i AspSyntax
-    @Override
-    void prettyPrint(){
-    }
-
-    @Override
-    public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-        //-- Must be changed in part 4:
-        return null;
-    }
 }

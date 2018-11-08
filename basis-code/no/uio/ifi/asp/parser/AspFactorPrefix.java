@@ -9,10 +9,14 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspFactorPrefix extends AspSyntax{
-    static String sign;
+    private String sign;
 
-    AspFactorPrefix(int n) {
+    protected AspFactorPrefix(int n) {
         super(n);
+    }
+
+    public String getSign() {
+        return sign;
     }
 
     // Sjekker om vi jobber med en + eller - operator, og setter variabelen
@@ -21,11 +25,11 @@ class AspFactorPrefix extends AspSyntax{
         AspFactorPrefix afp = new AspFactorPrefix(s.curLineNum());
         enterParser("Factor Prefix");
         if (s.curToken().kind == plusToken) {
-            sign = "+";
+            afp.sign = "+";
             skip(s, plusToken);
         }
         else if (s.curToken().kind == minusToken)   {
-            sign = "-";
+            afp.sign = "-";
             skip(s, minusToken);
         }
         leaveParser("Factor Prefix");
@@ -40,17 +44,6 @@ class AspFactorPrefix extends AspSyntax{
 
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-        //-- Must be changed in part 3:
-        RuntimeValue v = null;
-        if (sign.equals("+"))   {
-            v = v.evalAdd(this);
-        }
-        else if (sign.equals("-"))  {
-            v = v.evalSubtract(this);
-        }
-        else {
-            Main.panic("Illegal factor prefix: " + sign + "!");
-        }
-        return v;
+        return null;
     }
 }

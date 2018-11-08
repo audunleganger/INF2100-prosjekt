@@ -32,12 +32,11 @@ class AspIntegerLiteral extends AspAtom{
     //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint(){
-        word = word + " ";
-        Main.log.prettyWrite(word);
+        Main.log.prettyWrite(word + " ");
     }
 
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-        return new RuntimeIntValue(Integer.parseInt(word));
+        return new RuntimeIntValue(Long.parseLong(word));
     }
 }

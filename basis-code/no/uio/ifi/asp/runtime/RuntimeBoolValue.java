@@ -6,7 +6,7 @@ import no.uio.ifi.asp.parser.AspSyntax;
 public class RuntimeBoolValue extends RuntimeValue {
     private boolean boolValue;
 
-    protected RuntimeBoolValue(boolean v) {
+    public RuntimeBoolValue(boolean v) {
         boolValue = v;
     }
 

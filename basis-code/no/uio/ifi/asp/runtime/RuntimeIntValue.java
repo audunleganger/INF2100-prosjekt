@@ -25,6 +25,10 @@ public class RuntimeIntValue extends RuntimeValue {
         return intValue;
     }
 
+    @Override
+    public boolean getBoolValue(String what, AspSyntax where) {
+        return intValue != 0;
+    }
 
     @Override
     public RuntimeValue evalIntDivide(RuntimeValue v, AspSyntax where) {

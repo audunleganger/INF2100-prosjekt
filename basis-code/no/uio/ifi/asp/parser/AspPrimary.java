@@ -26,6 +26,7 @@ class AspPrimary extends AspSyntax{
         ap.atom = AspAtom.parse(s);
 
         while(true) {
+
             if(s.curToken().kind != leftParToken && s.curToken().kind != leftBracketToken){
                 break;
             }
@@ -53,10 +54,13 @@ class AspPrimary extends AspSyntax{
 
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-        RuntimeValue v = atom.eval(curScope);
-        for (int i = 0; i < primaryS.size(); i++) {
-            v = primaryS.get(i).eval(curScope);
+        RuntimeValue v;
+
+        for (AspPrimarySuffix ap: primaryS){
+            System.out.println("Come here");
+            v = ap.eval(curScope);
         }
+        v = atom.eval(curScope);
         return v;
     }
 

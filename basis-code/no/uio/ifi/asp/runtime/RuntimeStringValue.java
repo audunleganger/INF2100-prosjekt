@@ -24,6 +24,11 @@ public class RuntimeStringValue extends RuntimeValue{
     }
 
     @Override
+    public boolean getBoolValue(String what, AspSyntax where) {
+        return !stringValue.equals("");
+    }
+
+    @Override
     public RuntimeValue evalAdd(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeStringValue) {
             return new RuntimeStringValue(stringValue + v.getStringValue("+ operand", where));

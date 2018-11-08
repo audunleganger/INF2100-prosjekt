@@ -202,10 +202,10 @@ public class Scanner {
                 a = letter_counter;
                 }
                 // Vi sjekker om det er en operator via checkOperator-funksjonen
-                else if(checkOperator(line.substring(a,a+1))){
+                else if(checkOperator(line.substring(a,a+1)) || (a+1 != line.length() && line.substring(a,a+2).equals("!="))){
                   // Vi vet at det er en operator, maa sjekke om det er en to-tegns-operator (f.eks "==" eller ">=")
                   letter_counter = a;
-                  if( a+1 != line.length() && checkOperator(line.substring(letter_counter, letter_counter+2))){
+                  if(a+1 != line.length() && checkOperator(line.substring(letter_counter, letter_counter+2))){
                     // Vi vet det er en to-tegns-operator, saa vi oppretter en token og pusher den paa curLineTokens
                     Token temp = new Token(get_Operator(line.substring(letter_counter, letter_counter+2)), curLineNum());
                     curLineTokens.add(temp);

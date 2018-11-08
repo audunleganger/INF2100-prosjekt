@@ -26,6 +26,11 @@ public class RuntimeFloatValue extends RuntimeValue {
     }
 
     @Override
+    public boolean getBoolValue(String what, AspSyntax where){
+        return floatValue != 0;
+    }
+
+    @Override
     public RuntimeValue evalIntDivide(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeIntValue) {
             return new RuntimeFloatValue(Math.floor(floatValue / v.getIntValue("// operand", where)));
