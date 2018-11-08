@@ -81,11 +81,14 @@ class AspFuncDef extends AspStmt{
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         //-- Must be changed in part 3:
+        /*
         RuntimeValue v = name.eval(curScope);
         for (int i = 0; i < name.size(); i++)   {
             v = name.eval(curScope);
         }
         v = suite.eval(curScope);
         return v;
+        */
+        return null;
     }
 }

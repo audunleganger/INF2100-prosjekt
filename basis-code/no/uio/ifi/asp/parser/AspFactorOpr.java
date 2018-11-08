@@ -43,6 +43,7 @@ class AspFactorOpr extends AspSyntax{
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         //-- Must be changed in part 3:
+        /*
         RuntimeValue v = null;
         if (sign.equals("* "))    {
             v = v.evalMultiply(this);
@@ -59,7 +60,8 @@ class AspFactorOpr extends AspSyntax{
         else    {
             Main.panic("Illegal factor operator: " + sign + "!");
         }
-        return new RuntimeFa(word)
         return v;
+        */
+        return null;
     }
 }
