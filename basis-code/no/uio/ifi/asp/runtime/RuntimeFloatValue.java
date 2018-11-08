@@ -6,7 +6,7 @@ public class RuntimeFloatValue extends RuntimeValue {
 
     private double floatValue;
 
-    protected RuntimeFloatValue(double v) {
+    public RuntimeFloatValue(double v) {
         floatValue = v;
     }
 

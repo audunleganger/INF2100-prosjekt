@@ -6,7 +6,7 @@ public class RuntimeListValue extends RuntimeValue{
 
     private ArrayList<RuntimeValue> listValues;
 
-    protected RuntimeListValue (ArrayList<RuntimeValue> v) {
+    public RuntimeListValue (ArrayList<RuntimeValue> v) {
         listValues = v;
     }
 
@@ -16,6 +16,19 @@ public class RuntimeListValue extends RuntimeValue{
 
     public ArrayList<RuntimeValue> getListValues(){
         return listValues;
+    }
+
+    @Override
+    public String toString() {
+        String temp = "[";
+        for(int i = 0; i<listValues.size(); i++){
+            if(i == listValues.size() - 1) {
+                temp = temp.concat(listValues.get(i).toString() + "]");
+                break;
+            }
+            temp = temp.concat(listValues.get(i).toString() + ", ");
+        }
+        return temp;
     }
 
     @Override
