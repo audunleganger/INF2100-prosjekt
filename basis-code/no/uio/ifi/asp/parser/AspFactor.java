@@ -62,9 +62,25 @@ class AspFactor extends AspSyntax{
         }
     }
 
+    // IKKE FERDIG
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-        //-- Must be changed in part 3:
-        return null;
+        RuntimeValue v = prim.get(0).eval(curScope);
+        for (int i = 1; i < prim.size(); i++)   {
+            TokenKind k = factoro.get(i-1).kind;
+            switch(k) {
+                case astToken:
+                    v = v.evalMultiply(prim.get(i).eval(curScope), this); break;
+                case slashToken:
+                    v = v.evalDivide(prim.get(i).eval(curScope), this); break;
+                case percentToken:
+                    v = v.evalModulo(prim.get(i).eval(curScope), this); break;
+                case doubleSlashToken:
+                    v = v.evalIntDivide(prim.get(i).eval(curScope), this); break;
+                default:
+                    Main.panic("Illegal factor operator: " + k + "!");
+            }
+        }
+        return v;
     }
 }

@@ -53,10 +53,10 @@ class AspAndTest extends AspSyntax{
         // Evaluerer foerste notTest
         RuntimeValue v = notTests.get(0).eval(curScope);
         for (int i = 1; i < notTests.size(); i++) {
-            if (!v.getBoolValue("and oeprand", this)) {
+            if (!v.getBoolValue("and operand", this)) {
                 return v;
             }
-            c = notTests.get(i).eval(curScope);
+            v = notTests.get(i).eval(curScope);
         }
         return v;
     }

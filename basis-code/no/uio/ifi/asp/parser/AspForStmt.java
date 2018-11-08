@@ -51,6 +51,9 @@ class AspForStmt extends AspStmt{
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         //-- Must be changed in part 3:
-        return null;
+        RuntimeValue v = name.eval(curScope);
+        v = expr.eval(curScope);
+        v = suite.expr(curScope);
+        return v;
     }
 }

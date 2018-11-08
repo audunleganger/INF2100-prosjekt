@@ -46,9 +46,19 @@ class AspTermOpr extends AspSyntax{
         }
     }
 
+    // IKKE FERDIG
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         //-- Must be changed in part 3:
+        if (pluss.equals("+")) {
+
+        }
+        else if (minus.equals("-")) {
+
+        }
+        else {
+            Main.panic("Illegal term operator!");
+        }
         return null;
     }
 }

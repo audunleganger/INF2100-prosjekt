@@ -1,0 +1,43 @@
+Part 3:
+AspAndTest XX
+AspArguments XX
+AspAssignment XX
+AspBooleanLiteral XX
+AspComparison XX
+AspCompOpr XX
+AspDictDisplay XX
+AspExpr XX
+AspExprStmt XX
+AspFactor X
+AspFactorOpr X
+AspFactorPrefix X
+AspFloatLiteral XX
+AspForStmt XX
+AspFuncDef X
+AspIfStmt X
+AspInnerExpr XX
+AspIntegerLiteral XX
+AspListDisplay XX
+AspName 
+AspNoneLiteral 
+AspNotTest XX
+AspPassStmt
+AspPrimary XX
+AspReturnStmt X
+AspStringLiteral XX
+AspSubscription XX
+AspSuite XX
+AspTerm XX
+AspTermOpr X
+AspWhileStmt XX
+
+
+
+Part 4:
+AspPrimarySuffix
+AspProgram
+AspStmt
+
+Unspecified:
+AspAtom
+AspSyntax
