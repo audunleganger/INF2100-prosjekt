@@ -59,19 +59,19 @@ class AspComparison extends AspSyntax{
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         RuntimeValue v = term.get(0).eval(curScope);
         for (int i = 1; i < term.size(); i++)   {
-            TokenKind k = compo.get(i-1).kind;
+            String k = compo.get(i-1).sign;
             switch (k) {
-                case lessToken:
+                case "< ":
                     v = v.evalLess(term.get(i).eval(curScope), this); break;
-                case greaterToken:
+                case "> ":
                     v = v.evalGreater(term.get(i).eval(curScope), this); break;
-                case doubleEqualToken:
+                case "== ":
                     v = v.evalEqual(term.get(i).eval(curScope), this); break;
-                case greaterEqualToken:
+                case ">= ":
                     v = v.evalGreaterEqual(term.get(i).eval(curScope), this); break;
-                case lessEqualToken:
+                case "<= ":
                     v = v.evalLessEqual(term.get(i).eval(curScope), this); break;
-                case notEqualToken:
+                case "!= ":
                     v = v.evalNotEqual(term.get(i).eval(curScope), this); break;
                 default:
                     Main.panic("Illegal term operator: " + k + "!");
