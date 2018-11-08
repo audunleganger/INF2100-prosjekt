@@ -7,7 +7,6 @@ import static no.uio.ifi.asp.scanner.TokenKind.*;
 import no.uio.ifi.asp.runtime.*;
 
 
-
 class AspStringLiteral extends AspAtom{
     String word;
 
@@ -37,7 +36,6 @@ class AspStringLiteral extends AspAtom{
 
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-        //-- Must be changed in part 3:
-        return null;
+        return new RuntimeStringValue(word);
     }
 }

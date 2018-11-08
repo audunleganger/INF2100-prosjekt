@@ -38,6 +38,6 @@ class AspIntegerLiteral extends AspAtom{
 
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-        return new RuntimeIntValue(Long.parseLong(word));
+        return new RuntimeIntValue(Integer.parseInt(word));
     }
 }
