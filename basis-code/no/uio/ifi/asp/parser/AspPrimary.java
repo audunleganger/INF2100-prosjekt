@@ -55,10 +55,18 @@ class AspPrimary extends AspSyntax{
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         RuntimeValue v;
+        RuntimeValue k = null;
         for (AspPrimarySuffix ap: primaryS){
-            v = ap.eval(curScope);
+            k = ap.eval(curScope);
         }
-        v = atom.eval(curScope);;
+        if (k != null){
+            v = atom.eval(curScope);
+            v = v.evalSubscription(k, this);
+        }
+        else{
+            v = atom.eval(curScope);
+        }
+
         return v;
     }
 

@@ -45,12 +45,12 @@ class AspComparison extends AspSyntax{
             term.get(0).prettyPrint();
         }
         else{
+            int teller = 0;
             for(AspTerm at : term){
                 at.prettyPrint();
-                if(!compo.isEmpty()){
-                    compo.get(0).prettyPrint();
-                    compo.remove(0);
-                }
+                if(teller < compo.size())
+                    compo.get(teller).prettyPrint();
+                    teller++;
             }
         }
     }
@@ -58,28 +58,59 @@ class AspComparison extends AspSyntax{
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         RuntimeValue v = term.get(0).eval(curScope);
-        for (int i = 1; i < term.size(); i++)   {
-            if(compo.isEmpty()) {
+        int comp_teller = 0;
+        int term_teller = 0;
+        while(true) {
+            if (compo.isEmpty()) {
                 break;
             }
-            String k = compo.get(i-1).sign;
-            switch (k) {
-                case "< ":
-                    v = v.evalLess(term.get(i).eval(curScope), this); break;
-                case "> ":
-                    v = v.evalGreater(term.get(i).eval(curScope), this); break;
-                case "== ":
-                    v = v.evalEqual(term.get(i).eval(curScope), this); break;
-                case ">= ":
-                    v = v.evalGreaterEqual(term.get(i).eval(curScope), this); break;
-                case "<= ":
-                    v = v.evalLessEqual(term.get(i).eval(curScope), this); break;
-                case "!= ":
-                    v = v.evalNotEqual(term.get(i).eval(curScope), this); break;
-                default:
-                    Main.panic("Illegal term operator: " + k + "!");
+            if(comp_teller < compo.size()) {
+                String comp = compo.get(comp_teller).sign;
+                RuntimeValue x = term.get(term_teller).eval(curScope);
+                RuntimeValue y = term.get(term_teller + 1).eval(curScope);
+                RuntimeValue answear;
+
+                switch (comp){
+                    case "< ": answear = x.evalLess(y,this);
+                    if(answear.getBoolValue("comp", this)){
+                        break;
+                    }
+                    return answear;
+                    case "> ": answear = x.evalGreater(y, this);
+                    if (answear.getBoolValue("comp", this)) {
+                        break;
+                    }
+                    return answear;
+                    case "== ": answear = x.evalEqual(y, this);
+                        if (answear.getBoolValue("comp", this)) {
+                            break;
+                        }
+                        return answear;
+                    case ">= ": answear = x.evalGreaterEqual(y, this);
+                        if (answear.getBoolValue("comp", this)) {
+                            break;
+                        }
+                        return answear;
+                    case "<= ": answear = x.evalLessEqual(y, this);
+                        if (answear.getBoolValue("comp", this)) {
+                            break;
+                        }
+                        return answear;
+                    case "!= ": answear = x.evalNotEqual(y, this);
+                        if (answear.getBoolValue("comp", this)) {
+                            break;
+                        }
+                        return answear;
+                    default: System.out.println("Something went wrong comparision"); System.exit(1); break;
+                }
+                term_teller ++;
+                comp_teller ++;
+            }
+            else {
+                return new RuntimeBoolValue(true);
             }
         }
+
         return v;
     }
 }

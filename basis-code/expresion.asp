@@ -15,7 +15,7 @@
 "Testing string expressions"
 "Abc"
 "x" * 10
-"Î±" + "-"*5 + "Ï‰"
+"a" + "-" * 5 + "T"
 
 "Testing boolean expressions"
 not False

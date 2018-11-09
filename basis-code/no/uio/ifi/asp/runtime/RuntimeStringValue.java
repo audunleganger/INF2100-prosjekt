@@ -15,7 +15,7 @@ public class RuntimeStringValue extends RuntimeValue{
 
     @Override
     public String toString(){
-        return stringValue;
+        return "\'" + stringValue + "\'";
     }
 
     @Override
@@ -31,7 +31,7 @@ public class RuntimeStringValue extends RuntimeValue{
     @Override
     public RuntimeValue evalAdd(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeStringValue) {
-            return new RuntimeStringValue(stringValue + v.getStringValue("+ operand", where));
+            return new RuntimeStringValue(stringValue.concat(v.getStringValue("+ operand", where)));
         }
         runtimeError("Type error +", where);
         return null;
@@ -163,12 +163,26 @@ public class RuntimeStringValue extends RuntimeValue{
     public RuntimeValue evalMultiply(RuntimeValue v, AspSyntax where) {
         if(v instanceof RuntimeIntValue) {
             String temp = stringValue;
-            for(int a = 0; a < v.getIntValue("operand +", where); a++){
+            for(int a = 0; a < v.getIntValue("operand +", where); a++) {
                 temp = temp.concat(stringValue);
             }
             return new RuntimeStringValue(temp);
         }
         runtimeError("Type error +", where);
+        return null;
+    }
+
+    @Override
+    public RuntimeValue evalSubscription(RuntimeValue v, AspSyntax where) {
+        if(v instanceof RuntimeIntValue){
+            if(v.getIntValue("subscription", where) >= stringValue.length()){
+                System.out.println("String Out of bounds error at: " + where.lineNum);
+                System.exit(1);
+            }
+            char temp = stringValue.charAt((int) v.getIntValue("subscription ", where));
+            return new RuntimeStringValue("" + temp);
+        }
+        runtimeError("Type error [..]", where);
         return null;
     }
 

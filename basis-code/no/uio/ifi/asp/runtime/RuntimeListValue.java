@@ -20,6 +20,9 @@ public class RuntimeListValue extends RuntimeValue{
 
     @Override
     public String toString() {
+        if(listValues.isEmpty()) {
+            return "[]";
+        }
         String temp = "[";
         for(int i = 0; i<listValues.size(); i++){
             if(i == listValues.size() - 1) {
@@ -39,7 +42,7 @@ public class RuntimeListValue extends RuntimeValue{
     @Override
     public RuntimeValue evalMultiply(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeIntValue) {
-            ArrayList<RuntimeValue> temp = listValues;
+            ArrayList<RuntimeValue> temp = new ArrayList<>(listValues);
             for(int a = 0; a < v.getIntValue("operand *", where); a++) {
                 temp.addAll(listValues);
             }
@@ -62,6 +65,11 @@ public class RuntimeListValue extends RuntimeValue{
     @Override
     public RuntimeValue evalSubscription(RuntimeValue v, AspSyntax where) {
         if (v instanceof RuntimeIntValue) {
+            if(v.getIntValue("get operand", where) >= listValues.size()){
+                System.out.println("List out of bounds error: list size: " + listValues.size() + " index: " +
+                        v.getIntValue("get operand", where) + " at: " + where.lineNum);
+                System.exit(1);
+            }
             return listValues.get((int) v.getIntValue("get operand", where));
         }
         runtimeError("Type error get", where);

@@ -19,6 +19,9 @@ public class RuntimeDictionaryValue extends RuntimeValue{
 
     @Override
     public String toString() {
+        if(dictionaryValues.isEmpty()) {
+            return "{}";
+        }
         String temp = "{";
         int teller = 0;
         for(int i = 0; i<dictionaryValues.size()/2; i++) {
@@ -59,7 +62,8 @@ public class RuntimeDictionaryValue extends RuntimeValue{
             if (teller == dictionaryValues.size()-2) {
                 return new RuntimeNoneValue();
             }
-            if (dictionaryValues.get(teller) == v){
+            if (dictionaryValues.get(teller).getStringValue("Subscription error", where).equals(
+                    v.getStringValue("Subscription error", where))){
                 return dictionaryValues.get(teller + 1);
             }
             teller += 2;

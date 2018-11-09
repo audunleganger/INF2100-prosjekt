@@ -122,7 +122,7 @@ public class RuntimeFloatValue extends RuntimeValue {
             return new RuntimeBoolValue(floatValue > v.getIntValue("> operand", where));
         }
         else if (v instanceof RuntimeFloatValue) {
-            return new RuntimeBoolValue(floatValue > v.getIntValue("> operand", where));
+            return new RuntimeBoolValue(floatValue > v.getFloatValue("> operand", where));
         }
         runtimeError("Type error for >.", where);
         return null;
