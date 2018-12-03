@@ -43,12 +43,13 @@ class AspWhileStmt extends AspStmt{
 
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-        //-- Must be changed in part 3:
-        /*
-        RuntimeValue v = expr.eval(curScope);
-        v = suite.eval(curScope);
-        return v;
-        */
+        while (true) {
+            RuntimeValue t = expr.eval(curScope);
+            if (! t.getBoolValue("while loop test",this)) break;
+            trace("while True: ...");
+            suite.eval(curScope);
+        }
+        trace("while False:");
         return null;
     }
 

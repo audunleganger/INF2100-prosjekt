@@ -12,9 +12,29 @@ public class RuntimeDictionaryValue extends RuntimeValue{
         this.dictionaryValues = dictionaryValues;
     }
 
+    @Override
+    public int size(String what, AspSyntax where){
+        return dictionaryValues.size()/2;
+    }
 
     public String typeName(){
         return "Dictionary";
+    }
+
+    public RuntimeValue getKey(int teller, AspSyntax where) {
+        if (dictionaryValues.isEmpty()){
+            return new RuntimeNoneValue();
+        }
+        int temp = 0;
+
+        for (int i = 0; i <dictionaryValues.size()/2; i++) {
+            if(i == teller) {
+                return dictionaryValues.get(temp);
+            }
+            temp += 2;
+        }
+        runtimeError("Out of bounds dictionary exception", where);
+        return null;
     }
 
     @Override
@@ -29,7 +49,6 @@ public class RuntimeDictionaryValue extends RuntimeValue{
                 temp = temp.concat(dictionaryValues.get(teller).toString() + ":");
                 teller += 1;
                 temp = temp.concat(dictionaryValues.get(teller).toString() + "}");
-                teller +=1;
                 break;
             }
             temp = temp.concat(dictionaryValues.get(teller).toString() + ":");
@@ -59,7 +78,7 @@ public class RuntimeDictionaryValue extends RuntimeValue{
     public RuntimeValue evalSubscription(RuntimeValue v, AspSyntax where) {
         int teller = 0;
         for(int a = 0; a<dictionaryValues.size()/2; a++){
-            if (teller == dictionaryValues.size()-2) {
+            if (a == dictionaryValues.size()/2) {
                 return new RuntimeNoneValue();
             }
             if (dictionaryValues.get(teller).getStringValue("Subscription error", where).equals(

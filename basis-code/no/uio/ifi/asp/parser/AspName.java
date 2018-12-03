@@ -30,13 +30,11 @@ class AspName extends AspAtom{
     //Se forklaring for prettyPrint() i AspSyntax
     @Override
     void prettyPrint() {
-        word = word + " ";
-        Main.log.prettyWrite(word);
+        Main.log.prettyWrite(word + " ");
     }
 
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-        //-- Must be changed in part 3:
-        return null;
+        return curScope.find(word,this);
     }
 }

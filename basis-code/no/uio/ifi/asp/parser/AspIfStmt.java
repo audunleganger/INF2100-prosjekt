@@ -64,30 +64,25 @@ class AspIfStmt extends AspStmt{
             Main.log.prettyWrite(": ");
             suite.get(0).prettyPrint();
 
-            if(suite2 == null){
-                return;
-            }
-            else{
+            if(suite2 != null){
                 Main.log.prettyWrite("else ");
                 Main.log.prettyWrite(": ");
                 suite2.prettyPrint();
             }
         }
         else{
+            int teller = 0;
             for(AspExpr ae : expr){
                 ae.prettyPrint();
                 Main.log.prettyWrite(": ");
-                suite.get(0).prettyPrint();
-                suite.remove(0);
+                suite.get(teller).prettyPrint();
+                teller++;
                 if(amount_p != 0){
                     Main.log.prettyWrite("elif ");
                     amount_p--;
                 }
             }
-            if(suite2 == null){
-                return;
-            }
-            else{
+            if(suite2 != null){
                 Main.log.prettyWrite("else ");
                 Main.log.prettyWrite(": ");
                 suite2.prettyPrint();
@@ -99,18 +94,49 @@ class AspIfStmt extends AspStmt{
 
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-        //-- Must be changed in part 3:
-        /*
-        RuntimeValue v = null;
-        for (int i = 0; i < expr.size(); i++)   {
-            v = expr.get(i).eval(curScope);
-            v = suite.get(i).eval(curScope);
+        if (suite2 == null) {
+            if(suite.size() == 1){
+                RuntimeValue v = expr.get(0).eval(curScope);
+                if(v.getBoolValue("If test",this)) {
+                    v = suite.get(0).eval(curScope);
+                    return v;
+                }
+                else{
+                    return null;
+                }
+            }
+            else {
+                int teller = 0;
+                for (AspExpr ae : expr) {
+                    if(ae.eval(curScope).getBoolValue("if test",this)){
+                        return suite.get(teller).eval(curScope);
+                    }
+                    teller ++;
+                }
+                return null;
+            }
         }
-        if (suite2 != null) {
-            v = suite2.eval(curScope);
+        else {
+            if(suite.size() == 1){
+                RuntimeValue v = expr.get(0).eval(curScope);
+                if(v.getBoolValue("If test",this)) {
+                    v = suite.get(0).eval(curScope);
+                    return v;
+                }
+                else{
+                    return suite2.eval(curScope);
+                }
+            }
+            else {
+                int teller = 0;
+                for (AspExpr ae : expr) {
+                    if(ae.eval(curScope).getBoolValue("if test",this)){
+                        return suite.get(teller).eval(curScope);
+                    }
+                    teller ++;
+                }
+                return suite2.eval(curScope);
+            }
         }
-        return v;
-        */
-        return null;
     }
 }

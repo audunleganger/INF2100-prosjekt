@@ -11,7 +11,7 @@ public class RuntimeIntValue extends RuntimeValue {
         intValue = v;
     }
 
-    protected String typeName() {
+    public String typeName() {
         return "Integer";
     }
 

@@ -80,15 +80,14 @@ class AspFuncDef extends AspStmt{
 
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-        //-- Must be changed in part 3:
-        /*
-        RuntimeValue v = name.eval(curScope);
-        for (int i = 0; i < name.size(); i++)   {
-            v = name.eval(curScope);
+        String aName = name.word;
+        ArrayList<String> aNames = new ArrayList<>();
+
+        for (AspName an : list_name) {
+            aNames.add(an.word);
         }
-        v = suite.eval(curScope);
-        return v;
-        */
+        curScope.assign(aName, new RuntimeFunc(suite, aNames));
+
         return null;
     }
 }

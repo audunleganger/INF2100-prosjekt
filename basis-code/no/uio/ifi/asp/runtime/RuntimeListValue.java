@@ -19,6 +19,11 @@ public class RuntimeListValue extends RuntimeValue{
     }
 
     @Override
+    public int size(String what, AspSyntax where){
+        return listValues.size();
+    }
+
+    @Override
     public String toString() {
         if(listValues.isEmpty()) {
             return "[]";

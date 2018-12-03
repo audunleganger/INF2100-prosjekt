@@ -9,13 +9,18 @@ public class RuntimeStringValue extends RuntimeValue{
         this.stringValue = v;
     }
 
-    protected String typeName(){
+    public String typeName(){
         return "String";
     }
 
     @Override
     public String toString(){
-        return "\'" + stringValue + "\'";
+        return stringValue;
+    }
+
+    @Override
+    public int size(String what, AspSyntax where){
+        return stringValue.length();
     }
 
     @Override

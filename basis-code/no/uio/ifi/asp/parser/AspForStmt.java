@@ -9,11 +9,11 @@ import no.uio.ifi.asp.runtime.*;
 
 
 class AspForStmt extends AspStmt{
-    AspName name;
-    AspExpr expr;
-    AspSuite suite;
+    public AspName name;
+    public AspExpr expr;
+    public AspSuite suite;
 
-    AspForStmt(int n){
+    public AspForStmt(int n){
         super(n);
     }
 
@@ -50,13 +50,21 @@ class AspForStmt extends AspStmt{
 
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
-        //-- Must be changed in part 3:
-        /*
-        RuntimeValue v = name.eval(curScope);
-        v = expr.eval(curScope);
-        v = suite.expr(curScope);
-        return v;
-        */
+        String aName = name.word;
+        RuntimeValue aExpr = expr.eval(curScope);
+        int teller = 0;
+        while(teller < aExpr.size("expr",this)) {
+
+            if(aExpr instanceof RuntimeDictionaryValue){
+                RuntimeValue ap = ((RuntimeDictionaryValue) aExpr).getKey(teller,this);
+                curScope.assign(aName,aExpr.evalSubscription(ap,this));
+            }
+            else {
+                curScope.assign(aName,aExpr.evalSubscription(new RuntimeIntValue(teller),this));
+            }
+            suite.eval(curScope);
+            teller ++;
+        }
         return null;
     }
 }

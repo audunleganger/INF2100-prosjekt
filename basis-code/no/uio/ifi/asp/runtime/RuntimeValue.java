@@ -6,13 +6,18 @@ import no.uio.ifi.asp.main.*;
 import no.uio.ifi.asp.parser.AspSyntax;
 
 public abstract class RuntimeValue {
-    abstract protected String typeName();
+    abstract public String typeName();
 
     public String showInfo() {
         return toString();
     }
 
     // For parts 3 and 4:
+
+    public int size(String what, AspSyntax where){
+        runtimeError("Type error: " + what + " has no size! ", where);
+        return 0;
+    }
 
     public boolean getBoolValue(String what, AspSyntax where) {
         runtimeError("Type error: " + what + " is not a Boolean!", where);

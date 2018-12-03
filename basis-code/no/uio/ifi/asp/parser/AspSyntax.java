@@ -15,7 +15,7 @@ public abstract class AspSyntax {
     // maate. Hver subklasse av AspSyntax har sin egen variant av prettyPrint formatert
     // spesifikt for den typen tokens som blir parset.
     abstract void prettyPrint();
-    abstract RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue;
+    abstract public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue;
 
 
     static void parserError(String message, int lineNum) {
