@@ -1,8 +1,4 @@
-
-def name(x):
-    return x + 1
-
-a = 5
-c = name(a)
-
-print(c)
+var = [1,2,3,4]
+print(var)
+var[1] = "hei"
+print(var)

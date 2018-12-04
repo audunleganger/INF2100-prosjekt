@@ -86,24 +86,38 @@ public class RuntimeLibrary extends RuntimeScope {
             @Override
             public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
                 if(actualParams.size() != 2) {
-                    runtimeError("To little or to many arg in ", where);
+                    runtimeError("To little or to many arg", where);
                 }
 
                 else if (!(actualParams.get(0) instanceof RuntimeIntValue) ||
                         !(actualParams.get(1) instanceof RuntimeIntValue)) {
-                    runtimeError("Expected a int got: " + actualParams.get(0).typeName()
-                    + " in line: ", where);
+                    runtimeError("Expected a int got: " +
+                            actualParams.get(0).typeName(), where);
                 }
 
                 ArrayList<RuntimeValue> number_list = new ArrayList<>();
                 int number1 = (int) actualParams.get(0).getIntValue("Range func", where);
-                int number2 = (int) actualParams.get(0).getIntValue("Range func", where);
-
+                int number2 = (int) actualParams.get(1).getIntValue("Range func", where);
                 for(int i = number1; i<number2; i++) {
                     number_list.add(new RuntimeIntValue(i));
                 }
 
                 return new RuntimeListValue(number_list);
+            }
+        });
+
+        //input
+        assign("input", new RuntimeFunc("input") {
+            @Override
+            public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where) {
+                Scanner reader = new Scanner(System.in);
+                if(!(actualParams.get(0) instanceof RuntimeStringValue)) {
+                    runtimeError("Expected a string got a " +
+                            actualParams.get(0).typeName(), where);
+                }
+                System.out.println(actualParams.get(0).toString());
+                String output = reader.nextLine();
+                return new RuntimeStringValue(output);
             }
         });
 

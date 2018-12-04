@@ -55,18 +55,21 @@ class AspPrimary extends AspSyntax{
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         RuntimeValue v;
-        ArrayList<RuntimeValue> k = new ArrayList<>();
-        for (AspPrimarySuffix ap: primaryS){
-            k.add(ap.eval(curScope));
+        RuntimeValue k = null;
+
+        if(!primaryS.isEmpty()){
+            k = primaryS.get(0).eval(curScope);
         }
-        if (!k.isEmpty()){
+
+        if (k != null){
             v = atom.eval(curScope);
             if (v instanceof RuntimeListValue || v instanceof  RuntimeDictionaryValue){
                 //for nå kan det være det etter på må byttes ut til noe annet, det er ikke riktig ennå.
                 System.out.println("this part is not implemented");
             }
             else if(v instanceof RuntimeFunc){
-                v = v.evalFuncCall(k,this);
+                ArrayList<RuntimeValue> args = k.getListValues("Get list", this);
+                v = v.evalFuncCall(args,this);
             }
         }
         else{

@@ -14,7 +14,8 @@ public class RuntimeListValue extends RuntimeValue{
         return "List";
     }
 
-    public ArrayList<RuntimeValue> getListValues(){
+    @Override
+    public ArrayList<RuntimeValue> getListValues(String what, AspSyntax where){
         return listValues;
     }
 
@@ -79,5 +80,14 @@ public class RuntimeListValue extends RuntimeValue{
         }
         runtimeError("Type error get", where);
         return null;
+    }
+
+    @Override
+    public void evalAssignElem(RuntimeValue inx, RuntimeValue val, AspSyntax where) {
+        if(inx.getIntValue("Assignment",where) > listValues.size()) {
+            runtimeError("Out of bounds exception", where);
+        }
+
+        listValues.set((int) inx.getIntValue("Assignment", where), val);
     }
 }

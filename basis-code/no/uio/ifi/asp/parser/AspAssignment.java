@@ -55,15 +55,18 @@ class AspAssignment extends AspStmt{
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         String aName = name.word;
-        ArrayList<RuntimeValue> k = new ArrayList<>();
+        RuntimeValue k = null;
 
         if(!lasub.isEmpty()) {
-            for (AspSubscription ap : lasub) {
-                k.add(ap.eval(curScope));
-            }
+            k = lasub.get(0).eval(curScope);
+            RuntimeValue aExpr = exp.eval(curScope);
+            RuntimeValue list_to_as = name.eval(curScope);
 
-            //Den deleen kan vi gjøre etterpå når vi har tid, den brukes bare med dic or list så det er
-            //der ikke noe vits ennå
+            list_to_as.evalAssignElem(k, aExpr,this);
+
+            curScope.assign(aName, new RuntimeListValue(
+                    list_to_as.getListValues("Append", this)));
+            return null;
         }
         RuntimeValue aExpr = exp.eval(curScope);
 
