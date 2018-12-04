@@ -64,8 +64,7 @@ class AspPrimary extends AspSyntax{
         if (k != null){
             v = atom.eval(curScope);
             if (v instanceof RuntimeListValue || v instanceof  RuntimeDictionaryValue){
-                //for nå kan det være det etter på må byttes ut til noe annet, det er ikke riktig ennå.
-                System.out.println("this part is not implemented");
+               v = v.evalSubscription(k,this);
             }
             else if(v instanceof RuntimeFunc){
                 ArrayList<RuntimeValue> args = k.getListValues("Get list", this);

@@ -7,14 +7,20 @@ public class RuntimeFunc extends RuntimeValue{
     String word;
     AspSyntax body;
     ArrayList<String> paramNames;
+    RuntimeScope outer;
 
     public RuntimeFunc(String word){
         this.word = word;
     }
 
-    public RuntimeFunc(AspSyntax body, ArrayList<String> paramNames) {
+    public void assignScope(RuntimeScope outer) {
+        this.outer = outer;
+    }
+
+    public RuntimeFunc(AspSyntax body, ArrayList<String> paramNames, RuntimeScope outer) {
         this.body = body;
         this.paramNames = paramNames;
+        this.outer = outer;
     }
 
     public String typeName(){
@@ -23,8 +29,7 @@ public class RuntimeFunc extends RuntimeValue{
 
     @Override
     public RuntimeValue evalFuncCall(ArrayList<RuntimeValue> actualParams, AspSyntax where){
-        RuntimeScope l = new RuntimeLibrary();
-        RuntimeScope newScope = new RuntimeScope(l);
+        RuntimeScope l = new RuntimeScope(outer);
 
         if(paramNames.size() != actualParams.size()) {
             runtimeError("To little/to Many arguments, need: "
@@ -33,12 +38,12 @@ public class RuntimeFunc extends RuntimeValue{
 
         int teller = 0;
         for (String g : paramNames) {
-            newScope.assign(g, actualParams.get(teller));
+            l.assign(g, actualParams.get(teller));
             teller++;
         }
 
         try{
-            body.eval(newScope);
+            body.eval(l);
         }catch (RuntimeReturnValue rrv) {
             return rrv.value;
         }

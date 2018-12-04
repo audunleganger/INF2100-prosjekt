@@ -64,9 +64,16 @@ class AspAssignment extends AspStmt{
 
             list_to_as.evalAssignElem(k, aExpr,this);
 
-            curScope.assign(aName, new RuntimeListValue(
-                    list_to_as.getListValues("Append", this)));
-            return null;
+            if(list_to_as instanceof  RuntimeDictionaryValue) {
+                curScope.assign(aName, new RuntimeDictionaryValue(
+                        list_to_as.getListValues("Append", this)));
+                return null;
+            }
+            else{
+                curScope.assign(aName, new RuntimeListValue(
+                        list_to_as.getListValues("Append", this)));
+                return null;
+            }
         }
         RuntimeValue aExpr = exp.eval(curScope);
 

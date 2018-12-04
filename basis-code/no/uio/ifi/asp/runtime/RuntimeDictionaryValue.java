@@ -17,6 +17,11 @@ public class RuntimeDictionaryValue extends RuntimeValue{
         return dictionaryValues.size()/2;
     }
 
+    @Override
+    public ArrayList<RuntimeValue> getListValues(String what, AspSyntax where){
+        return dictionaryValues;
+    }
+
     public String typeName(){
         return "Dictionary";
     }
@@ -107,5 +112,20 @@ public class RuntimeDictionaryValue extends RuntimeValue{
         }
         runtimeError("Type error !=", where);
         return null;
+    }
+
+    @Override
+    public void evalAssignElem(RuntimeValue inx, RuntimeValue val, AspSyntax where) {
+        int teller = 0;
+
+        for(int i = 0; i<dictionaryValues.size()/2; i++) {
+            if(dictionaryValues.get(teller).toString().equals(inx.toString())) {
+                dictionaryValues.set(teller + 1, val);
+                return;
+            }
+            teller += 2;
+        }
+
+        runtimeError("key doesn't exist ", where);
     }
 }

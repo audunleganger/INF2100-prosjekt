@@ -86,7 +86,7 @@ class AspFuncDef extends AspStmt{
         for (AspName an : list_name) {
             aNames.add(an.word);
         }
-        curScope.assign(aName, new RuntimeFunc(suite, aNames));
+        curScope.assign(aName, new RuntimeFunc(suite, aNames, curScope));
 
         return null;
     }

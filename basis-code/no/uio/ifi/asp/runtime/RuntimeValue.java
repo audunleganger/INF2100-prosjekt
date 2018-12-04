@@ -40,7 +40,7 @@ public abstract class RuntimeValue {
     }
 
     public ArrayList<RuntimeValue> getListValues(String what, AspSyntax where){
-        runtimeError("Type error: "+ what +" is not a list", where);
+        runtimeError("Type error: "+ what +" is not a list/ or a dictionary", where);
         return null;  // Required by the compiler!
     }
 
