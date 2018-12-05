@@ -1,0 +1,176 @@
+<program>
+   1: 
+   2: def name(x):
+  <Stmt>
+    <Func Def>
+      <Name>
+      </Name>
+      <Name>
+      </Name>
+      <Suite>
+   3:     return x + 1
+        <Stmt>
+          <Return Stmt>
+            <Expr>
+              <And test>
+                <Not test>
+                  <Comparison>
+                    <Term>
+                      <Factor>
+                        <Primary>
+                          <atom>
+                            <Name>
+                            </Name>
+                          </atom>
+                        </Primary>
+                      </Factor>
+                      <Term Opr>
+                      </Term Opr>
+                      <Factor>
+                        <Primary>
+                          <atom>
+                            <Integer Literal>
+                            </Integer Literal>
+                          </atom>
+                        </Primary>
+                      </Factor>
+                    </Term>
+                  </Comparison>
+                </Not test>
+              </and test>
+            </Expr>
+          </Return Stmt>
+        </Stmt>
+   4: 
+   5: a = 5
+      </Suite>
+    </Func Def>
+  </Stmt>
+  <Stmt>
+    <Assignment>
+      <Name>
+      </Name>
+      <Expr>
+        <And test>
+          <Not test>
+            <Comparison>
+              <Term>
+                <Factor>
+                  <Primary>
+                    <atom>
+                      <Integer Literal>
+                      </Integer Literal>
+                    </atom>
+                  </Primary>
+                </Factor>
+              </Term>
+            </Comparison>
+          </Not test>
+        </and test>
+      </Expr>
+    </Assignment>
+  </Stmt>
+   6: c = name(a)
+  <Stmt>
+    <Assignment>
+      <Name>
+      </Name>
+      <Expr>
+        <And test>
+          <Not test>
+            <Comparison>
+              <Term>
+                <Factor>
+                  <Primary>
+                    <atom>
+                      <Name>
+                      </Name>
+                    </atom>
+                    <Primary Suffix>
+                      <Arguments>
+                        <Expr>
+                          <And test>
+                            <Not test>
+                              <Comparison>
+                                <Term>
+                                  <Factor>
+                                    <Primary>
+                                      <atom>
+                                        <Name>
+                                        </Name>
+                                      </atom>
+                                    </Primary>
+                                  </Factor>
+                                </Term>
+                              </Comparison>
+                            </Not test>
+                          </and test>
+                        </Expr>
+                      </Arguments>
+                    </Primary Suffix>
+                  </Primary>
+                </Factor>
+              </Term>
+            </Comparison>
+          </Not test>
+        </and test>
+      </Expr>
+    </Assignment>
+  </Stmt>
+   7: 
+   8: print(c)
+  <Stmt>
+    <Exp Stmt>
+      <Expr>
+        <And test>
+          <Not test>
+            <Comparison>
+              <Term>
+                <Factor>
+                  <Primary>
+                    <atom>
+                      <Name>
+                      </Name>
+                    </atom>
+                    <Primary Suffix>
+                      <Arguments>
+                        <Expr>
+                          <And test>
+                            <Not test>
+                              <Comparison>
+                                <Term>
+                                  <Factor>
+                                    <Primary>
+                                      <atom>
+                                        <Name>
+                                        </Name>
+                                      </atom>
+                                    </Primary>
+                                  </Factor>
+                                </Term>
+                              </Comparison>
+                            </Not test>
+                          </and test>
+                        </Expr>
+                      </Arguments>
+                    </Primary Suffix>
+                  </Primary>
+                </Factor>
+              </Term>
+            </Comparison>
+          </Not test>
+        </and test>
+      </Expr>
+    </Exp Stmt>
+  </Stmt>
+</program>
+PP> def name ( x ) : 
+
+PP>   return x + 1 
+
+PP> a = 5 
+
+PP> c = name ( a ) 
+
+PP> print ( c )  
+

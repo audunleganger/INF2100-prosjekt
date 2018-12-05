@@ -1,0 +1,230 @@
+<program>
+   1: var = {"ma" : 1, "ta" : 2, "ka" : 3}
+  <Stmt>
+    <Assignment>
+      <Name>
+      </Name>
+      <Expr>
+        <And test>
+          <Not test>
+            <Comparison>
+              <Term>
+                <Factor>
+                  <Primary>
+                    <atom>
+                      <DictDisplay>
+                        <String Literal>
+                        </String Literal>
+                        <Expr>
+                          <And test>
+                            <Not test>
+                              <Comparison>
+                                <Term>
+                                  <Factor>
+                                    <Primary>
+                                      <atom>
+                                        <Integer Literal>
+                                        </Integer Literal>
+                                      </atom>
+                                    </Primary>
+                                  </Factor>
+                                </Term>
+                              </Comparison>
+                            </Not test>
+                          </and test>
+                        </Expr>
+                        <String Literal>
+                        </String Literal>
+                        <Expr>
+                          <And test>
+                            <Not test>
+                              <Comparison>
+                                <Term>
+                                  <Factor>
+                                    <Primary>
+                                      <atom>
+                                        <Integer Literal>
+                                        </Integer Literal>
+                                      </atom>
+                                    </Primary>
+                                  </Factor>
+                                </Term>
+                              </Comparison>
+                            </Not test>
+                          </and test>
+                        </Expr>
+                        <String Literal>
+                        </String Literal>
+                        <Expr>
+                          <And test>
+                            <Not test>
+                              <Comparison>
+                                <Term>
+                                  <Factor>
+                                    <Primary>
+                                      <atom>
+                                        <Integer Literal>
+                                        </Integer Literal>
+                                      </atom>
+                                    </Primary>
+                                  </Factor>
+                                </Term>
+                              </Comparison>
+                            </Not test>
+                          </and test>
+                        </Expr>
+                      </DictDisplay>
+                    </atom>
+                  </Primary>
+                </Factor>
+              </Term>
+            </Comparison>
+          </Not test>
+        </and test>
+      </Expr>
+    </Assignment>
+  </Stmt>
+   2: print(var)
+  <Stmt>
+    <Exp Stmt>
+      <Expr>
+        <And test>
+          <Not test>
+            <Comparison>
+              <Term>
+                <Factor>
+                  <Primary>
+                    <atom>
+                      <Name>
+                      </Name>
+                    </atom>
+                    <Primary Suffix>
+                      <Arguments>
+                        <Expr>
+                          <And test>
+                            <Not test>
+                              <Comparison>
+                                <Term>
+                                  <Factor>
+                                    <Primary>
+                                      <atom>
+                                        <Name>
+                                        </Name>
+                                      </atom>
+                                    </Primary>
+                                  </Factor>
+                                </Term>
+                              </Comparison>
+                            </Not test>
+                          </and test>
+                        </Expr>
+                      </Arguments>
+                    </Primary Suffix>
+                  </Primary>
+                </Factor>
+              </Term>
+            </Comparison>
+          </Not test>
+        </and test>
+      </Expr>
+    </Exp Stmt>
+  </Stmt>
+   3: var["ma"] = "hei"
+  <Stmt>
+    <Assignment>
+      <Name>
+      </Name>
+      <Subscription>
+        <Expr>
+          <And test>
+            <Not test>
+              <Comparison>
+                <Term>
+                  <Factor>
+                    <Primary>
+                      <atom>
+                        <String Literal>
+                        </String Literal>
+                      </atom>
+                    </Primary>
+                  </Factor>
+                </Term>
+              </Comparison>
+            </Not test>
+          </and test>
+        </Expr>
+      </Subscription>
+      <Expr>
+        <And test>
+          <Not test>
+            <Comparison>
+              <Term>
+                <Factor>
+                  <Primary>
+                    <atom>
+                      <String Literal>
+                      </String Literal>
+                    </atom>
+                  </Primary>
+                </Factor>
+              </Term>
+            </Comparison>
+          </Not test>
+        </and test>
+      </Expr>
+    </Assignment>
+  </Stmt>
+   4: print(var)
+  <Stmt>
+    <Exp Stmt>
+      <Expr>
+        <And test>
+          <Not test>
+            <Comparison>
+              <Term>
+                <Factor>
+                  <Primary>
+                    <atom>
+                      <Name>
+                      </Name>
+                    </atom>
+                    <Primary Suffix>
+                      <Arguments>
+                        <Expr>
+                          <And test>
+                            <Not test>
+                              <Comparison>
+                                <Term>
+                                  <Factor>
+                                    <Primary>
+                                      <atom>
+                                        <Name>
+                                        </Name>
+                                      </atom>
+                                    </Primary>
+                                  </Factor>
+                                </Term>
+                              </Comparison>
+                            </Not test>
+                          </and test>
+                        </Expr>
+                      </Arguments>
+                    </Primary Suffix>
+                  </Primary>
+                </Factor>
+              </Term>
+            </Comparison>
+          </Not test>
+        </and test>
+      </Expr>
+    </Exp Stmt>
+  </Stmt>
+</program>
+PP> var = { "ma" : 1 , "ta" : 2 , "ka" : 3 } 
+
+PP> print ( var )  
+
+PP> var [ "ma" ] = "hei" 
+
+PP> print ( var )  
+

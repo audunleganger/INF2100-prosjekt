@@ -1,0 +1,1247 @@
+<program>
+   1: # Finn alle primtall opp til n
+   2: # ved hjelp av teknikken kalt «Eratosthenes’ sil».
+   3: 
+   4: n = 1000
+  <Stmt>
+    <Assignment>
+      <Name>
+      </Name>
+      <Expr>
+        <And test>
+          <Not test>
+            <Comparison>
+              <Term>
+                <Factor>
+                  <Primary>
+                    <atom>
+                      <Integer Literal>
+                      </Integer Literal>
+                    </atom>
+                  </Primary>
+                </Factor>
+              </Term>
+            </Comparison>
+          </Not test>
+        </and test>
+      </Expr>
+    </Assignment>
+  </Stmt>
+   5: primes = [True] * (n+1)
+  <Stmt>
+    <Assignment>
+      <Name>
+      </Name>
+      <Expr>
+        <And test>
+          <Not test>
+            <Comparison>
+              <Term>
+                <Factor>
+                  <Primary>
+                    <atom>
+                      <ListDisplay>
+                        <Expr>
+                          <And test>
+                            <Not test>
+                              <Comparison>
+                                <Term>
+                                  <Factor>
+                                    <Primary>
+                                      <atom>
+                                        <Boolean Literal>
+                                        </atom>
+                                      </Primary>
+                                    </Factor>
+                                  </Term>
+                                </Comparison>
+                              </Not test>
+                            </and test>
+                          </Expr>
+                        </ListDisplay>
+                      </atom>
+                    </Primary>
+                    <Factor Opr>
+                    </Factor Opr>
+                    <Primary>
+                      <atom>
+                        <InnerExpr>
+                          <Expr>
+                            <And test>
+                              <Not test>
+                                <Comparison>
+                                  <Term>
+                                    <Factor>
+                                      <Primary>
+                                        <atom>
+                                          <Name>
+                                          </Name>
+                                        </atom>
+                                      </Primary>
+                                    </Factor>
+                                    <Term Opr>
+                                    </Term Opr>
+                                    <Factor>
+                                      <Primary>
+                                        <atom>
+                                          <Integer Literal>
+                                          </Integer Literal>
+                                        </atom>
+                                      </Primary>
+                                    </Factor>
+                                  </Term>
+                                </Comparison>
+                              </Not test>
+                            </and test>
+                          </Expr>
+                        </InnerExpr>
+                      </atom>
+                    </Primary>
+                  </Factor>
+                </Term>
+              </Comparison>
+            </Not test>
+          </and test>
+        </Expr>
+      </Assignment>
+    </Stmt>
+   6: 
+   7: def find_primes():
+    <Stmt>
+      <Func Def>
+        <Name>
+        </Name>
+        <Suite>
+   8:     for i1 in range(2,n+1):
+          <Stmt>
+            <For>
+              <Name>
+              </Name>
+              <Expr>
+                <And test>
+                  <Not test>
+                    <Comparison>
+                      <Term>
+                        <Factor>
+                          <Primary>
+                            <atom>
+                              <Name>
+                              </Name>
+                            </atom>
+                            <Primary Suffix>
+                              <Arguments>
+                                <Expr>
+                                  <And test>
+                                    <Not test>
+                                      <Comparison>
+                                        <Term>
+                                          <Factor>
+                                            <Primary>
+                                              <atom>
+                                                <Integer Literal>
+                                                </Integer Literal>
+                                              </atom>
+                                            </Primary>
+                                          </Factor>
+                                        </Term>
+                                      </Comparison>
+                                    </Not test>
+                                  </and test>
+                                </Expr>
+                                <Expr>
+                                  <And test>
+                                    <Not test>
+                                      <Comparison>
+                                        <Term>
+                                          <Factor>
+                                            <Primary>
+                                              <atom>
+                                                <Name>
+                                                </Name>
+                                              </atom>
+                                            </Primary>
+                                          </Factor>
+                                          <Term Opr>
+                                          </Term Opr>
+                                          <Factor>
+                                            <Primary>
+                                              <atom>
+                                                <Integer Literal>
+                                                </Integer Literal>
+                                              </atom>
+                                            </Primary>
+                                          </Factor>
+                                        </Term>
+                                      </Comparison>
+                                    </Not test>
+                                  </and test>
+                                </Expr>
+                              </Arguments>
+                            </Primary Suffix>
+                          </Primary>
+                        </Factor>
+                      </Term>
+                    </Comparison>
+                  </Not test>
+                </and test>
+              </Expr>
+              <Suite>
+   9:         i2 = 2 * i1
+                <Stmt>
+                  <Assignment>
+                    <Name>
+                    </Name>
+                    <Expr>
+                      <And test>
+                        <Not test>
+                          <Comparison>
+                            <Term>
+                              <Factor>
+                                <Primary>
+                                  <atom>
+                                    <Integer Literal>
+                                    </Integer Literal>
+                                  </atom>
+                                </Primary>
+                                <Factor Opr>
+                                </Factor Opr>
+                                <Primary>
+                                  <atom>
+                                    <Name>
+                                    </Name>
+                                  </atom>
+                                </Primary>
+                              </Factor>
+                            </Term>
+                          </Comparison>
+                        </Not test>
+                      </and test>
+                    </Expr>
+                  </Assignment>
+                </Stmt>
+  10:         while i2 <= n:
+                <Stmt>
+                  <while stmt>
+                    <Expr>
+                      <And test>
+                        <Not test>
+                          <Comparison>
+                            <Term>
+                              <Factor>
+                                <Primary>
+                                  <atom>
+                                    <Name>
+                                    </Name>
+                                  </atom>
+                                </Primary>
+                              </Factor>
+                            </Term>
+                            <Comparison Operator>
+                            </Comparison Operator>
+                            <Term>
+                              <Factor>
+                                <Primary>
+                                  <atom>
+                                    <Name>
+                                    </Name>
+                                  </atom>
+                                </Primary>
+                              </Factor>
+                            </Term>
+                          </Comparison>
+                        </Not test>
+                      </and test>
+                    </Expr>
+                    <Suite>
+  11:             primes[i2] = False
+                      <Stmt>
+                        <Assignment>
+                          <Name>
+                          </Name>
+                          <Subscription>
+                            <Expr>
+                              <And test>
+                                <Not test>
+                                  <Comparison>
+                                    <Term>
+                                      <Factor>
+                                        <Primary>
+                                          <atom>
+                                            <Name>
+                                            </Name>
+                                          </atom>
+                                        </Primary>
+                                      </Factor>
+                                    </Term>
+                                  </Comparison>
+                                </Not test>
+                              </and test>
+                            </Expr>
+                          </Subscription>
+                          <Expr>
+                            <And test>
+                              <Not test>
+                                <Comparison>
+                                  <Term>
+                                    <Factor>
+                                      <Primary>
+                                        <atom>
+                                          <Boolean Literal>
+                                          </atom>
+                                        </Primary>
+                                      </Factor>
+                                    </Term>
+                                  </Comparison>
+                                </Not test>
+                              </and test>
+                            </Expr>
+                          </Assignment>
+                        </Stmt>
+  12:             i2 = i2 + i1
+                        <Stmt>
+                          <Assignment>
+                            <Name>
+                            </Name>
+                            <Expr>
+                              <And test>
+                                <Not test>
+                                  <Comparison>
+                                    <Term>
+                                      <Factor>
+                                        <Primary>
+                                          <atom>
+                                            <Name>
+                                            </Name>
+                                          </atom>
+                                        </Primary>
+                                      </Factor>
+                                      <Term Opr>
+                                      </Term Opr>
+                                      <Factor>
+                                        <Primary>
+                                          <atom>
+                                            <Name>
+                                            </Name>
+                                          </atom>
+                                        </Primary>
+                                      </Factor>
+                                    </Term>
+                                  </Comparison>
+                                </Not test>
+                              </and test>
+                            </Expr>
+                          </Assignment>
+                        </Stmt>
+  13: 
+                      </Suite>
+                    </while stmt>
+                  </Stmt>
+                </Suite>
+              </For>
+            </Stmt>
+          </Suite>
+        </Func Def>
+      </Stmt>
+  14: def w4(n):
+      <Stmt>
+        <Func Def>
+          <Name>
+          </Name>
+          <Name>
+          </Name>
+          <Suite>
+  15:     if n <= 9:
+            <Stmt>
+              <IfStmt>
+                <Expr>
+                  <And test>
+                    <Not test>
+                      <Comparison>
+                        <Term>
+                          <Factor>
+                            <Primary>
+                              <atom>
+                                <Name>
+                                </Name>
+                              </atom>
+                            </Primary>
+                          </Factor>
+                        </Term>
+                        <Comparison Operator>
+                        </Comparison Operator>
+                        <Term>
+                          <Factor>
+                            <Primary>
+                              <atom>
+                                <Integer Literal>
+                                </Integer Literal>
+                              </atom>
+                            </Primary>
+                          </Factor>
+                        </Term>
+                      </Comparison>
+                    </Not test>
+                  </and test>
+                </Expr>
+                <Suite>
+  16:         return ' ' + str(n)
+                  <Stmt>
+                    <Return Stmt>
+                      <Expr>
+                        <And test>
+                          <Not test>
+                            <Comparison>
+                              <Term>
+                                <Factor>
+                                  <Primary>
+                                    <atom>
+                                      <String Literal>
+                                      </String Literal>
+                                    </atom>
+                                  </Primary>
+                                </Factor>
+                                <Term Opr>
+                                </Term Opr>
+                                <Factor>
+                                  <Primary>
+                                    <atom>
+                                      <Name>
+                                      </Name>
+                                    </atom>
+                                    <Primary Suffix>
+                                      <Arguments>
+                                        <Expr>
+                                          <And test>
+                                            <Not test>
+                                              <Comparison>
+                                                <Term>
+                                                  <Factor>
+                                                    <Primary>
+                                                      <atom>
+                                                        <Name>
+                                                        </Name>
+                                                      </atom>
+                                                    </Primary>
+                                                  </Factor>
+                                                </Term>
+                                              </Comparison>
+                                            </Not test>
+                                          </and test>
+                                        </Expr>
+                                      </Arguments>
+                                    </Primary Suffix>
+                                  </Primary>
+                                </Factor>
+                              </Term>
+                            </Comparison>
+                          </Not test>
+                        </and test>
+                      </Expr>
+                    </Return Stmt>
+                  </Stmt>
+  17:     elif n <= 99:
+                </Suite>
+                <Expr>
+                  <And test>
+                    <Not test>
+                      <Comparison>
+                        <Term>
+                          <Factor>
+                            <Primary>
+                              <atom>
+                                <Name>
+                                </Name>
+                              </atom>
+                            </Primary>
+                          </Factor>
+                        </Term>
+                        <Comparison Operator>
+                        </Comparison Operator>
+                        <Term>
+                          <Factor>
+                            <Primary>
+                              <atom>
+                                <Integer Literal>
+                                </Integer Literal>
+                              </atom>
+                            </Primary>
+                          </Factor>
+                        </Term>
+                      </Comparison>
+                    </Not test>
+                  </and test>
+                </Expr>
+                <Suite>
+  18:         return '  ' + str(n)
+                  <Stmt>
+                    <Return Stmt>
+                      <Expr>
+                        <And test>
+                          <Not test>
+                            <Comparison>
+                              <Term>
+                                <Factor>
+                                  <Primary>
+                                    <atom>
+                                      <String Literal>
+                                      </String Literal>
+                                    </atom>
+                                  </Primary>
+                                </Factor>
+                                <Term Opr>
+                                </Term Opr>
+                                <Factor>
+                                  <Primary>
+                                    <atom>
+                                      <Name>
+                                      </Name>
+                                    </atom>
+                                    <Primary Suffix>
+                                      <Arguments>
+                                        <Expr>
+                                          <And test>
+                                            <Not test>
+                                              <Comparison>
+                                                <Term>
+                                                  <Factor>
+                                                    <Primary>
+                                                      <atom>
+                                                        <Name>
+                                                        </Name>
+                                                      </atom>
+                                                    </Primary>
+                                                  </Factor>
+                                                </Term>
+                                              </Comparison>
+                                            </Not test>
+                                          </and test>
+                                        </Expr>
+                                      </Arguments>
+                                    </Primary Suffix>
+                                  </Primary>
+                                </Factor>
+                              </Term>
+                            </Comparison>
+                          </Not test>
+                        </and test>
+                      </Expr>
+                    </Return Stmt>
+                  </Stmt>
+  19:     elif n <= 999:
+                </Suite>
+                <Expr>
+                  <And test>
+                    <Not test>
+                      <Comparison>
+                        <Term>
+                          <Factor>
+                            <Primary>
+                              <atom>
+                                <Name>
+                                </Name>
+                              </atom>
+                            </Primary>
+                          </Factor>
+                        </Term>
+                        <Comparison Operator>
+                        </Comparison Operator>
+                        <Term>
+                          <Factor>
+                            <Primary>
+                              <atom>
+                                <Integer Literal>
+                                </Integer Literal>
+                              </atom>
+                            </Primary>
+                          </Factor>
+                        </Term>
+                      </Comparison>
+                    </Not test>
+                  </and test>
+                </Expr>
+                <Suite>
+  20:         return '   ' + str(n)
+                  <Stmt>
+                    <Return Stmt>
+                      <Expr>
+                        <And test>
+                          <Not test>
+                            <Comparison>
+                              <Term>
+                                <Factor>
+                                  <Primary>
+                                    <atom>
+                                      <String Literal>
+                                      </String Literal>
+                                    </atom>
+                                  </Primary>
+                                </Factor>
+                                <Term Opr>
+                                </Term Opr>
+                                <Factor>
+                                  <Primary>
+                                    <atom>
+                                      <Name>
+                                      </Name>
+                                    </atom>
+                                    <Primary Suffix>
+                                      <Arguments>
+                                        <Expr>
+                                          <And test>
+                                            <Not test>
+                                              <Comparison>
+                                                <Term>
+                                                  <Factor>
+                                                    <Primary>
+                                                      <atom>
+                                                        <Name>
+                                                        </Name>
+                                                      </atom>
+                                                    </Primary>
+                                                  </Factor>
+                                                </Term>
+                                              </Comparison>
+                                            </Not test>
+                                          </and test>
+                                        </Expr>
+                                      </Arguments>
+                                    </Primary Suffix>
+                                  </Primary>
+                                </Factor>
+                              </Term>
+                            </Comparison>
+                          </Not test>
+                        </and test>
+                      </Expr>
+                    </Return Stmt>
+                  </Stmt>
+  21:     else:
+                </Suite>
+                <Suite>
+  22:         return str(n)
+                  <Stmt>
+                    <Return Stmt>
+                      <Expr>
+                        <And test>
+                          <Not test>
+                            <Comparison>
+                              <Term>
+                                <Factor>
+                                  <Primary>
+                                    <atom>
+                                      <Name>
+                                      </Name>
+                                    </atom>
+                                    <Primary Suffix>
+                                      <Arguments>
+                                        <Expr>
+                                          <And test>
+                                            <Not test>
+                                              <Comparison>
+                                                <Term>
+                                                  <Factor>
+                                                    <Primary>
+                                                      <atom>
+                                                        <Name>
+                                                        </Name>
+                                                      </atom>
+                                                    </Primary>
+                                                  </Factor>
+                                                </Term>
+                                              </Comparison>
+                                            </Not test>
+                                          </and test>
+                                        </Expr>
+                                      </Arguments>
+                                    </Primary Suffix>
+                                  </Primary>
+                                </Factor>
+                              </Term>
+                            </Comparison>
+                          </Not test>
+                        </and test>
+                      </Expr>
+                    </Return Stmt>
+                  </Stmt>
+  23: 
+                </Suite>
+              </IfStmt>
+            </Stmt>
+          </Suite>
+        </Func Def>
+      </Stmt>
+  24: 
+  25: def list_primes():
+      <Stmt>
+        <Func Def>
+          <Name>
+          </Name>
+          <Suite>
+  26:     n_printed = 0
+            <Stmt>
+              <Assignment>
+                <Name>
+                </Name>
+                <Expr>
+                  <And test>
+                    <Not test>
+                      <Comparison>
+                        <Term>
+                          <Factor>
+                            <Primary>
+                              <atom>
+                                <Integer Literal>
+                                </Integer Literal>
+                              </atom>
+                            </Primary>
+                          </Factor>
+                        </Term>
+                      </Comparison>
+                    </Not test>
+                  </and test>
+                </Expr>
+              </Assignment>
+            </Stmt>
+  27:     line_buf = ''
+            <Stmt>
+              <Assignment>
+                <Name>
+                </Name>
+                <Expr>
+                  <And test>
+                    <Not test>
+                      <Comparison>
+                        <Term>
+                          <Factor>
+                            <Primary>
+                              <atom>
+                                <String Literal>
+                                </String Literal>
+                              </atom>
+                            </Primary>
+                          </Factor>
+                        </Term>
+                      </Comparison>
+                    </Not test>
+                  </and test>
+                </Expr>
+              </Assignment>
+            </Stmt>
+  28:     for i in range(2,n+1):
+            <Stmt>
+              <For>
+                <Name>
+                </Name>
+                <Expr>
+                  <And test>
+                    <Not test>
+                      <Comparison>
+                        <Term>
+                          <Factor>
+                            <Primary>
+                              <atom>
+                                <Name>
+                                </Name>
+                              </atom>
+                              <Primary Suffix>
+                                <Arguments>
+                                  <Expr>
+                                    <And test>
+                                      <Not test>
+                                        <Comparison>
+                                          <Term>
+                                            <Factor>
+                                              <Primary>
+                                                <atom>
+                                                  <Integer Literal>
+                                                  </Integer Literal>
+                                                </atom>
+                                              </Primary>
+                                            </Factor>
+                                          </Term>
+                                        </Comparison>
+                                      </Not test>
+                                    </and test>
+                                  </Expr>
+                                  <Expr>
+                                    <And test>
+                                      <Not test>
+                                        <Comparison>
+                                          <Term>
+                                            <Factor>
+                                              <Primary>
+                                                <atom>
+                                                  <Name>
+                                                  </Name>
+                                                </atom>
+                                              </Primary>
+                                            </Factor>
+                                            <Term Opr>
+                                            </Term Opr>
+                                            <Factor>
+                                              <Primary>
+                                                <atom>
+                                                  <Integer Literal>
+                                                  </Integer Literal>
+                                                </atom>
+                                              </Primary>
+                                            </Factor>
+                                          </Term>
+                                        </Comparison>
+                                      </Not test>
+                                    </and test>
+                                  </Expr>
+                                </Arguments>
+                              </Primary Suffix>
+                            </Primary>
+                          </Factor>
+                        </Term>
+                      </Comparison>
+                    </Not test>
+                  </and test>
+                </Expr>
+                <Suite>
+  29:         if primes[i]:
+                  <Stmt>
+                    <IfStmt>
+                      <Expr>
+                        <And test>
+                          <Not test>
+                            <Comparison>
+                              <Term>
+                                <Factor>
+                                  <Primary>
+                                    <atom>
+                                      <Name>
+                                      </Name>
+                                    </atom>
+                                    <Primary Suffix>
+                                      <Subscription>
+                                        <Expr>
+                                          <And test>
+                                            <Not test>
+                                              <Comparison>
+                                                <Term>
+                                                  <Factor>
+                                                    <Primary>
+                                                      <atom>
+                                                        <Name>
+                                                        </Name>
+                                                      </atom>
+                                                    </Primary>
+                                                  </Factor>
+                                                </Term>
+                                              </Comparison>
+                                            </Not test>
+                                          </and test>
+                                        </Expr>
+                                      </Subscription>
+                                    </Primary Suffix>
+                                  </Primary>
+                                </Factor>
+                              </Term>
+                            </Comparison>
+                          </Not test>
+                        </and test>
+                      </Expr>
+                      <Suite>
+  30:             if n_printed > 0 and n_printed % 10 == 0:
+                        <Stmt>
+                          <IfStmt>
+                            <Expr>
+                              <And test>
+                                <Not test>
+                                  <Comparison>
+                                    <Term>
+                                      <Factor>
+                                        <Primary>
+                                          <atom>
+                                            <Name>
+                                            </Name>
+                                          </atom>
+                                        </Primary>
+                                      </Factor>
+                                    </Term>
+                                    <Comparison Operator>
+                                    </Comparison Operator>
+                                    <Term>
+                                      <Factor>
+                                        <Primary>
+                                          <atom>
+                                            <Integer Literal>
+                                            </Integer Literal>
+                                          </atom>
+                                        </Primary>
+                                      </Factor>
+                                    </Term>
+                                  </Comparison>
+                                </Not test>
+                                <Not test>
+                                  <Comparison>
+                                    <Term>
+                                      <Factor>
+                                        <Primary>
+                                          <atom>
+                                            <Name>
+                                            </Name>
+                                          </atom>
+                                        </Primary>
+                                        <Factor Opr>
+                                        </Factor Opr>
+                                        <Primary>
+                                          <atom>
+                                            <Integer Literal>
+                                            </Integer Literal>
+                                          </atom>
+                                        </Primary>
+                                      </Factor>
+                                    </Term>
+                                    <Comparison Operator>
+                                    </Comparison Operator>
+                                    <Term>
+                                      <Factor>
+                                        <Primary>
+                                          <atom>
+                                            <Integer Literal>
+                                            </Integer Literal>
+                                          </atom>
+                                        </Primary>
+                                      </Factor>
+                                    </Term>
+                                  </Comparison>
+                                </Not test>
+                              </and test>
+                            </Expr>
+                            <Suite>
+  31:                 print(line_buf)
+                              <Stmt>
+                                <Exp Stmt>
+                                  <Expr>
+                                    <And test>
+                                      <Not test>
+                                        <Comparison>
+                                          <Term>
+                                            <Factor>
+                                              <Primary>
+                                                <atom>
+                                                  <Name>
+                                                  </Name>
+                                                </atom>
+                                                <Primary Suffix>
+                                                  <Arguments>
+                                                    <Expr>
+                                                      <And test>
+                                                        <Not test>
+                                                          <Comparison>
+                                                            <Term>
+                                                              <Factor>
+                                                                <Primary>
+                                                                  <atom>
+                                                                    <Name>
+                                                                    </Name>
+                                                                  </atom>
+                                                                </Primary>
+                                                              </Factor>
+                                                            </Term>
+                                                          </Comparison>
+                                                        </Not test>
+                                                      </and test>
+                                                    </Expr>
+                                                  </Arguments>
+                                                </Primary Suffix>
+                                              </Primary>
+                                            </Factor>
+                                          </Term>
+                                        </Comparison>
+                                      </Not test>
+                                    </and test>
+                                  </Expr>
+                                </Exp Stmt>
+                              </Stmt>
+  32:                 line_buf = ''
+                              <Stmt>
+                                <Assignment>
+                                  <Name>
+                                  </Name>
+                                  <Expr>
+                                    <And test>
+                                      <Not test>
+                                        <Comparison>
+                                          <Term>
+                                            <Factor>
+                                              <Primary>
+                                                <atom>
+                                                  <String Literal>
+                                                  </String Literal>
+                                                </atom>
+                                              </Primary>
+                                            </Factor>
+                                          </Term>
+                                        </Comparison>
+                                      </Not test>
+                                    </and test>
+                                  </Expr>
+                                </Assignment>
+                              </Stmt>
+  33:             line_buf = line_buf + w4(i)
+                            </Suite>
+                          </IfStmt>
+                        </Stmt>
+                        <Stmt>
+                          <Assignment>
+                            <Name>
+                            </Name>
+                            <Expr>
+                              <And test>
+                                <Not test>
+                                  <Comparison>
+                                    <Term>
+                                      <Factor>
+                                        <Primary>
+                                          <atom>
+                                            <Name>
+                                            </Name>
+                                          </atom>
+                                        </Primary>
+                                      </Factor>
+                                      <Term Opr>
+                                      </Term Opr>
+                                      <Factor>
+                                        <Primary>
+                                          <atom>
+                                            <Name>
+                                            </Name>
+                                          </atom>
+                                          <Primary Suffix>
+                                            <Arguments>
+                                              <Expr>
+                                                <And test>
+                                                  <Not test>
+                                                    <Comparison>
+                                                      <Term>
+                                                        <Factor>
+                                                          <Primary>
+                                                            <atom>
+                                                              <Name>
+                                                              </Name>
+                                                            </atom>
+                                                          </Primary>
+                                                        </Factor>
+                                                      </Term>
+                                                    </Comparison>
+                                                  </Not test>
+                                                </and test>
+                                              </Expr>
+                                            </Arguments>
+                                          </Primary Suffix>
+                                        </Primary>
+                                      </Factor>
+                                    </Term>
+                                  </Comparison>
+                                </Not test>
+                              </and test>
+                            </Expr>
+                          </Assignment>
+                        </Stmt>
+  34:             n_printed = n_printed + 1
+                        <Stmt>
+                          <Assignment>
+                            <Name>
+                            </Name>
+                            <Expr>
+                              <And test>
+                                <Not test>
+                                  <Comparison>
+                                    <Term>
+                                      <Factor>
+                                        <Primary>
+                                          <atom>
+                                            <Name>
+                                            </Name>
+                                          </atom>
+                                        </Primary>
+                                      </Factor>
+                                      <Term Opr>
+                                      </Term Opr>
+                                      <Factor>
+                                        <Primary>
+                                          <atom>
+                                            <Integer Literal>
+                                            </Integer Literal>
+                                          </atom>
+                                        </Primary>
+                                      </Factor>
+                                    </Term>
+                                  </Comparison>
+                                </Not test>
+                              </and test>
+                            </Expr>
+                          </Assignment>
+                        </Stmt>
+  35:         print(line_buf)
+                      </Suite>
+                    </IfStmt>
+                  </Stmt>
+                  <Stmt>
+                    <Exp Stmt>
+                      <Expr>
+                        <And test>
+                          <Not test>
+                            <Comparison>
+                              <Term>
+                                <Factor>
+                                  <Primary>
+                                    <atom>
+                                      <Name>
+                                      </Name>
+                                    </atom>
+                                    <Primary Suffix>
+                                      <Arguments>
+                                        <Expr>
+                                          <And test>
+                                            <Not test>
+                                              <Comparison>
+                                                <Term>
+                                                  <Factor>
+                                                    <Primary>
+                                                      <atom>
+                                                        <Name>
+                                                        </Name>
+                                                      </atom>
+                                                    </Primary>
+                                                  </Factor>
+                                                </Term>
+                                              </Comparison>
+                                            </Not test>
+                                          </and test>
+                                        </Expr>
+                                      </Arguments>
+                                    </Primary Suffix>
+                                  </Primary>
+                                </Factor>
+                              </Term>
+                            </Comparison>
+                          </Not test>
+                        </and test>
+                      </Expr>
+                    </Exp Stmt>
+                  </Stmt>
+  36: 
+                </Suite>
+              </For>
+            </Stmt>
+          </Suite>
+        </Func Def>
+      </Stmt>
+  37: 
+  38: find_primes()
+      <Stmt>
+        <Exp Stmt>
+          <Expr>
+            <And test>
+              <Not test>
+                <Comparison>
+                  <Term>
+                    <Factor>
+                      <Primary>
+                        <atom>
+                          <Name>
+                          </Name>
+                        </atom>
+                        <Primary Suffix>
+                          <Arguments>
+                          </Arguments>
+                        </Primary Suffix>
+                      </Primary>
+                    </Factor>
+                  </Term>
+                </Comparison>
+              </Not test>
+            </and test>
+          </Expr>
+        </Exp Stmt>
+      </Stmt>
+  39: list_primes()
+      <Stmt>
+        <Exp Stmt>
+          <Expr>
+            <And test>
+              <Not test>
+                <Comparison>
+                  <Term>
+                    <Factor>
+                      <Primary>
+                        <atom>
+                          <Name>
+                          </Name>
+                        </atom>
+                        <Primary Suffix>
+                          <Arguments>
+                          </Arguments>
+                        </Primary Suffix>
+                      </Primary>
+                    </Factor>
+                  </Term>
+                </Comparison>
+              </Not test>
+            </and test>
+          </Expr>
+        </Exp Stmt>
+      </Stmt>
+    </program>
+PP> n = 1000 
+
+PP> primes = [ True ] * ( n + 1 ) 
+
+PP> def find_primes ( ) : 
+
+PP>   for i1 in range ( 2 , n + 1 ) : 
+
+PP>     i2 = 2 * i1 
+
+PP>     While i2 <= n : 
+
+PP>       primes [ i2 ] = False 
+
+PP>       i2 = i2 + i1 
+
+PP> def w4 ( n ) : 
+
+PP>   if n <= 9 : 
+
+PP>     return " " + str ( n ) 
+
+PP>   elif n <= 99 : 
+
+PP>     return "  " + str ( n ) 
+
+PP>   elif n <= 999 : 
+
+PP>     return "   " + str ( n ) 
+
+PP> def list_primes ( ) : 
+
+PP>   n_printed = 0 
+
+PP>   line_buf = "" 
+
+PP>   for i in range ( 2 , n + 1 ) : 
+
+PP>     if primes [ i ] : 
+
+PP>       if n_printed > 0 and n_printed % 10 == 0 : 
+
+PP>         print ( line_buf )  
+
+PP>         line_buf = "" 
+
+PP>       line_buf = line_buf + w4 ( i ) 
+
+PP>       n_printed = n_printed + 1 
+
+PP>     print ( line_buf )  
+
+PP> find_primes ( )  
+
+PP> list_primes ( )  
+
