@@ -54,7 +54,7 @@ class AspForStmt extends AspStmt{
         RuntimeValue aExpr = expr.eval(curScope);
         int teller = 0;
         while(teller < aExpr.size("expr",this)) {
-
+            trace("for teller < aExpr.size..");
             if(aExpr instanceof RuntimeDictionaryValue){
                 RuntimeValue ap = ((RuntimeDictionaryValue) aExpr).getKey(teller,this);
                 curScope.assign(aName,aExpr.evalSubscription(ap,this));
@@ -65,6 +65,7 @@ class AspForStmt extends AspStmt{
             suite.eval(curScope);
             teller ++;
         }
+        trace("for teller > aExpr.size");
         return null;
     }
 }

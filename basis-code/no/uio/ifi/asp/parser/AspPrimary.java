@@ -64,10 +64,12 @@ class AspPrimary extends AspSyntax{
         if (k != null){
             v = atom.eval(curScope);
             if (v instanceof RuntimeListValue || v instanceof  RuntimeDictionaryValue){
+                trace("getting " + v.evalSubscription(k,this).toString() + " from a list or dictionary");
                v = v.evalSubscription(k,this);
             }
             else if(v instanceof RuntimeFunc){
                 ArrayList<RuntimeValue> args = k.getListValues("Get list", this);
+                trace("Call " + ((RuntimeFunc)v).getWord() + " with params: " + k.toString());
                 v = v.evalFuncCall(args,this);
             }
         }

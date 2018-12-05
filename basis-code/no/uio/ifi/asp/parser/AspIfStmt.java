@@ -98,43 +98,51 @@ class AspIfStmt extends AspStmt{
             if(suite.size() == 1){
                 RuntimeValue v = expr.get(0).eval(curScope);
                 if(v.getBoolValue("If test",this)) {
+                    trace("If true: ..");
                     v = suite.get(0).eval(curScope);
                     return v;
                 }
                 else{
+                    trace("if false:");
                     return null;
                 }
             }
             else {
                 int teller = 0;
+                trace("elif true...");
                 for (AspExpr ae : expr) {
                     if(ae.eval(curScope).getBoolValue("if test",this)){
                         return suite.get(teller).eval(curScope);
                     }
                     teller ++;
                 }
+                trace("elif false:");
                 return null;
             }
         }
         else {
             if(suite.size() == 1){
+                trace("if true: ..");
                 RuntimeValue v = expr.get(0).eval(curScope);
                 if(v.getBoolValue("If test",this)) {
                     v = suite.get(0).eval(curScope);
                     return v;
                 }
                 else{
+                    trace("else:");
                     return suite2.eval(curScope);
                 }
             }
             else {
                 int teller = 0;
+                trace("elif true: ..");
                 for (AspExpr ae : expr) {
                     if(ae.eval(curScope).getBoolValue("if test",this)){
                         return suite.get(teller).eval(curScope);
                     }
                     teller ++;
                 }
+                trace("else:");
                 return suite2.eval(curScope);
             }
         }

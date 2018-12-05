@@ -5,7 +5,7 @@ import no.uio.ifi.asp.parser.AspSyntax;
 
 public class RuntimeNoneValue extends RuntimeValue {
     @Override
-    protected String typeName() {
+    public String typeName() {
         return "None";
     }
 

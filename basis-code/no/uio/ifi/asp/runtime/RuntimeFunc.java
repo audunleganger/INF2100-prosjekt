@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public class RuntimeFunc extends RuntimeValue{
-    String word;
+    public String word;
     AspSyntax body;
     ArrayList<String> paramNames;
     RuntimeScope outer;
@@ -15,6 +15,10 @@ public class RuntimeFunc extends RuntimeValue{
 
     public void assignScope(RuntimeScope outer) {
         this.outer = outer;
+    }
+
+    public String getWord() {
+        return word;
     }
 
     public RuntimeFunc(AspSyntax body, ArrayList<String> paramNames, RuntimeScope outer) {
