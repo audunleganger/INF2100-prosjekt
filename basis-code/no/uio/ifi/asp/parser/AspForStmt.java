@@ -48,6 +48,12 @@ class AspForStmt extends AspStmt{
         suite.prettyPrint();
     }
 
+    /*
+    Itererer gjennom hvert element i aExpr, og sjekker om elementet ligger i en
+    liste-struktur eller en dictionary-struktur. Vil deretter assigne dette
+    til det gitte skopet. Kaller til slutt paa suite sin evaluerings-metode for
+    hvert element.
+    */
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         String aName = name.word;

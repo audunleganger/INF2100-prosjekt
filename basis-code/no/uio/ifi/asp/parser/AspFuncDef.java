@@ -77,7 +77,9 @@ class AspFuncDef extends AspStmt{
 
     }
 
-
+    /*
+    Evaluerer funksjons - og parameternavnene, og legger de til i gjeldende skop
+    */
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         String aName = name.word;

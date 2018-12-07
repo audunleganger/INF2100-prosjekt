@@ -52,6 +52,12 @@ class AspPrimary extends AspSyntax{
         }
     }
 
+    /*
+    Metoden sjekker om vi har suffixer etter primariene, og evaluerer resultatet
+    ut i fra dette. Hvis vi har det, vil den sjekke om vi oprerer med en liste/dictionary,
+    eller med et funksjonskall, for saa aa kalle paa enten evalSubscription (for lister/dictionaries)
+    eller evalFuncCall (for funksjonskall). Har vi ikke det, blir verdien sendt videre til atom.eval()
+    */
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         RuntimeValue v;

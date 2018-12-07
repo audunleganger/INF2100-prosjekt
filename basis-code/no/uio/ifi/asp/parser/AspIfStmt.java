@@ -91,11 +91,14 @@ class AspIfStmt extends AspStmt{
 
     }
 
-
+    // Metoden sjekker hva slags struktur if/elif/else-statementet har, og evaluerer
+    // det via suite sin eval-metode.
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         if (suite2 == null) {
+            // Kommer vi hit, har vi ingen else-statement
             if(suite.size() == 1){
+                // Kommer vi hit, har vi kun et if-statement
                 RuntimeValue v = expr.get(0).eval(curScope);
                 if(v.getBoolValue("If test",this)) {
                     trace("If true: ..");
@@ -108,6 +111,7 @@ class AspIfStmt extends AspStmt{
                 }
             }
             else {
+                // Kommer vi hit, vil vi iterere gjennom alle elif-ene og evaluere dem
                 int teller = 0;
                 trace("elif true...");
                 for (AspExpr ae : expr) {
@@ -121,6 +125,7 @@ class AspIfStmt extends AspStmt{
             }
         }
         else {
+            // Kommer vi hit, har vi et else-statement
             if(suite.size() == 1){
                 trace("if true: ..");
                 RuntimeValue v = expr.get(0).eval(curScope);

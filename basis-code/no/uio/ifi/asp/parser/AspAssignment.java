@@ -53,6 +53,13 @@ class AspAssignment extends AspStmt{
         Main.log.prettyWriteLn("\n");
     }
 
+    /*
+    Foerst henter metoden ut variabelnavnet. Deretter sjekker vi om vi har
+    en enkelt tilordning, eller en med flere elementer (liste/dictionary).
+    Har vi en med flere elementer, sjekker vi hva slags type liste det er, for saa
+    aa tilordne denne listen til skopet via skopet sin assign-funksjon.
+    Har vi kun et enkelt element, blir de
+    */
     @Override
     public RuntimeValue eval(RuntimeScope curScope) throws RuntimeReturnValue {
         String aName = name.word;
